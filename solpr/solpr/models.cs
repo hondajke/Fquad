@@ -31,7 +31,6 @@ namespace solpr
         public Specs Specs { get; set; }
     }
 
-<<<<<<< HEAD
     class Periphery 
     {
         [Key]
@@ -45,10 +44,6 @@ namespace solpr
         public int SpecId { get; set; }
         [ForeignKey("SpecId")]
         public Specs Specs { get; set; }
-=======
-    class Employee
-    {
->>>>>>> ee78f69bfedbddd276a6e1a19449ee51a90d88d9
     }
 
     class Specs 
