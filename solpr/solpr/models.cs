@@ -26,8 +26,22 @@ namespace solpr
         public Manufacturer Manufacturer { get; set; }
     }
 
+    class Department
+    {
+        [Key]
+        public string Name { get; set; }
+        public ICollection<Employee> Employees { get; set; }    
+    }
     class Employee
     {
+        [Key]
+        public int Id { get; set; }
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string Patronymic_Name { get; set; }
+        public int DepartmentId { get; set; }
+        [ForeignKey("DepartmentId")]
+        public Department Department { get; set; }
     }
 
 }
