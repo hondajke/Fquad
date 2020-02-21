@@ -8,12 +8,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace solpr
 {
-    enum ComponentType { video, processor, rom, disk }
+    enum ComponentType { processor, mboard, video, ram, disk}
+    enum PeripheryType { mouse, keyboard, monitor, printer, webcam, other}
+
     class Manufacturer
     {
         [Key]
+        public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Component> Components { get; set; }
+
+        public virtual ICollection<Component> Components { get; set; }
+        public virtual ICollection<Periphery> Peripheries { get; set; }
     }
 
     class Component
@@ -24,8 +29,12 @@ namespace solpr
         public int ManufacturerId { get; set; }
         [ForeignKey("ManufacturerId")]
         public Manufacturer Manufacturer { get; set; }
+        public int SpecId { get; set; }
+        [ForeignKey("SpecId")]
+        public Specs Specs { get; set; }
     }
 
+<<<<<<< HEAD
     class Department
     {
         [Key]
@@ -42,6 +51,30 @@ namespace solpr
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }
+=======
+    class Periphery 
+    {
+        [Key]
+        public int Id { get; set; }
+        public PeripheryType Type { get; set; }
+        [StringLength(100)]
+        public string model { get; set; }
+        public int ManufacturerId { get; set; }
+        [ForeignKey("ManufacturerId")]
+        public Manufacturer Manufacturer { get; set; }
+        public int SpecId { get; set; }
+        [ForeignKey("SpecId")]
+        public Specs Specs { get; set; }
+>>>>>>> bc5cd93d60e8fbacbbc976eb6af63b4957cec0b5
     }
 
+    class Specs 
+    {
+        [Key]
+        public int Id { get; set; }
+        [StringLength(100)]
+        public string Name { get; set; }
+        [StringLength(100)]
+        public string Value { get; set; }
+    }
 }
