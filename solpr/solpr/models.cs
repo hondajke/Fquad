@@ -34,13 +34,13 @@ namespace solpr
         public Specs Specs { get; set; }
     }
 
-<<<<<<< HEAD
     class Department
     {
         [Key]
         public string Name { get; set; }
         public ICollection<Employee> Employees { get; set; }    
     }
+
     class Employee
     {
         [Key]
@@ -51,7 +51,8 @@ namespace solpr
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }
-=======
+    }
+
     class Periphery 
     {
         [Key]
@@ -65,7 +66,6 @@ namespace solpr
         public int SpecId { get; set; }
         [ForeignKey("SpecId")]
         public Specs Specs { get; set; }
->>>>>>> bc5cd93d60e8fbacbbc976eb6af63b4957cec0b5
     }
 
     class Specs 
