@@ -8,12 +8,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace solpr
 {
-    enum ComponentType { video, processor, rom, disk }
+    enum ComponentType { processor, mboard, video, ram, disk}
     class Manufacturer
     {
         [Key]
+        public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<Component> Components { get; set; }
+        
     }
 
     class Component
