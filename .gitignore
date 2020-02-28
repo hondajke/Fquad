@@ -4,3 +4,4 @@ obj
 
 EntityFramework.6.4.0
 *.oob
+*.suo
