@@ -8,12 +8,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace solpr
 {
-    enum ComponentType { video, processor, rom, disk }
-    enum PeripheryType { mouse, keyboard, monitor, printer, webcam, other}
+    enum ComponentType { processor, mboard, video, ram, disk }
+    enum PeripheryType { mouse, keyboard, monitor, printer, webcam, other }
+
     class Manufacturer
     {
         [Key]
+        public int Id { get; set; }
         public string Name { get; set; }
+
         public virtual ICollection<Component> Components { get; set; }
         public virtual ICollection<Periphery> Peripheries { get; set; }
     }
@@ -31,7 +34,37 @@ namespace solpr
         public Specs Specs { get; set; }
     }
 
-    class Periphery 
+    class Department
+    {
+        [Key]
+        public string Name { get; set; }
+        public ICollection<Employee> Employees { get; set; }
+    }
+
+    class Employee
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string Patronymic_Name { get; set; }
+        public int DepartmentId { get; set; }
+        [ForeignKey("DepartmentId")]
+        public Department Department { get; set; }
+    }
+
+    class Computer
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Status { get; set; }
+        public int EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
+        public Employee Employee { get; set; }
+        public ICollection<Component> Components { get; set; }
+    }
+
+    class Periphery
     {
         [Key]
         public int Id { get; set; }
@@ -46,7 +79,7 @@ namespace solpr
         public Specs Specs { get; set; }
     }
 
-    class Specs 
+    class Specs
     {
         [Key]
         public int Id { get; set; }
