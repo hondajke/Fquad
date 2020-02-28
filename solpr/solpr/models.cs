@@ -52,7 +52,6 @@ namespace solpr
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }
     }
-
     class Computer
     {
         [Key]
@@ -64,7 +63,7 @@ namespace solpr
         public ICollection<Component> Components { get; set; }
     }
 
-    class Periphery
+    class Periphery 
     {
         [Key]
         public int Id { get; set; }
