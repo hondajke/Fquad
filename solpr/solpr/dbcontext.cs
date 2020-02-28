@@ -12,7 +12,7 @@ namespace solpr
     public partial class ParkDBEntities : DbContext
     {
 
-        public ParkDBEntities()
+        public ParkDBEntities():base("FquadExpress")
         {
 
         }
