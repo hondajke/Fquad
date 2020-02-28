@@ -34,6 +34,7 @@ namespace solpr
         public int SpecId { get; set; }
         [ForeignKey("SpecId")]
         public Specs Specs { get; set; }
+        public ICollection<Computer> Computers { get; set; }
     }
 
     class Department
