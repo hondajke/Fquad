@@ -8,8 +8,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace solpr
 {
-    enum ComponentType { processor, mboard, video, ram, disk }
-    enum PeripheryType { mouse, keyboard, monitor, printer, webcam, other }
+    
+    public enum ComponentType { processor, mboard, video, ram, disk }
+    public enum PeripheryType { mouse, keyboard, monitor, printer, webcam, other }
+    public enum ComputerStatus { ok, under_repair, scrapped } 
 
     class Manufacturer
     {
@@ -57,7 +59,7 @@ namespace solpr
     {
         [Key]
         public int Id { get; set; }
-        public string Status { get; set; }
+        public ComputerStatus Status { get; set; }
         public int EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
