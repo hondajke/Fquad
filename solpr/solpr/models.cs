@@ -13,7 +13,7 @@ namespace solpr
     public enum PeripheryType { mouse, keyboard, monitor, printer, webcam, other }
     public enum ComputerStatus { ok, under_repair, scrapped } 
 
-    class Manufacturer
+    public class Manufacturer
     {
         [Key]
         public int Id { get; set; }
@@ -23,7 +23,7 @@ namespace solpr
         public virtual ICollection<Periphery> Peripheries { get; set; }
     }
 
-    class Component
+    public class Component
     {
         [Key]
         public int Id { get; set; }
@@ -37,7 +37,7 @@ namespace solpr
         public ICollection<Computer> Computers { get; set; }
     }
 
-    class Department
+    public class Department
     {
         [Key]
         public int Id { get; set; }
@@ -45,7 +45,7 @@ namespace solpr
         public ICollection<Employee> Employees { get; set; }
     }
 
-    class Employee
+    public class Employee
     {
         [Key]
         public int Id { get; set; }
@@ -56,7 +56,7 @@ namespace solpr
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }
     }
-    class Computer
+    public class Computer
     {
         [Key]
         public int Id { get; set; }
@@ -67,7 +67,7 @@ namespace solpr
         public ICollection<Component> Components { get; set; }
     }
 
-    class Periphery 
+    public class Periphery 
     {
         [Key]
         public int Id { get; set; }
@@ -82,7 +82,7 @@ namespace solpr
         public Specs Specs { get; set; }
     }
 
-    class Specs
+    public class Specs
     {
         [Key]
         public int Id { get; set; }
