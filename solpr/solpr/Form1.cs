@@ -29,6 +29,11 @@ namespace solpr
             //dataGridView3.DataSource = 
         }
 
+        private void tabPage3_Enter(object sender, EventArgs e)
+        {
+            dataGridView4.DataSource = db.Employees.ToList();
+        }
+
         
 
     }
