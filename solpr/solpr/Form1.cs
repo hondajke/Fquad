@@ -26,7 +26,7 @@ namespace solpr
 
         private void tabPage2_Enter(object sender, EventArgs e)
         {
-            //dataGridView3.DataSource = 
+            dataGridView3.DataSource = db.Components.ToList();
         }
 
         private void tabPage1_Enter(object sender, EventArgs e)
