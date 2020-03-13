@@ -112,6 +112,7 @@
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Комплектующие";
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
             // 
             // tabPage3
             // 
