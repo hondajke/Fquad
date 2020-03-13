@@ -94,6 +94,7 @@
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "Периферия";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
             // dataGridView2
             // 
@@ -139,6 +140,14 @@
             this.dataGridView4.Location = new System.Drawing.Point(3, 3);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(500, 400);
+            this.dataGridView4.TabIndex = 0;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(28, 34);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(240, 150);
             this.dataGridView4.TabIndex = 0;
             // 
             // tabPage4
