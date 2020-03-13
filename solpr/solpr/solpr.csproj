@@ -61,9 +61,15 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\202003060349483_First migration.cs" />
     <Compile Include="Migrations\202003060349483_First migration.designer.cs">
       <DependentUpon>202003060349483_First migration.cs</DependentUpon>
+=======
+    <Compile Include="Migrations\202003120608462_First.cs" />
+    <Compile Include="Migrations\202003120608462_First.designer.cs">
+      <DependentUpon>202003120608462_First.cs</DependentUpon>
+>>>>>>> 17451f0341156d31f340985632427221dcce5798
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="models.cs" />
@@ -72,8 +78,13 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\202003060349483_First migration.resx">
       <DependentUpon>202003060349483_First migration.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Migrations\202003120608462_First.resx">
+      <DependentUpon>202003120608462_First.cs</DependentUpon>
+>>>>>>> 17451f0341156d31f340985632427221dcce5798
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -84,7 +95,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
