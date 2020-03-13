@@ -29,6 +29,11 @@ namespace solpr
             //dataGridView3.DataSource = 
         }
 
+        private void tabPage1_Enter(object sender, EventArgs e)
+        {
+            dataGridView2.DataSource = db.Peripheries.ToList();
+        }
+
         
 
     }
