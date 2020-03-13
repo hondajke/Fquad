@@ -12,6 +12,8 @@ namespace solpr
 {
     public partial class Form1 : Form
     {
+        ParkDBEntities db;
+
         public Form1()
         {
             InitializeComponent();
@@ -19,7 +21,12 @@ namespace solpr
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            db = new ParkDBEntities();
+        }
 
+        private void tabPage2_Enter(object sender, EventArgs e)
+        {
+            //dataGridView3.DataSource = 
         }
 
         
