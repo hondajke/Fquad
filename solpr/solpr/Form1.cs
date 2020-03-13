@@ -29,6 +29,16 @@ namespace solpr
             //dataGridView3.DataSource = 
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tabPage0_Enter(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = db.Computers.ToList();
+        }
+
         
 
     }
