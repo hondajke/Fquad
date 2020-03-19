@@ -45,7 +45,13 @@ namespace solpr
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            if (comboBox1.ValueMember != null &&
+                comboBox2.ValueMember != null && 
+                comboBox3.ValueMember != null && 
+                comboBox4.ValueMember != null && 
+                textBox1.Text != null) { 
+
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
