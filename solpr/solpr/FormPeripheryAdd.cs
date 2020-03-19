@@ -19,17 +19,24 @@ namespace solpr
 
         private void FormPeripheryAdd_Load(object sender, EventArgs e)
         {
-            
+            loadPeripheryTypes();
+            loadManufacturers();
         }
 
         private void loadPeripheryTypes() 
         {
-            comboBox1.Items.Add("Клавиатура");
-            comboBox1.Items.Add("Мышь");
-            comboBox1.Items.Add("Монитор");
-            comboBox1.Items.Add("Принтер");
-            comboBox1.Items.Add("Веб-камера");
-            comboBox1.Items.Add("Другое");
+            comboBox1.DataSource = Enum.GetValues(typeof(PeripheryType))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            comboBox1.DisplayMember = "Description";
+            comboBox1.ValueMember = "value";
+
         }
 
         private void loadManufacturers() 
@@ -39,6 +46,11 @@ namespace solpr
         private void button1_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
