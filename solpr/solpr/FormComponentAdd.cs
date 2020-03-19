@@ -16,5 +16,43 @@ namespace solpr
         {
             InitializeComponent();
         }
+        
+        private void FormComponentAdd_Load(object sender, EventArgs e)
+        {
+            loadCompTypes();
+            loadManufacturers();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void loadCompTypes()
+        {
+            comboBox1.DataSource = Enum.GetValues(typeof(ComponentType))
+                .Cast<Enum>()
+                .Select(value => new
+                    {
+                        (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                            value
+                    })
+                .OrderBy(item => item.value)
+                .ToList();
+            comboBox1.DisplayMember = "Description";
+            comboBox1.ValueMember = "value";
+
+        }
+
+        private void loadManufacturers()
+        {
+
+        }
+
     }
 }
