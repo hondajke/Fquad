@@ -16,7 +16,12 @@ namespace solpr
         [Description("Видеокарта")] video,
         [Description("Оперативная память")] ram,
         [Description("Жесткий диск")] disk }
-    public enum PeripheryType { mouse, keyboard, monitor, printer, webcam, other }
+    public enum PeripheryType { [Description("Мышь")] mouse,
+        [Description("Клавиатура")] keyboard,
+        [Description("Монитор")] monitor,
+        [Description("Принтер")] printer,
+        [Description("Веб-камера")] webcam,
+        [Description("Другое")] other }
     public enum ComputerStatus { ok, under_repair, scrapped }
 
     public class Manufacturer

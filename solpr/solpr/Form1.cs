@@ -32,6 +32,7 @@ namespace solpr
         private void tabPage1_Enter(object sender, EventArgs e)
         {
             dataGridView2.DataSource = db.Peripheries.ToList();
+
         }
 
         private void tabPage3_Enter(object sender, EventArgs e)
@@ -52,6 +53,12 @@ namespace solpr
         private void button1_Click(object sender, EventArgs e)
         {
             FormComponentAdd dial = new FormComponentAdd();
+            dial.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormPeripheryAdd dial = new FormPeripheryAdd();
             dial.ShowDialog();
         }
     }

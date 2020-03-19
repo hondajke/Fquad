@@ -68,6 +68,12 @@
     <Compile Include="FormComponentAdd.Designer.cs">
       <DependentUpon>FormComponentAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPeripheryAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPeripheryAdd.Designer.cs">
+      <DependentUpon>FormPeripheryAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202003120608462_First.cs" />
     <Compile Include="Migrations\202003120608462_First.designer.cs">
       <DependentUpon>202003120608462_First.cs</DependentUpon>
@@ -81,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormComponentAdd.resx">
       <DependentUpon>FormComponentAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPeripheryAdd.resx">
+      <DependentUpon>FormPeripheryAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003120608462_First.resx">
       <DependentUpon>202003120608462_First.cs</DependentUpon>
