@@ -10,8 +10,11 @@ using System.Windows.Forms;
 
 namespace solpr
 {
+
     public partial class FormComponentAdd : Form
     {
+        ParkDBEntities db;
+
         public FormComponentAdd()
         {
             InitializeComponent();
@@ -19,6 +22,7 @@ namespace solpr
         
         private void FormComponentAdd_Load(object sender, EventArgs e)
         {
+            db = new ParkDBEntities();
             loadCompTypes();
             loadManufacturers();
         }
@@ -51,7 +55,7 @@ namespace solpr
 
         private void loadManufacturers()
         {
-
+            //comboBox2.DataSource = db.Manufacturers.
         }
 
     }
