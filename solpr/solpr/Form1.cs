@@ -49,7 +49,10 @@ namespace solpr
             dataGridView1.DataSource = db.Computers.ToList();
         }
 
-        
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormComponentAdd dial = new FormComponentAdd();
+            dial.ShowDialog();
+        }
     }
 }
