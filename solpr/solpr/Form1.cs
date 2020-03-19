@@ -52,7 +52,14 @@ namespace solpr
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            FormComponentAdd dial = new FormComponentAdd();
+            dial.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormPeripheryAdd dial = new FormPeripheryAdd();
+            dial.ShowDialog();
         }
     }
 }

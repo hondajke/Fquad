@@ -1,6 +1,6 @@
 ﻿namespace solpr
 {
-    partial class FormPeripheryAdd
+    partial class FormComponentAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // FormPeripheryAdd
+            // FormComponentAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 351);
-            this.Name = "FormPeripheryAdd";
-            this.Text = "FormPeripheryAdd";
+            this.Name = "FormComponentAdd";
+            this.Text = "FormComponentAdd";
             this.ResumeLayout(false);
 
         }
