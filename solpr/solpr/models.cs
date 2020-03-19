@@ -5,13 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace solpr
 {
-    
-    public enum ComponentType { processor, mboard, video, ram, disk }
+
+    public enum ComponentType {[Description("Процессор")] processor,
+        [Description("Материнская плата")] mboard,
+        [Description("Видеокарта")] video,
+        [Description("Оперативная память")] ram,
+        [Description("Жесткий диск")] disk }
     public enum PeripheryType { mouse, keyboard, monitor, printer, webcam, other }
-    public enum ComputerStatus { ok, under_repair, scrapped } 
+    public enum ComputerStatus { ok, under_repair, scrapped }
 
     public class Manufacturer
     {
@@ -67,7 +73,7 @@ namespace solpr
         public ICollection<Component> Components { get; set; }
     }
 
-    public class Periphery 
+    public class Periphery
     {
         [Key]
         public int Id { get; set; }
@@ -90,5 +96,23 @@ namespace solpr
         public string Name { get; set; }
         [StringLength(100)]
         public string Value { get; set; }
+    }
+
+    public static class GetTypes
+    {
+        static string GetDescription(Enum enumElement)
+        {
+            Type type = enumElement.GetType();
+
+            MemberInfo[] memInfo = type.GetMember(enumElement.ToString());
+            if (memInfo != null && memInfo.Length > 0)
+            {
+                object[] attrs = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (attrs != null && attrs.Length > 0)
+                    return ((DescriptionAttribute)attrs[0]).Description;
+            }
+
+            return enumElement.ToString();
+        }
     }
 }
