@@ -26,5 +26,6 @@ namespace solpr.Properties
                 return defaultInstance;
             }
         }
+
     }
 }

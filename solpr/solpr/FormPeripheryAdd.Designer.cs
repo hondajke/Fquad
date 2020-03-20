@@ -38,6 +38,8 @@
             this.manufac = new System.Windows.Forms.ComboBox();
             this.model = new System.Windows.Forms.ComboBox();
             this.Spe = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // type
@@ -128,11 +130,30 @@
             this.Spe.Size = new System.Drawing.Size(121, 21);
             this.Spe.TabIndex = 14;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(178, 230);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 15;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(61, 233);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Сотрудник";
+            // 
             // FormPeripheryAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(389, 339);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.Spe);
             this.Controls.Add(this.model);
             this.Controls.Add(this.manufac);
@@ -162,5 +183,7 @@
         private System.Windows.Forms.ComboBox manufac;
         private System.Windows.Forms.ComboBox model;
         private System.Windows.Forms.ComboBox Spe;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label5;
     }
 }
