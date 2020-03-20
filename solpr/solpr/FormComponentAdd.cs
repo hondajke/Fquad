@@ -29,12 +29,30 @@ namespace solpr
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (checkManufacturerExistence(comboBox2.Text))
+            {
+                Component comp = new Component();
+                comp.Type = (ComponentType)comboBox1.SelectedValue;
+                comp.ManufacturerId = (int)comboBox2.SelectedValue;
+                Specs spec = new Specs();
+                spec.Name = textBox1.Text;
+                db.Specs.Add(spec);
+                db.SaveChanges();
+                comp.SpecId = spec.Id;
 
+                db.Components.Add(comp);
+                db.SaveChanges();
+                Close();
+            }
+            else
+            {
+
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void loadCompTypes()
@@ -50,13 +68,33 @@ namespace solpr
                 .ToList();
             comboBox1.DisplayMember = "Description";
             comboBox1.ValueMember = "value";
-
         }
 
         private void loadManufacturers()
         {
-            //comboBox2.DataSource = db.Manufacturers.
+            var manufQuery = from man in db.Manufacturers
+                             orderby man.Name
+                             select new
+                             {
+                                 man.Name, man.Id
+                             };
+            comboBox2.DataSource = manufQuery.ToList();
+            comboBox2.DisplayMember = "Name";
+            comboBox2.ValueMember = "Id";
         }
 
+
+
+        private bool checkManufacturerExistence(string newMan)
+        {
+            foreach (Manufacturer man in db.Manufacturers.ToList())
+            {
+                if (man.Name == newMan)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
