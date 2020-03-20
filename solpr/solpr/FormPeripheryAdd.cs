@@ -14,6 +14,7 @@ namespace solpr
     {
         ParkDBEntities db;
         string[] Values;
+        int length;
         public FormPeripheryAdd()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace solpr
             loadPeripheryTypes();
             loadManufacturers();
             loadSpecs();
+            loadModels();
         }
 
         private void loadPeripheryTypes() 
@@ -44,21 +46,31 @@ namespace solpr
 
         private void loadManufacturers() 
         {
-            Spe.DataSource = db.Manufacturers.ToList();
-            Spe.DisplayMember = "Name" + "-" + "Value";
-            Spe.ValueMember = "Id";
+            db = new ParkDBEntities();
+            manufac.DataSource = db.Manufacturers.ToList();
+            manufac.DisplayMember = "Name";
+            manufac.ValueMember = "Id";  
         }
 
         private void loadSpecs() 
         {
+            db = new ParkDBEntities();
             Spe.DataSource = db.Specs.ToList();
-            Spe.DisplayMember = "Name" + "-" + "Value";
+            Spe.DisplayMember = "Name";
             Spe.ValueMember = "Id";
         }
 
+        private void loadModels()
+        {
+            db = new ParkDBEntities();
+            model.DataSource = db.Peripheries.ToList();
+            model.DisplayMember = "model";
+            model.ValueMember = "Id";
+        }
         private void SplitSpecs() 
         {
             Values = Spe.Text.Split(new Char[] { '@', '.', '\n', '-' }, StringSplitOptions.RemoveEmptyEntries);
+            length = Values.Length;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -72,47 +84,38 @@ namespace solpr
                         {
                             Name = manufac.Text
                         };
-                        db.Manufacturers.Add(man);
-                        db.SaveChanges();
+                    db.Manufacturers.Add(man);
+                    db.SaveChanges();
                     }
-                        if (!db.Specs.ToList().Exists(x => x.Name == Spe.Text))
+                    SplitSpecs();
+                    for (int i = 0; i < length - 1; i += 2)
+                    {
+                        if (!db.Specs.ToList().Exists(x => x.Name == Values[i]) && !db.Specs.ToList().Exists(y => y.Value == Values[i + 1]))
                         {
-                        SplitSpecs();
                             Specs spe = new Specs
                             {
-                                Name = Values[0],
-                                Value = Values[1]
+                                Name = Values[i],
+                                Value = Values[i + 1]
                             };
                             db.Specs.Add(spe);
                             db.SaveChanges();
                         }
-                        /*Manufacturer man = new Manufacturer
-                        {
-                            Name = manufac.Text
-                        };
-                        db.Manufacturers.Add(man);
-                        db.SaveChanges();
-                        SplitSpecs();
-                    Specs spe = new Specs
-                    {
-                            Name = Values[0],
-                            Value = Values[1]
-                        };
-                        db.Specs.Add(spe);
-                        db.SaveChanges();*/
-                        Periphery example = new Periphery
-                        {
-                            Type = (PeripheryType)type.SelectedItem,
-                            ManufacturerId = manufac.SelectedIndex,
-                            Manufacturer = (Manufacturer)manufac.SelectedItem,
-                            model = model.Text,
-                            SpecId = Spe.SelectedIndex,
-                            Specs = (Specs)Spe.SelectedItem
-                        };
-                        db.Peripheries.Add(example);
-                        db.SaveChanges();
                     }
-                    this.Close();
+                    Periphery example = new Periphery
+                    {
+                        Type = (PeripheryType)type.SelectedItem,
+                        ManufacturerId = manufac.SelectedIndex,
+                        Manufacturer = (Manufacturer)manufac.SelectedItem,
+                        model = model.Text,
+                        SpecId = Spe.SelectedIndex,
+                        Specs = (Specs)Spe.SelectedItem,
+                        EmployeeId = comboBox1.SelectedIndex,
+                        Employee = (Employee)comboBox1.SelectedItem,
+                        };
+                    db.Peripheries.Add(example);
+                    db.SaveChanges();
+                }
+                this.Close();
             }
             catch (Exception ex)
             {

@@ -61,5 +61,11 @@ namespace solpr
             FormPeripheryAdd dial = new FormPeripheryAdd();
             dial.ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormEmployeeAdd dial = new FormEmployeeAdd();
+            dial.ShowDialog();
+        }
     }
 }
