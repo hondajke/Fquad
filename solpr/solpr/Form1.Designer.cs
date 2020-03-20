@@ -43,10 +43,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button3 = new System.Windows.Forms.Button();
-<<<<<<< HEAD
-            this.button4 = new System.Windows.Forms.Button();
-=======
->>>>>>> 1f718c98b63c91c00dee68f41fa4fa7d88e2d21b
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -95,7 +91,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.dataGridView2);
@@ -203,23 +198,6 @@
             // 
             // button3
             // 
-<<<<<<< HEAD
-            this.button3.Location = new System.Drawing.Point(509, 52);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(139, 40);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Удалить периферию";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(509, 98);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(139, 40);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Редактировать периферию";
-            this.button4.UseVisualStyleBackColor = true;
-=======
             this.button3.Location = new System.Drawing.Point(512, 6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(126, 36);
@@ -227,7 +205,6 @@
             this.button3.Text = "Добавить сотрудника";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
->>>>>>> 1f718c98b63c91c00dee68f41fa4fa7d88e2d21b
             // 
             // Form1
             // 
@@ -272,10 +249,6 @@
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-<<<<<<< HEAD
-        private System.Windows.Forms.Button button4;
-=======
->>>>>>> 1f718c98b63c91c00dee68f41fa4fa7d88e2d21b
         private System.Windows.Forms.Button button3;
     }
 }
