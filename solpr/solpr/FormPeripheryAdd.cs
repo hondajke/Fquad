@@ -27,6 +27,14 @@ namespace solpr
             loadManufacturers();
             loadSpecs();
             loadModels();
+            loadEmployee();
+        }
+
+        private void loadEmployee()
+        {
+            comboBox1.DataSource = db.Employees.ToList();
+            comboBox1.DisplayMember = "Surname";
+            comboBox1.ValueMember = "Id";
         }
 
         private void loadPeripheryTypes() 
@@ -76,7 +84,7 @@ namespace solpr
             //{
             using (db = new ParkDBEntities())
             {
-                /*if (!checkManufacturerExistence(manufac.SelectedItem.ToString()))
+                if (!checkManufacturerExistence(manufac.SelectedItem.ToString()))
                 {
                     Manufacturer man = new Manufacturer
                     {
@@ -100,11 +108,11 @@ namespace solpr
                         db.SaveChanges();
                         this.Refresh();
                     }
-                }*/
+                }
                 Periphery example = new Periphery()
                 {
                     Type = (PeripheryType)type.SelectedValue,
-                    model = (string)model.SelectedValue,
+                    model = model.Text,
                     ManufacturerId = (int)manufac.SelectedValue,
                     SpecId = (int)Spe.SelectedValue,
                     EmployeeId = (int)comboBox1.SelectedValue,
