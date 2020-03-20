@@ -22,7 +22,9 @@ namespace solpr
         [Description("Принтер")] printer,
         [Description("Веб-камера")] webcam,
         [Description("Другое")] other }
-    public enum ComputerStatus { ok, under_repair, scrapped }
+    public enum ComputerStatus {[Description("Окей")] ok,
+        [Description("В ремонте")] under_repair,
+        [Description("Списан")] scrapped }
 
     public class Manufacturer
     {

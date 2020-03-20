@@ -68,6 +68,12 @@
     <Compile Include="FormComponentAdd.Designer.cs">
       <DependentUpon>FormComponentAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormComputerAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormComputerAdd.Designer.cs">
+      <DependentUpon>FormComputerAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormEmployeeAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormComponentAdd.resx">
       <DependentUpon>FormComponentAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormComputerAdd.resx">
+      <DependentUpon>FormComputerAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmployeeAdd.resx">
       <DependentUpon>FormEmployeeAdd.cs</DependentUpon>
