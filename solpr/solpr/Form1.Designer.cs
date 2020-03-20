@@ -38,11 +38,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -134,7 +134,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(512, 6);
+            this.button1.Location = new System.Drawing.Point(509, 6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 40);
             this.button1.TabIndex = 1;
@@ -161,6 +161,16 @@
             this.tabPage3.Text = "Сотрудники";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Enter += new System.EventHandler(this.tabPage3_Enter);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(509, 6);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(139, 40);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Добавить сотрудника";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dataGridView4
             // 
@@ -194,16 +204,6 @@
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(512, 6);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(126, 36);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Добавить сотрудника";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 

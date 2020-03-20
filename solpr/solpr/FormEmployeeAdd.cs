@@ -19,6 +19,12 @@ namespace solpr
             InitializeComponent();
         }
 
+        private void FormEmployeeAdd_Load(object sender, EventArgs e)
+        {
+            db = new ParkDBEntities();
+            loadDepartments();
+        }
+
         private void loadDepartments()
         {
             var depQuery = from dep in db.Departments

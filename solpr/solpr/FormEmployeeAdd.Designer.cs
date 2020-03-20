@@ -142,6 +142,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormEmployeeAdd";
             this.Text = "FormEmployeeAdd";
+            this.Load += new System.EventHandler(this.FormEmployeeAdd_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
