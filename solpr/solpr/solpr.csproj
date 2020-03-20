@@ -68,6 +68,12 @@
     <Compile Include="FormComponentAdd.Designer.cs">
       <DependentUpon>FormComponentAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEmployeeAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmployeeAdd.Designer.cs">
+      <DependentUpon>FormEmployeeAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPeripheryAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormComponentAdd.resx">
       <DependentUpon>FormComponentAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmployeeAdd.resx">
+      <DependentUpon>FormEmployeeAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPeripheryAdd.resx">
       <DependentUpon>FormPeripheryAdd.cs</DependentUpon>
