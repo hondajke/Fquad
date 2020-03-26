@@ -33,19 +33,21 @@
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button5 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -118,15 +120,23 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
-            // button3
+            // label1
             // 
-            this.button3.Location = new System.Drawing.Point(509, 6);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(139, 40);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Добавить сотрудника";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.label1.Location = new System.Drawing.Point(512, 94);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(136, 54);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "*удаляет периферию выбранную в таблице слева";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(509, 52);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(139, 39);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "Удалить периферию";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button2
             // 
@@ -178,6 +188,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label2);
+            this.tabPage3.Controls.Add(this.button6);
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Controls.Add(this.dataGridView4);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -187,6 +199,16 @@
             this.tabPage3.Text = "Сотрудники";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Enter += new System.EventHandler(this.tabPage3_Enter);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(509, 6);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(139, 40);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Добавить сотрудника";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dataGridView4
             // 
@@ -221,23 +243,23 @@
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
-            // button5
+            // button6
             // 
-            this.button5.Location = new System.Drawing.Point(509, 52);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(139, 39);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "Удалить периферию";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button6.Location = new System.Drawing.Point(509, 53);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(139, 38);
+            this.button6.TabIndex = 2;
+            this.button6.Text = "Удалить сотрудника";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // label1
+            // label2
             // 
-            this.label1.Location = new System.Drawing.Point(512, 94);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 54);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "*удаляет периферию выбранную в таблице слева";
+            this.label2.Location = new System.Drawing.Point(512, 94);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(136, 54);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "*удаляет сотрудника выбранного в таблице слева";
             // 
             // Form1
             // 
@@ -286,6 +308,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button6;
     }
 }
 

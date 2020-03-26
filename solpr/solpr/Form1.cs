@@ -36,7 +36,7 @@ namespace solpr
 
         private void tabPage3_Enter(object sender, EventArgs e)
         {
-            dataGridView4.DataSource = db.Employees.ToList();
+            RefreshEmployeeGrid();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -114,6 +114,48 @@ namespace solpr
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView2.DataSource = result.ToList();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView4.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView4.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+                    Employee emplo = db.Employees
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+
+                    db.Employees.Remove(emplo);
+                    db.SaveChanges();
+                    RefreshEmployeeGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void RefreshEmployeeGrid()
+        {
+            var result = from employee in db.Employees
+                         join department in db.Departments on employee.DepartmentId equals department.Id
+                         select new
+                         {
+                             Айди = employee.Id,
+                             Фамилия = employee.Surname,
+                             Имя = employee.Name,
+                             Отчество = employee.Patronymic_Name,
+                             ИД_отдела = employee.DepartmentId,
+                             Отдел = employee.Department
+                         };
+            dataGridView4.DataSource = result.ToList();
         }
     }
 }
