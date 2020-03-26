@@ -11,12 +11,15 @@ namespace solpr
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        internal static Form1 mf;
+
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            mf = new Form1();
+            Application.Run(mf);
         }
     }
 }

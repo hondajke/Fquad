@@ -35,11 +35,11 @@ namespace solpr
             {
                 //yEEEE
                 Department dep = new Department();
-                dep.Id = Int32.Parse(textBox1.Text);
                 dep.Name = textBox2.Text;
                 db.Departments.Add(dep);
                 db.SaveChanges();
                 Close();
+                Program.mf.RefreshEmployeeGrid();
             }
         }
     }
