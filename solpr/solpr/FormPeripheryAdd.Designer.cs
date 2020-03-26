@@ -36,7 +36,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.manufac = new System.Windows.Forms.ComboBox();
-            this.model = new System.Windows.Forms.ComboBox();
+            this.Model = new System.Windows.Forms.ComboBox();
             this.Spe = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -116,11 +116,11 @@
             // 
             // model
             // 
-            this.model.FormattingEnabled = true;
-            this.model.Location = new System.Drawing.Point(178, 143);
-            this.model.Name = "model";
-            this.model.Size = new System.Drawing.Size(121, 21);
-            this.model.TabIndex = 13;
+            this.Model.FormattingEnabled = true;
+            this.Model.Location = new System.Drawing.Point(178, 143);
+            this.Model.Name = "model";
+            this.Model.Size = new System.Drawing.Size(121, 21);
+            this.Model.TabIndex = 13;
             // 
             // Spe
             // 
@@ -155,7 +155,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.Spe);
-            this.Controls.Add(this.model);
+            this.Controls.Add(this.Model);
             this.Controls.Add(this.manufac);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -181,7 +181,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox type;
         private System.Windows.Forms.ComboBox manufac;
-        private System.Windows.Forms.ComboBox model;
+        private System.Windows.Forms.ComboBox Model;
         private System.Windows.Forms.ComboBox Spe;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label5;

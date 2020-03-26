@@ -69,9 +69,9 @@ namespace solpr
 
         private void loadModels()
         {
-            model.DataSource = db.Peripheries.ToList();
-            model.DisplayMember = "model";
-            model.ValueMember = "Id";
+            Model.DataSource = db.Peripheries.ToList();
+            Model.DisplayMember = "model";
+            Model.ValueMember = "Id";
         }
         private void SplitSpecs() 
         {
@@ -112,9 +112,8 @@ namespace solpr
                 Periphery example = new Periphery()
                 {
                     Type = (PeripheryType)type.SelectedValue,
-                    model = model.Text,
+                    Model = Model.Text,
                     ManufacturerId = (int)manufac.SelectedValue,
-                    SpecId = (int)Spe.SelectedValue,
                     EmployeeId = (int)comboBox1.SelectedValue,
                 };
                 db.Peripheries.Add(example);
