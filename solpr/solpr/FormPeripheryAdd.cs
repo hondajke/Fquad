@@ -90,6 +90,7 @@ namespace solpr
                     {
                         Name = manufac.Text
                     };
+                    db.Manufacturers.Attach(man);
                 db.Manufacturers.Add(man);
                 db.SaveChanges();
                 this.Refresh();
@@ -104,9 +105,10 @@ namespace solpr
                             Name = Values[i],
                             Value = Values[i + 1]
                         };
+                        db.Specs.Attach(spe);
                         db.Specs.Add(spe);
                         db.SaveChanges();
-                        this.Refresh();
+                        
                     }
                 }
                 Periphery example = new Periphery()
@@ -116,6 +118,7 @@ namespace solpr
                     ManufacturerId = (int)manufac.SelectedValue,
                     EmployeeId = (int)comboBox1.SelectedValue,
                 };
+                db.Peripheries.Attach(example);
                 db.Peripheries.Add(example);
                 db.SaveChanges();
                 }

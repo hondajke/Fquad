@@ -31,8 +31,7 @@ namespace solpr
 
         private void tabPage1_Enter(object sender, EventArgs e)
         {
-            dataGridView2.DataSource = db.Peripheries.ToList();
-
+            RefreshPeripheryGrid();
         }
 
         private void tabPage3_Enter(object sender, EventArgs e)
@@ -72,6 +71,49 @@ namespace solpr
         {
             FormComputerAdd dial = new FormComputerAdd();
             dial.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView2.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+                    Periphery peri = db.Peripheries
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+
+                    db.Peripheries.Remove(peri);
+                    db.SaveChanges();
+                    RefreshPeripheryGrid();
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void RefreshPeripheryGrid() 
+        {
+            var result = from periphery in db.Peripheries
+                         join manufac in db.Manufacturers on periphery.ManufacturerId equals manufac.Id
+                         join spec in db.Specs on periphery.SpecId equals spec.Id
+                         join empl in db.Employees on periphery.EmployeeId equals empl.Id
+                         select new
+                         {
+                             Айди = periphery.Id,
+                             Тип = periphery.Type,
+                             Модель = periphery.model,
+                             Производитель = manufac.Name,
+                             Характеристика = spec.Name + " - " + spec.Value,
+                             Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
+                         };
+            dataGridView2.DataSource = result.ToList();
         }
     }
 }
