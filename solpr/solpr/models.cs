@@ -61,6 +61,7 @@ namespace solpr
     {
         [Key]
         public int Id { get; set; }
+        [StringLength(100)]
         public string Name { get; set; }
         public ICollection<Employee> Employees { get; set; }
     }
@@ -93,7 +94,7 @@ namespace solpr
         public int Id { get; set; }
         public PeripheryType Type { get; set; }
         [StringLength(100)]
-        public string model { get; set; }
+        public string Model { get; set; }
         public int ManufacturerId { get; set; }
         [ForeignKey("ManufacturerId")]
         public Manufacturer Manufacturer { get; set; }

@@ -39,7 +39,10 @@ namespace solpr
                 spec.Name = textBox1.Text;
                 db.Specs.Add(spec);
                 db.SaveChanges();
+<<<<<<< HEAD
                 //comp.SpecId = spec.Id;
+=======
+>>>>>>> 4a55da9931de7feced28a7213cea22763b0c2f8c
 
                 db.Components.Add(comp);
                 db.SaveChanges();
