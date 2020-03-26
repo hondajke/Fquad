@@ -108,7 +108,7 @@ namespace solpr
                          {
                              Айди = periphery.Id,
                              Тип = periphery.Type,
-                             Модель = periphery.model,
+                             Модель = periphery.Model,
                              Производитель = manufac.Name,
                              Характеристика = spec.Name + " - " + spec.Value,
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
