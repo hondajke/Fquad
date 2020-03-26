@@ -41,13 +41,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -155,6 +155,8 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(500, 400);
             this.dataGridView2.TabIndex = 0;
+            this.dataGridView2.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView2_CellFormatting);
+            this.dataGridView2.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView2_CellPainting);
             // 
             // tabPage2
             // 
@@ -200,6 +202,24 @@
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Enter += new System.EventHandler(this.tabPage3_Enter);
             // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(512, 94);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(136, 54);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "*удаляет сотрудника выбранного в таблице слева";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(509, 53);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(139, 38);
+            this.button6.TabIndex = 2;
+            this.button6.Text = "Удалить сотрудника";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(509, 6);
@@ -242,24 +262,6 @@
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(509, 53);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(139, 38);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "Удалить сотрудника";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(512, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(136, 54);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "*удаляет сотрудника выбранного в таблице слева";
             // 
             // Form1
             // 

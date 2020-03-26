@@ -22,6 +22,7 @@ namespace solpr
         private void Form1_Load(object sender, EventArgs e)
         {
             db = new ParkDBEntities();
+            //dataGridView2.AutoGenerateColumns = false;
         }
 
         private void tabPage2_Enter(object sender, EventArgs e)
@@ -102,7 +103,7 @@ namespace solpr
         {
             var result = from periphery in db.Peripheries
                          join manufac in db.Manufacturers on periphery.ManufacturerId equals manufac.Id
-                         //join spec in db.Specs on periphery.SpecId equals spec.Id
+                         join specs in db.Specs on periphery.Id equals specs.PeripheryId
                          join empl in db.Employees on periphery.EmployeeId equals empl.Id
                          select new
                          {
@@ -110,7 +111,7 @@ namespace solpr
                              Тип = periphery.Type,
                              Модель = periphery.Model,
                              Производитель = manufac.Name,
-                             //Характеристика = spec.Name + " - " + spec.Value,
+                             Характеристика = specs.Name + " - " + specs.Value,
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView2.DataSource = result.ToList();
@@ -156,6 +157,41 @@ namespace solpr
                              Отдел = employee.Department
                          };
             dataGridView4.DataSource = result.ToList();
+        }
+        bool IsTheSameCellValue(int column, int row)
+        {
+            DataGridViewCell cell1 = dataGridView2[column, row];
+            DataGridViewCell cell2 = dataGridView2[column, row - 1];
+            if (cell1.Value == null || cell2.Value == null)
+            {
+                return false;
+            }
+            return cell1.Value.ToString() == cell2.Value.ToString();
+        }
+        private void dataGridView2_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None;
+            if (e.RowIndex < 1 || e.ColumnIndex < 0)
+                return;
+            if (IsTheSameCellValue(e.ColumnIndex, e.RowIndex))
+            {
+                e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
+            }
+            else
+            {
+                e.AdvancedBorderStyle.Top = dataGridView2.AdvancedCellBorderStyle.Top;
+            }
+        }
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex == 0)
+                return;
+            if (IsTheSameCellValue(e.ColumnIndex, e.RowIndex))
+            {
+                e.Value = "";
+                e.FormattingApplied = true;
+            }
         }
     }
 }

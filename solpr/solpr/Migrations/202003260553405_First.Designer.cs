@@ -13,11 +13,7 @@ namespace solpr.Migrations
         
         string IMigrationMetadata.Id
         {
-<<<<<<< HEAD:solpr/solpr/Migrations/202003260517195_First.Designer.cs
-            get { return "202003260517195_First"; }
-=======
-            get { return "202003260414444_First"; }
->>>>>>> 4a55da9931de7feced28a7213cea22763b0c2f8c:solpr/solpr/Migrations/202003260414444_First.Designer.cs
+            get { return "202003260553405_First"; }
         }
         
         string IMigrationMetadata.Source

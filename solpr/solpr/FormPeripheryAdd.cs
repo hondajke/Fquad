@@ -80,7 +80,7 @@ namespace solpr
         }
         private void SplitSpecs() 
         {
-            Values = Spe.Text.Split(new Char[] { '@', '.', '\n', '-' , ',' }, StringSplitOptions.RemoveEmptyEntries);
+            Values = Spe.Text.Split(new Char[] { '@', '.', '\n', '-' , ',', ';',' '}, StringSplitOptions.RemoveEmptyEntries);
             length = Values.Length;
         }
         private void button1_Click(object sender, EventArgs e)
@@ -89,7 +89,8 @@ namespace solpr
             //{
             using (db = new ParkDBEntities())
             {
-                if (!checkManufacturerExistence(manufac.SelectedItem.ToString()))
+                Periphery example = new Periphery();
+                if (!checkManufacturerExistence(manufac.Text))
                 {
                     Manufacturer man = new Manufacturer
                     {
@@ -100,42 +101,37 @@ namespace solpr
                 db.SaveChanges();
                 this.Refresh();
                 }
-                SplitSpecs();
-                string _name = "";
-                string _values = "";
-                for (int i = 0; i < length - 1; i = i + 2) 
-                { 
-                    _name = _name + Values[i] + " ";
-                    _values = _values + Values[i + 1] + ";";
-                }
+                
 
-                    if (!checkSpecsExistence(_name, _values))
+
+                example.Type = (PeripheryType)type.SelectedValue;
+                example.Model = Model.Text;
+                example.ManufacturerId = (int)manufac.SelectedValue;
+                //SpecId = (int)Spe.SelectedValue,
+
+                example.EmployeeId = (int)comboBox1.SelectedValue;
+                db.Peripheries.Attach(example);
+                db.Peripheries.Add(example);
+                int temp = example.Id;
+                db.SaveChanges();
+                SplitSpecs();
+                for (int i = 0; i < length - 1; i = i + 2)
+                {
+                    if (!checkSpecsExistence(Values[i], Values[i + 1], example.Id))
                     {
                         Specs spe = new Specs
                         {
-                            Name = _name,
-                            Value = _values
+                            Name = Values[i],
+                            Value = Values[i + 1],
+                            PeripheryId = example.Id,
                         };
                         db.Specs.Attach(spe);
                         db.Specs.Add(spe);
                         db.SaveChanges();
 
                     }
-                Periphery example = new Periphery()
-                {
-                    Type = (PeripheryType)type.SelectedValue,
-                    Model = Model.Text,
-                    ManufacturerId = (int)manufac.SelectedValue,
-<<<<<<< HEAD
-                    //SpecId = (int)Spe.SelectedValue,
-=======
->>>>>>> 4a55da9931de7feced28a7213cea22763b0c2f8c
-                    EmployeeId = (int)comboBox1.SelectedValue,
-                };
-                db.Peripheries.Attach(example);
-                db.Peripheries.Add(example);
-                db.SaveChanges();
                 }
+            }
                 this.Close();
             }
             /*catch (Exception ex)
@@ -160,11 +156,11 @@ namespace solpr
             return false;
         }
 
-        private bool checkSpecsExistence(string _name, string _value)
+        private bool checkSpecsExistence(string _name, string _value, int _PeripheryId)
         {
             foreach (Specs spe in db.Specs.ToList())
             {
-                if (spe.Name == _name && spe.Value == _value)
+                if (spe.Name == _name && spe.Value == _value && spe.PeripheryId == _PeripheryId)
                 {
                     return true;
                 }

@@ -53,7 +53,7 @@ namespace solpr
         public int ManufacturerId { get; set; }
         [ForeignKey("ManufacturerId")]
         public Manufacturer Manufacturer { get; set; }
-        public ICollection<Specs> Specs { get; set; }
+        public virtual ICollection<Specs> Specs { get; set; }
         public ICollection<Computer> Computers { get; set; }
     }
 
@@ -112,6 +112,12 @@ namespace solpr
         public string Name { get; set; }
         [StringLength(100)]
         public string Value { get; set; }
+
+        public int? PeripheryId { get; set; }
+        public Periphery Periphery { get; set; }
+
+        public int? ComponentId { get; set; }
+        public Component Component { get; set; }
     }
 
     public static class GetTypes
