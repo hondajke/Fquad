@@ -158,6 +158,7 @@ namespace solpr
                          };
             dataGridView4.DataSource = result.ToList();
         }
+
         bool IsTheSameCellValue(int column, int row)
         {
             DataGridViewCell cell1 = dataGridView2[column, row];
@@ -192,6 +193,12 @@ namespace solpr
                 e.Value = "";
                 e.FormattingApplied = true;
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            FormDepartmentAdd dial = new FormDepartmentAdd();
+            dial.ShowDialog();
         }
     }
 }

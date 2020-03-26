@@ -46,14 +46,17 @@ namespace solpr
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Employee emplo = new Employee();
-            emplo.Surname = textBox1.Text;
-            emplo.Name = textBox2.Text;
-            emplo.Patronymic_Name = textBox3.Text;
-            emplo.DepartmentId = (int)comboBox1.SelectedValue;
-            db.Employees.Add(emplo);
-            db.SaveChanges();
-            Close();
+            using (db = new ParkDBEntities())
+            {
+                Employee emplo = new Employee();
+                emplo.Surname = textBox1.Text;
+                emplo.Name = textBox2.Text;
+                emplo.Patronymic_Name = textBox3.Text;
+                emplo.DepartmentId = (int)comboBox1.SelectedValue;
+                db.Employees.Add(emplo);
+                db.SaveChanges();
+                Close();
+            }
         }
 
     }
