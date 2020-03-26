@@ -62,7 +62,12 @@ namespace solpr
 
         private void loadSpecs() 
         {
-            Spe.DataSource = db.Specs.ToList();
+            var spe = db.Specs.Select(p => new
+            {
+                Id = p.Id,
+                Name = p.Name + p.Value,
+            });
+            Spe.DataSource = spe.ToList();
             Spe.DisplayMember = "Name";
             Spe.ValueMember = "Id";
         }
@@ -75,7 +80,7 @@ namespace solpr
         }
         private void SplitSpecs() 
         {
-            Values = Spe.Text.Split(new Char[] { '@', '.', '\n', '-' }, StringSplitOptions.RemoveEmptyEntries);
+            Values = Spe.Text.Split(new Char[] { '@', '.', '\n', '-' , ',' }, StringSplitOptions.RemoveEmptyEntries);
             length = Values.Length;
         }
         private void button1_Click(object sender, EventArgs e)
@@ -96,27 +101,32 @@ namespace solpr
                 this.Refresh();
                 }
                 SplitSpecs();
-                for (int i = 0; i < length - 1; i = i + 2)
-                {
-                    if (!checkSpecsExistence(Values[i], Values[i+1]))
+                string _name = "";
+                string _values = "";
+                for (int i = 0; i < length - 1; i = i + 2) 
+                { 
+                    _name = _name + Values[i] + " ";
+                    _values = _values + Values[i + 1] + ";";
+                }
+
+                    if (!checkSpecsExistence(_name, _values))
                     {
                         Specs spe = new Specs
                         {
-                            Name = Values[i],
-                            Value = Values[i + 1]
+                            Name = _name,
+                            Value = _values
                         };
                         db.Specs.Attach(spe);
                         db.Specs.Add(spe);
                         db.SaveChanges();
-                        
+
                     }
-                }
                 Periphery example = new Periphery()
                 {
                     Type = (PeripheryType)type.SelectedValue,
                     model = model.Text,
                     ManufacturerId = (int)manufac.SelectedValue,
-                    SpecId = (int)Spe.SelectedValue,
+                    //SpecId = (int)Spe.SelectedValue,
                     EmployeeId = (int)comboBox1.SelectedValue,
                 };
                 db.Peripheries.Attach(example);

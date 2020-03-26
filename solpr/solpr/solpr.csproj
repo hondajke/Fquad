@@ -86,13 +86,9 @@
     <Compile Include="FormPeripheryAdd.Designer.cs">
       <DependentUpon>FormPeripheryAdd.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003120608462_First.cs" />
-    <Compile Include="Migrations\202003120608462_First.designer.cs">
-      <DependentUpon>202003120608462_First.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003200431017_Second.cs" />
-    <Compile Include="Migrations\202003200431017_Second.designer.cs">
-      <DependentUpon>202003200431017_Second.cs</DependentUpon>
+    <Compile Include="Migrations\202003260517195_First.cs" />
+    <Compile Include="Migrations\202003260517195_First.designer.cs">
+      <DependentUpon>202003260517195_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="models.cs" />
@@ -113,11 +109,8 @@
     <EmbeddedResource Include="FormPeripheryAdd.resx">
       <DependentUpon>FormPeripheryAdd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003120608462_First.resx">
-      <DependentUpon>202003120608462_First.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003200431017_Second.resx">
-      <DependentUpon>202003200431017_Second.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003260517195_First.resx">
+      <DependentUpon>202003260517195_First.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

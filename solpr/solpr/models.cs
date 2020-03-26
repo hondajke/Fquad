@@ -11,20 +11,29 @@ using System.Reflection;
 namespace solpr
 {
 
-    public enum ComponentType {[Description("Процессор")] processor,
+    public enum ComponentType
+    {
+        [Description("Процессор")] processor,
         [Description("Материнская плата")] mboard,
         [Description("Видеокарта")] video,
         [Description("Оперативная память")] ram,
-        [Description("Жесткий диск")] disk }
-    public enum PeripheryType { [Description("Мышь")] mouse,
+        [Description("Жесткий диск")] disk
+    }
+    public enum PeripheryType
+    {
+        [Description("Мышь")] mouse,
         [Description("Клавиатура")] keyboard,
         [Description("Монитор")] monitor,
         [Description("Принтер")] printer,
         [Description("Веб-камера")] webcam,
-        [Description("Другое")] other }
-    public enum ComputerStatus {[Description("Окей")] ok,
+        [Description("Другое")] other
+    }
+    public enum ComputerStatus
+    {
+        [Description("Окей")] ok,
         [Description("В ремонте")] under_repair,
-        [Description("Списан")] scrapped }
+        [Description("Списан")] scrapped
+    }
 
     public class Manufacturer
     {
@@ -44,9 +53,7 @@ namespace solpr
         public int ManufacturerId { get; set; }
         [ForeignKey("ManufacturerId")]
         public Manufacturer Manufacturer { get; set; }
-        public int SpecId { get; set; }
-        [ForeignKey("SpecId")]
-        public Specs Specs { get; set; }
+        public ICollection<Specs> Specs { get; set; }
         public ICollection<Computer> Computers { get; set; }
     }
 
@@ -90,12 +97,10 @@ namespace solpr
         public int ManufacturerId { get; set; }
         [ForeignKey("ManufacturerId")]
         public Manufacturer Manufacturer { get; set; }
-        public int SpecId { get; set; }
-        [ForeignKey("SpecId")]
-        public Specs Specs { get; set; }
         public int EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
+        public virtual ICollection<Specs> Specs { get; set; }
     }
 
     public class Specs

@@ -102,7 +102,7 @@ namespace solpr
         {
             var result = from periphery in db.Peripheries
                          join manufac in db.Manufacturers on periphery.ManufacturerId equals manufac.Id
-                         join spec in db.Specs on periphery.SpecId equals spec.Id
+                         //join spec in db.Specs on periphery.SpecId equals spec.Id
                          join empl in db.Employees on periphery.EmployeeId equals empl.Id
                          select new
                          {
@@ -110,7 +110,7 @@ namespace solpr
                              Тип = periphery.Type,
                              Модель = periphery.model,
                              Производитель = manufac.Name,
-                             Характеристика = spec.Name + " - " + spec.Value,
+                             //Характеристика = spec.Name + " - " + spec.Value,
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView2.DataSource = result.ToList();
