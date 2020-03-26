@@ -157,5 +157,11 @@ namespace solpr
                          };
             dataGridView4.DataSource = result.ToList();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            FormDepartmentAdd dial = new FormDepartmentAdd();
+            dial.ShowDialog();
+        }
     }
 }
