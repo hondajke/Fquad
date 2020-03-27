@@ -237,24 +237,19 @@ namespace solpr
             }
         }
 
-        public void CheckEmployeeDataGrid()
-        {
-            int index = dataGridView4.SelectedRows[0].Index;
-            int id = 0;
-            bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
-            if (converted == false)
-                return;
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
             if (dataGridView4.SelectedRows.Count > 0)
             {
-                CheckEmployeeDataGrid();
+                int index = dataGridView4.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
 
-               /* Employee emplo = db.Employees
-                        .Where(p => p.Id == id)
-                        .FirstOrDefault();*/
+                /* Employee emplo = db.Employees
+                         .Where(p => p.Id == id)
+                         .FirstOrDefault();*/
 
                 FormEmployeeEdit Edit = new FormEmployeeEdit();
                 Edit.ShowDialog();
