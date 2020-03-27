@@ -86,6 +86,12 @@
     <Compile Include="FormEmployeeAdd.Designer.cs">
       <DependentUpon>FormEmployeeAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEmployeeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmployeeEdit.Designer.cs">
+      <DependentUpon>FormEmployeeEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPeripheryAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmployeeAdd.resx">
       <DependentUpon>FormEmployeeAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmployeeEdit.resx">
+      <DependentUpon>FormEmployeeEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPeripheryAdd.resx">
       <DependentUpon>FormPeripheryAdd.cs</DependentUpon>
