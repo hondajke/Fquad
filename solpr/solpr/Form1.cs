@@ -85,6 +85,11 @@ namespace solpr
                     bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
                     if (converted == false)
                         return;
+                    Specs spe = db.Specs
+                        .Where(s => s.PeripheryId == id)
+                        .FirstOrDefault();
+                    db.Specs.Remove(spe);
+                    db.SaveChanges();
                     Periphery peri = db.Peripheries
                         .Where(p => p.Id == id)
                         .FirstOrDefault();
@@ -199,6 +204,11 @@ namespace solpr
         {
             FormDepartmentAdd dial = new FormDepartmentAdd();
             dial.ShowDialog();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
