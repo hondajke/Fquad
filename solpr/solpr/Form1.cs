@@ -27,7 +27,8 @@ namespace solpr
 
         private void tabPage2_Enter(object sender, EventArgs e)
         {
-            dataGridView3.DataSource = db.Components.ToList();
+            RefreshComponentsGrid();
+            //dataGridView3.DataSource = db.Components.ToList();
         }
 
         private void tabPage1_Enter(object sender, EventArgs e)
@@ -55,6 +56,7 @@ namespace solpr
         {
             FormComponentAdd dial = new FormComponentAdd();
             dial.ShowDialog();
+            RefreshComponentsGrid();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -236,5 +238,69 @@ namespace solpr
             }
         }
 
+        public void CheckEmployeeDataGrid()
+        {
+            int index = dataGridView4.SelectedRows[0].Index;
+            int id = 0;
+            bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
+            if (converted == false)
+                return;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (dataGridView4.SelectedRows.Count > 0)
+            {
+                CheckEmployeeDataGrid();
+
+               /* Employee emplo = db.Employees
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();*/
+
+                FormEmployeeEdit Edit = new FormEmployeeEdit();
+                Edit.ShowDialog();
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView3.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView3.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+                    Component comp = db.Components
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+
+                    db.Components.Remove(comp);
+                    db.SaveChanges();
+                    RefreshComponentsGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void RefreshComponentsGrid()
+        {
+            var result = from comps in db.Components
+                         join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
+                         join specs in db.Specs on comps.Id equals specs.ComponentId
+                         select new
+                         {
+                             ID = comps.Id,
+                             Тип = comps.Type,
+                             Производитель = manufac.Name,
+                             Характеристики = specs.Name + " - " + specs.Value
+                         };
+            dataGridView3.DataSource = result.ToList();
+        }
     }
 }

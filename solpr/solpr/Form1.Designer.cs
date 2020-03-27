@@ -40,6 +40,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button9 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -51,7 +52,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -184,7 +185,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button9);
+            this.tabPage2.Controls.Add(this.button10);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.dataGridView3);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -194,6 +195,16 @@
             this.tabPage2.Text = "Комплектующие";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(509, 188);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(139, 40);
+            this.button9.TabIndex = 5;
+            this.button9.Text = "Редактировать сотрудника";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button1
             // 
@@ -215,6 +226,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button9);
             this.tabPage3.Controls.Add(this.button7);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.button6);
@@ -299,14 +311,15 @@
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
-            // button9
+            // button10
             // 
-            this.button9.Location = new System.Drawing.Point(509, 52);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(139, 40);
-            this.button9.TabIndex = 2;
-            this.button9.Text = "Удалить комплектующее";
-            this.button9.UseVisualStyleBackColor = true;
+            this.button10.Location = new System.Drawing.Point(509, 52);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(139, 40);
+            this.button10.TabIndex = 2;
+            this.button10.Text = "Удалить комплектующее";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // Form1
             // 
@@ -346,7 +359,6 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.Button button1;
@@ -359,8 +371,10 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button9;
+        internal System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button10;
     }
 }
 
