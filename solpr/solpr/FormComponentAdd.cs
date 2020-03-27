@@ -34,15 +34,11 @@ namespace solpr
                 Component comp = new Component();
                 comp.Type = (ComponentType)comboBox1.SelectedValue;
                 comp.ManufacturerId = (int)comboBox2.SelectedValue;
-                comp.Manufacturer = (Manufacturer)comboBox2.SelectedValue;
-                Specs spec = new Specs();
-                spec.Name = textBox1.Text;
-                db.Specs.Add(spec);
                 db.SaveChanges();
-
-
+                
                 db.Components.Add(comp);
                 db.SaveChanges();
+                
                 Close();
             }
             else

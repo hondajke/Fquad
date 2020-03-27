@@ -28,7 +28,6 @@ namespace solpr
         private void tabPage2_Enter(object sender, EventArgs e)
         {
             RefreshComponentsGrid();
-            //dataGridView3.DataSource = db.Components.ToList();
         }
 
         private void tabPage1_Enter(object sender, EventArgs e)
@@ -118,7 +117,7 @@ namespace solpr
                              Тип = periphery.Type,
                              Модель = periphery.Model,
                              Производитель = manufac.Name,
-                             Характеристика = specs.Name + " - " + specs.Value,
+                             Характеристики = specs.Name + " - " + specs.Value,
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView2.DataSource = result.ToList();
@@ -156,11 +155,11 @@ namespace solpr
                          join department in db.Departments on employee.DepartmentId equals department.Id
                          select new
                          {
-                             Айди = employee.Id,
+                             ID = employee.Id,
                              Фамилия = employee.Surname,
                              Имя = employee.Name,
                              Отчество = employee.Patronymic_Name,
-                             ИД_отдела = employee.DepartmentId,
+                             ID_отдела = employee.DepartmentId,
                              Отдел = department.Name
                          };
             dataGridView4.DataSource = result.ToList();
