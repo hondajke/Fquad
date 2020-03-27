@@ -51,6 +51,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button9 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -110,6 +111,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.button8);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.button5);
@@ -298,6 +300,14 @@
             this.button9.Text = "Редактировать сотрудника";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
+            //
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(512, 193);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(136, 54);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "*редактирует периферию выбранную в таблице слева";
             // 
             // Form1
             // 
@@ -351,6 +361,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         internal System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.Label label3;
     }
 }
 
