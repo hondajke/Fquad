@@ -56,6 +56,7 @@ namespace solpr
                 db.Employees.Add(emplo);
                 db.SaveChanges();
                 Close();
+                Program.mf.RefreshEmployeeGrid();
             }
         }
 

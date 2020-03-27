@@ -104,7 +104,7 @@ namespace solpr
                 MessageBox.Show(ex.Message);
             }
         }
-        private void RefreshPeripheryGrid() 
+        public void RefreshPeripheryGrid() 
         {
             var result = from periphery in db.Peripheries
                          join manufac in db.Manufacturers on periphery.ManufacturerId equals manufac.Id
@@ -148,7 +148,7 @@ namespace solpr
             }
         }
 
-        private void RefreshEmployeeGrid()
+        public void RefreshEmployeeGrid()
         {
             var result = from employee in db.Employees
                          join department in db.Departments on employee.DepartmentId equals department.Id
@@ -159,7 +159,7 @@ namespace solpr
                              Имя = employee.Name,
                              Отчество = employee.Patronymic_Name,
                              ИД_отдела = employee.DepartmentId,
-                             Отдел = employee.Department
+                             Отдел = department.Name
                          };
             dataGridView4.DataSource = result.ToList();
         }
@@ -206,9 +206,12 @@ namespace solpr
             dial.ShowDialog();
         }
 
+<<<<<<< HEAD
         private void button8_Click(object sender, EventArgs e)
         {
 
         }
+=======
+>>>>>>> 68aa63d49e149d5f8373ae85bc258061a376ec31
     }
 }
