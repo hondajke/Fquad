@@ -22,7 +22,7 @@ namespace solpr
         private void Form1_Load(object sender, EventArgs e)
         {
             db = new ParkDBEntities();
-            //dataGridView2.AutoGenerateColumns = false;
+            
         }
 
         private void tabPage2_Enter(object sender, EventArgs e)
@@ -33,6 +33,7 @@ namespace solpr
         private void tabPage1_Enter(object sender, EventArgs e)
         {
             RefreshPeripheryGrid();
+            dataGridView2.AutoGenerateColumns = false;
         }
 
         private void tabPage3_Enter(object sender, EventArgs e)
@@ -206,12 +207,35 @@ namespace solpr
             dial.ShowDialog();
         }
 
-<<<<<<< HEAD
+
         private void button8_Click(object sender, EventArgs e)
         {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                int index = dataGridView2.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
 
+                Periphery peri = db.Peripheries
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+
+                FormPeripheryEdit Edit = new FormPeripheryEdit(peri);
+                Edit.ShowDialog();
+
+                /*peri.Age = (int)Edit.numericUpDown1.Value;
+                peri.Name = Edit.textBox1.Text;
+                peri.Position = Edit.comboBox1.SelectedItem.ToString();
+                peri.Team = (Team)Edit.comboBox2.SelectedItem;
+
+                db.Entry(peri).State = EntityState.Modified;
+                db.SaveChanges();*/
+
+                //MessageBox.Show("Объект обновлен");
+            }
         }
-=======
->>>>>>> 68aa63d49e149d5f8373ae85bc258061a376ec31
+
     }
 }

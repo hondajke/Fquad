@@ -65,7 +65,7 @@ namespace solpr
             var spe = db.Specs.Select(p => new
             {
                 Id = p.Id,
-                Name = p.Name + p.Value,
+                Name = p.Name + " - " + p.Value,
             });
             Spe.DataSource = spe.ToList();
             Spe.DisplayMember = "Name";
