@@ -86,11 +86,10 @@ namespace solpr
                     bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
                     if (converted == false)
                         return;
-                    Specs spe = db.Specs
-                        .Where(s => s.PeripheryId == id)
-                        .FirstOrDefault();
-                    db.Specs.Remove(spe);
+                    System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@param", id);
+                    int numberOfRowDeleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.Specs WHERE PeripheryId=@param",param);
                     db.SaveChanges();
+                    
                     Periphery peri = db.Peripheries
                         .Where(p => p.Id == id)
                         .FirstOrDefault();

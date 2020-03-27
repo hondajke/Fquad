@@ -33,6 +33,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button8 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -49,7 +50,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button8 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -109,6 +110,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.button8);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.button5);
@@ -122,6 +124,16 @@
             this.tabPage1.Text = "Периферия";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(509, 151);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(139, 39);
+            this.button8.TabIndex = 5;
+            this.button8.Text = "Редактировать периферию";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // label1
             // 
@@ -277,15 +289,13 @@
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
-            // button8
+            // label3
             // 
-            this.button8.Location = new System.Drawing.Point(509, 151);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(139, 39);
-            this.button8.TabIndex = 5;
-            this.button8.Text = "Редактировать периферию";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.label3.Location = new System.Drawing.Point(512, 193);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(136, 54);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "*редактирует периферию выбранную в таблице слева";
             // 
             // Form1
             // 
@@ -338,6 +348,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label3;
     }
 }
 
