@@ -33,6 +33,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,8 +56,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button11 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button12 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -132,6 +135,23 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(541, 6);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 43);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "*кнопка обновления таблицы";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(509, 6);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(25, 21);
+            this.button11.TabIndex = 7;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // label3
             // 
             this.label3.Location = new System.Drawing.Point(512, 239);
@@ -190,6 +210,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button12);
             this.tabPage2.Controls.Add(this.button10);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.dataGridView3);
@@ -331,31 +352,41 @@
             // выToolStripMenuItem
             // 
             this.выToolStripMenuItem.Name = "выToolStripMenuItem";
-            this.выToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.выToolStripMenuItem.Size = new System.Drawing.Size(89, 22);
             this.выToolStripMenuItem.Text = "вы";
             // 
-            // button11
+            // comboBox1
             // 
-            this.button11.Location = new System.Drawing.Point(509, 6);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(25, 21);
-            this.button11.TabIndex = 7;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(0, 74);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 2;
             // 
-            // label4
+            // textBox1
             // 
-            this.label4.Location = new System.Drawing.Point(541, 6);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 43);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "*кнопка обновления таблицы";
+            this.textBox1.Location = new System.Drawing.Point(0, 102);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 6;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(509, 98);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(139, 39);
+            this.button12.TabIndex = 3;
+            this.button12.Text = "Редактировать комплектующее";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(797, 477);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -408,6 +439,9 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.ToolStripMenuItem выToolStripMenuItem;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button12;
     }
 }
 

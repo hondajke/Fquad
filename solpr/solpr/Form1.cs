@@ -28,6 +28,7 @@ namespace solpr
         private void tabPage2_Enter(object sender, EventArgs e)
         {
             RefreshComponentsGrid();
+            
         }
 
         private void tabPage1_Enter(object sender, EventArgs e)
@@ -286,13 +287,12 @@ namespace solpr
         {
             var result = from comps in db.Components
                          join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
-                         join specs in db.Specs on comps.Id equals specs.ComponentId
                          select new
                          {
                              ID = comps.Id,
                              Тип = comps.Type,
                              Производитель = manufac.Name,
-                             Характеристики = specs.Name + " - " + specs.Value
+                             //Характеристики = specs.Name + " - " + specs.Value
                          };
             dataGridView3.DataSource = result.ToList();
         }
@@ -300,6 +300,11 @@ namespace solpr
         private void button11_Click(object sender, EventArgs e)
         {
             RefreshPeripheryGrid();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

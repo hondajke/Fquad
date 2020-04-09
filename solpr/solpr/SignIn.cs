@@ -15,6 +15,7 @@ namespace solpr
         public SignIn()
         {
             InitializeComponent();
+            pass.KeyDown += TextBoxKeyDown;
         }
 
         private void exit_Click(object sender, EventArgs e)
@@ -39,6 +40,16 @@ namespace solpr
             catch(Exception ex)
             {
                 MessageBox.Show("Найдена ошибка:" + ex.Message);
+            }
+        }
+
+        private void TextBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                checkIn.PerformClick();
+                e.SuppressKeyPress = true;
+                e.Handled = true;
             }
         }
     }
