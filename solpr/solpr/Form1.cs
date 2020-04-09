@@ -28,18 +28,35 @@ namespace solpr
         private void tabPage2_Enter(object sender, EventArgs e)
         {
             RefreshComponentsGrid();
-            
+            List<string> colnames = new List<string>();
+            foreach (DataGridViewColumn col in dataGridView3.Columns)
+            {
+                colnames.Add(col.Name);
+            }
+            comboBox1.DataSource = colnames;
         }
 
         private void tabPage1_Enter(object sender, EventArgs e)
         {
             RefreshPeripheryGrid();
             dataGridView2.AutoGenerateColumns = false;
+            List<string> colnames = new List<string>();
+            foreach (DataGridViewColumn col in dataGridView2.Columns)
+            {
+                colnames.Add(col.Name);
+            }
+            comboBox1.DataSource = colnames;
         }
 
         private void tabPage3_Enter(object sender, EventArgs e)
         {
             RefreshEmployeeGrid();
+            List<string> colnames = new List<string>();
+            foreach (DataGridViewColumn col in dataGridView4.Columns)
+            {
+                colnames.Add(col.Name);
+            }
+            comboBox1.DataSource = colnames;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -50,6 +67,12 @@ namespace solpr
         private void tabPage0_Enter(object sender, EventArgs e)
         {
             dataGridView1.DataSource = db.Computers.ToList();
+            List<string> colnames = new List<string>();
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                colnames.Add(col.Name);
+            }
+            comboBox1.DataSource = colnames;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -304,7 +327,21 @@ namespace solpr
 
         private void button12_Click(object sender, EventArgs e)
         {
-
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                int index = dataGridView3.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+                
+                FormComponentEdit Edit = new FormComponentEdit();
+                Edit.ShowDialog();
+            }
+        }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }
