@@ -12,6 +12,7 @@ namespace solpr
         /// The main entry point for the application.
         /// </summary>
         internal static Form1 mf;
+        internal static SignIn st;
 
         [STAThread]
         static void Main()
@@ -19,7 +20,8 @@ namespace solpr
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             mf = new Form1();
-            Application.Run(mf);
+            st = new SignIn();
+            Application.Run(st);
         }
     }
 }
