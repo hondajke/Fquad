@@ -34,8 +34,6 @@ namespace solpr
                 Component comp = new Component();
                 comp.Type = (ComponentType)comboBox1.SelectedValue;
                 comp.ManufacturerId = (int)comboBox2.SelectedValue;
-                db.SaveChanges();
-                
                 db.Components.Add(comp);
                 db.SaveChanges();
                 
@@ -64,7 +62,7 @@ namespace solpr
                 .OrderBy(item => item.value)
                 .ToList();
             comboBox1.DisplayMember = "Description";
-            comboBox1.ValueMember = "value";
+            comboBox1.ValueMember = "Value";
         }
 
         private void loadManufacturers()

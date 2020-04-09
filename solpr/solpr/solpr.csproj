@@ -54,13 +54,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addmethods.cs" />
     <Compile Include="dbcontext.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormComponentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormComponentEdit.Designer.cs">
+      <DependentUpon>FormComponentEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="FormDepartmentAdd.cs">
       <SubType>Form</SubType>
@@ -123,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormComponentAdd.resx">
       <DependentUpon>FormComponentAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormComponentEdit.resx">
+      <DependentUpon>FormComponentEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormComputerAdd.resx">
       <DependentUpon>FormComputerAdd.cs</DependentUpon>

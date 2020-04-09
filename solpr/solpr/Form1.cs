@@ -310,13 +310,12 @@ namespace solpr
         {
             var result = from comps in db.Components
                          join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
-                         join specs in db.Specs on comps.Id equals specs.ComponentId
                          select new
                          {
                              ID = comps.Id,
                              Тип = comps.Type,
                              Производитель = manufac.Name,
-                             Характеристики = specs.Name + " - " + specs.Value
+                             //Характеристики = specs.Name + " - " + specs.Value
                          };
             dataGridView3.DataSource = result.ToList();
         }
@@ -326,6 +325,20 @@ namespace solpr
             RefreshPeripheryGrid();
         }
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                int index = dataGridView3.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+                
+                FormComponentEdit Edit = new FormComponentEdit();
+                Edit.ShowDialog();
+            }
+        }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             (dataGridView4.DataSource as DataTable).DefaultView.RowFilter = string.Format(comboBox1.Text + " like '{0}%'", textBox1.Text);

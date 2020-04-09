@@ -48,8 +48,9 @@
             // pass
             // 
             this.pass.Location = new System.Drawing.Point(137, 151);
-            this.pass.Multiline = true;
+            this.pass.MaxLength = 100;
             this.pass.Name = "pass";
+            this.pass.PasswordChar = '*';
             this.pass.Size = new System.Drawing.Size(115, 20);
             this.pass.TabIndex = 1;
             // 
