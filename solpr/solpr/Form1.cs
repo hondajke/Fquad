@@ -328,7 +328,7 @@ namespace solpr
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-           
+            (dataGridView4.DataSource as DataTable).DefaultView.RowFilter = string.Format(comboBox1.Text + " like '{0}%'", textBox1.Text);
         }
     }
 }
