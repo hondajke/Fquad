@@ -16,6 +16,7 @@ namespace solpr
         {
             InitializeComponent();
             pass.KeyDown += TextBoxKeyDown;
+            login.KeyDown += TextBoxKeyDown;
         }
 
         private void exit_Click(object sender, EventArgs e)

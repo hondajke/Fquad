@@ -229,6 +229,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormComputerAdd";
             this.Text = "FormComputerAdd";
+            this.Load += new System.EventHandler(this.FormComputerAdd_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
