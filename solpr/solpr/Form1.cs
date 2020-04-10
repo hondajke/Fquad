@@ -428,16 +428,16 @@ namespace solpr
         {
             switch (tabControl1.SelectedIndex)
             {
-                case '0':
+                case 0:
                     
                     break;
-                case '1':
+                case 1:
                     RefreshPeripheryGrid();
                     break;
-                case '2':
+                case 2:
                     RefreshComponentsGrid();
                     break;
-                case '3':
+                case 3:
                     RefreshEmployeeGrid();
                     break;
                 default:
@@ -449,13 +449,13 @@ namespace solpr
         {
             switch (tabControl1.SelectedIndex)
             {
-                case '0':
+                case 0:
                     return dataGridView1;
-                case '1':
+                case 1:
                     return dataGridView2;
-                case '2':
+                case 2:
                     return dataGridView3;
-                case '3':
+                case 3:
                     return dataGridView4;
                 default:
                     return dataGridView1;
