@@ -13,6 +13,7 @@ namespace solpr
     public partial class Form1 : Form
     {
         ParkDBEntities db;
+        int dataGridNumber = 1;
 
         public Form1()
         {
@@ -27,6 +28,7 @@ namespace solpr
 
         private void tabPage2_Enter(object sender, EventArgs e)
         {
+            dataGridNumber = 3;
             RefreshComponentsGrid();
             List<string> colnames = new List<string>();
             foreach (DataGridViewColumn col in dataGridView3.Columns)
@@ -38,6 +40,7 @@ namespace solpr
 
         private void tabPage1_Enter(object sender, EventArgs e)
         {
+            dataGridNumber = 2;
             RefreshPeripheryGrid();
             dataGridView2.AutoGenerateColumns = false;
             List<string> colnames = new List<string>();
@@ -50,6 +53,7 @@ namespace solpr
 
         private void tabPage3_Enter(object sender, EventArgs e)
         {
+            dataGridNumber = 4;
             RefreshEmployeeGrid();
             List<string> colnames = new List<string>();
             foreach (DataGridViewColumn col in dataGridView4.Columns)
@@ -66,6 +70,7 @@ namespace solpr
 
         private void tabPage0_Enter(object sender, EventArgs e)
         {
+            dataGridNumber = 1;
             dataGridView1.DataSource = db.Computers.ToList();
             List<string> colnames = new List<string>();
             foreach (DataGridViewColumn col in dataGridView1.Columns)
@@ -339,10 +344,65 @@ namespace solpr
                 Edit.ShowDialog();
             }
         }
+
+        private void FilterDataView()
+        {
+            /*DataTable dt = new DataTable();
+            DataView view = new DataView();
+
+            view = dt.DefaultView;
+            string filter = string.Format("CONVERT(" + dataGridView4.Columns[2].DataPropertyName + ", System.String)  LIKE '" + textBox1.Text + "*'");
+            view.RowFilter = filter;
+            dataGridView4.DataSource = view;*/
+
+
+            //dt.DefaultView.RowFilter = string.Format(comboBox1.Text + " like '%{0}%'", textBox1.Text);
+            //dataGridView4.Refresh();
+
+
+            // (dataGridView4.DataSource as DataTable).DefaultView.RowFilter = string.Format(comboBox1.Text + " like '{0}%'", textBox1.Text);
+            /* BindingSource bs = new BindingSource();
+             bs.DataSource = dataGridView4.DataSource;
+             bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
+             dataGridView4.DataSource = bs;
+             dataGridView4.Refresh();*/
+          /*  BindingSource bs = new BindingSource();
+            bs.DataSource = dataGridView4.DataSource;
+            bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
+            dataGridView4.DataSource = bs;
+            dataGridView4.Refresh();*/
+        }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            RefreshEmployeeGrid();
-            (dataGridView4.DataSource as DataTable).DefaultView.RowFilter = string.Format(comboBox1.Text + " like '{0}%'", textBox1.Text);
+            //FilterDataView();
+            BindingSource bs = new BindingSource();
+            switch (dataGridNumber)
+            {
+                case 1:
+                    bs.DataSource = dataGridView1.DataSource;
+                    bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
+                    dataGridView1.DataSource = bs;
+                    dataGridView1.Refresh();
+                    break;
+                case 2:
+                    bs.DataSource = dataGridView2.DataSource;
+                    bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
+                    dataGridView2.DataSource = bs;
+                    dataGridView2.Refresh();
+                    break;
+                case 3:
+                    bs.DataSource = dataGridView3.DataSource;
+                    bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
+                    dataGridView3.DataSource = bs;
+                    dataGridView3.Refresh();
+                    break;
+                case 4:
+                    bs.DataSource = dataGridView4.DataSource;
+                    bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
+                    dataGridView4.DataSource = bs;
+                    dataGridView4.Refresh();
+                    break;
+            }
         }
     }
 }
