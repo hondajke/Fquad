@@ -409,7 +409,7 @@ namespace solpr
         {
 
             RefreshActiveGrid();
-            foreach (DataGridViewRow row in dataGridView3.Rows)
+            foreach (DataGridViewRow row in activeGrid().Rows)
             {
                 foreach (DataGridViewCell cell in row.Cells)
                 if (cell.Value.ToString() == textBox2.Text)
@@ -421,7 +421,7 @@ namespace solpr
                         cell.Style.BackColor = Color.White;
                     }
             }
-            dataGridView3.Refresh();
+            activeGrid().Refresh();
         }
 
         private void RefreshActiveGrid()
@@ -442,6 +442,23 @@ namespace solpr
                     break;
                 default:
                     break;
+            }
+        }
+
+        private DataGridView activeGrid()
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case '0':
+                    return dataGridView1;
+                case '1':
+                    return dataGridView2;
+                case '2':
+                    return dataGridView3;
+                case '3':
+                    return dataGridView4;
+                default:
+                    return dataGridView1;
             }
         }
 
