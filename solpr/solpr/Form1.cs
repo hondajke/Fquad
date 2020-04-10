@@ -344,5 +344,55 @@ namespace solpr
             RefreshEmployeeGrid();
             (dataGridView4.DataSource as DataTable).DefaultView.RowFilter = string.Format(comboBox1.Text + " like '{0}%'", textBox1.Text);
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+            RefreshActiveGrid();
+            foreach (DataGridViewRow row in dataGridView3.Rows)
+            {
+                foreach (DataGridViewCell cell in row.Cells)
+                if (cell.Value.ToString() == textBox2.Text)
+                {
+                    cell.Style.BackColor = Color.LightYellow;
+                }
+                else
+                    {
+                        cell.Style.BackColor = Color.White;
+                    }
+            }
+            dataGridView3.Refresh();
+        }
+
+        private void RefreshActiveGrid()
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case '0':
+                    
+                    break;
+                case '1':
+                    RefreshPeripheryGrid();
+                    break;
+                case '2':
+                    RefreshComponentsGrid();
+                    break;
+                case '3':
+                    RefreshEmployeeGrid();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
