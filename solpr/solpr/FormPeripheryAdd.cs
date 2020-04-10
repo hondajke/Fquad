@@ -89,6 +89,8 @@ namespace solpr
             //{
             using (db = new ParkDBEntities())
             {
+                int tempManId = 0;
+                bool addedNewOne = false;
                 Periphery example = new Periphery();
                 if (!checkManufacturerExistence(manufac.Text))
                 {
@@ -96,17 +98,21 @@ namespace solpr
                     {
                         Name = manufac.Text
                     };
-                    db.Manufacturers.Attach(man);
+                db.Manufacturers.Attach(man);
                 db.Manufacturers.Add(man);
                 db.SaveChanges();
-                this.Refresh();
+                    //this.Refresh();
+                loadManufacturers();
+                tempManId = man.Id;
+                addedNewOne = true;
                 }
-                
 
+                
 
                 example.Type = (PeripheryType)type.SelectedValue;
                 example.Model = Model.Text;
-                example.ManufacturerId = (int)manufac.SelectedValue;
+                if (addedNewOne == true) example.ManufacturerId = tempManId;
+                else example.ManufacturerId = (int)manufac.SelectedValue;
                 //SpecId = (int)Spe.SelectedValue,
 
                 example.EmployeeId = (int)comboBox1.SelectedValue;

@@ -67,6 +67,8 @@ namespace solpr
         {
             using (db = new ParkDBEntities())
             {
+                int tempManId = 0;
+                bool addedNewOne = false;
                 changedPeri = db.Peripheries.Where(p => p.Id == tempPerId).FirstOrDefault();
                 if (!checkManufacturerExistence(manufac.Text))
                 {
@@ -77,13 +79,15 @@ namespace solpr
                     db.Manufacturers.Attach(man);
                     db.Manufacturers.Add(man);
                     db.SaveChanges();
-                    this.Refresh();
+                    tempManId = man.Id;
+                    addedNewOne = true;
                 }
 
 
                 changedPeri.Type = (PeripheryType)type.SelectedValue;
                 changedPeri.Model = Model.Text;
-                changedPeri.ManufacturerId = (int)manufac.SelectedValue;
+                if (addedNewOne == true) changedPeri.ManufacturerId = tempManId;
+                else changedPeri.ManufacturerId = (int)manufac.SelectedValue;
                 //SpecId = (int)Spe.SelectedValue,
 
                 changedPeri.EmployeeId = (int)comboBox1.SelectedValue;
@@ -161,5 +165,6 @@ namespace solpr
             }
             return false;
         }
+        
     }
 }
