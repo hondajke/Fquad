@@ -15,6 +15,9 @@ namespace solpr
         ParkDBEntities db;
         int dataGridNumber = 1;
 
+        List<DataGridViewCell> searchCells;
+        int searchCellNum = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -407,20 +410,25 @@ namespace solpr
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            searchCellNum = 0;
+            searchCells = new List<DataGridViewCell>();
             RefreshActiveGrid();
             foreach (DataGridViewRow row in activeGrid().Rows)
             {
                 foreach (DataGridViewCell cell in row.Cells)
-                if (cell.Value.ToString() == textBox2.Text)
                 {
-                    cell.Style.BackColor = Color.LightYellow;
-                }
-                else
+                    if (cell.Value.ToString().Contains(textBox2.Text) && textBox2.Text != "")
+                    {
+                        searchCells.Add(cell);
+                        cell.Style.BackColor = Color.Yellow;
+                    }
+                    else
                     {
                         cell.Style.BackColor = Color.White;
                     }
+                }
             }
+            if (searchCells.Count != 0) activeGrid().CurrentCell = searchCells[0];
             activeGrid().Refresh();
         }
 
@@ -464,12 +472,34 @@ namespace solpr
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            if (textBox2.Text != "" && searchCells.Count != 0)
+            {
+                if (searchCellNum < searchCells.Count - 1)
+                {
+                    searchCellNum++;
+                }
+                else
+                {
+                    searchCellNum = 0;
+                }
+                activeGrid().CurrentCell = searchCells[searchCellNum];
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-
+            if (textBox2.Text != "" && searchCells.Count != 0)
+            {
+                if (searchCellNum > 0)
+                {
+                    searchCellNum--;
+                }
+                else
+                {
+                    searchCellNum = searchCells.Count - 1;
+                }
+                activeGrid().CurrentCell = searchCells[searchCellNum];
+            }
         }
     }
 }

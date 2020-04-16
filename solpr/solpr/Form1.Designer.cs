@@ -414,23 +414,25 @@
             // 
             // button13
             // 
-            this.button13.Font = new System.Drawing.Font("Segoe MDL2 Assets", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button13.Cursor = System.Windows.Forms.Cursors.Default;
+            this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button13.Location = new System.Drawing.Point(56, 181);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(25, 25);
             this.button13.TabIndex = 6;
-            this.button13.Text = "";
+            this.button13.Text = "<";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
-            this.button14.Font = new System.Drawing.Font("Segoe MDL2 Assets", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button14.Cursor = System.Windows.Forms.Cursors.Default;
+            this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button14.Location = new System.Drawing.Point(87, 181);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(25, 25);
             this.button14.TabIndex = 7;
-            this.button14.Text = "";
+            this.button14.Text = ">";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
