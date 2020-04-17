@@ -417,7 +417,7 @@ namespace solpr
             {
                 foreach (DataGridViewCell cell in row.Cells)
                 {
-                    if (cell.Value.ToString().Contains(textBox2.Text) && textBox2.Text != "")
+                    if (cell.Value.ToString().ToLower().Contains(textBox2.Text.ToLower()) && textBox2.Text != "")
                     {
                         searchCells.Add(cell);
                         cell.Style.BackColor = Color.Yellow;
@@ -510,6 +510,12 @@ namespace solpr
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            searchCells = new List<DataGridViewCell>();
+            searchCellNum = 0;
         }
     }
 }
