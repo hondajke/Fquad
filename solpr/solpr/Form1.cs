@@ -145,7 +145,7 @@ namespace solpr
                          join empl in db.Employees on periphery.EmployeeId equals empl.Id
                          select new
                          {
-                             Айди = periphery.Id,
+                             ID = periphery.Id,
                              Тип = periphery.Type,
                              Модель = periphery.Model,
                              Производитель = manufac.Name,
@@ -500,6 +500,16 @@ namespace solpr
                 }
                 activeGrid().CurrentCell = searchCells[searchCellNum];
             }
+        }
+
+        private void файлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

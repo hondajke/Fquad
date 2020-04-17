@@ -63,7 +63,8 @@
             // Spe
             // 
             this.Spe.FormattingEnabled = true;
-            this.Spe.Location = new System.Drawing.Point(192, 188);
+            this.Spe.ItemHeight = 13;
+            this.Spe.Location = new System.Drawing.Point(192, 187);
             this.Spe.Name = "Spe";
             this.Spe.Size = new System.Drawing.Size(121, 21);
             this.Spe.TabIndex = 26;

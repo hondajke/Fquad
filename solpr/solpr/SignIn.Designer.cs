@@ -35,6 +35,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.checkIn = new System.Windows.Forms.Button();
             this.exit = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // login
@@ -76,7 +77,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(87, 32);
+            this.label3.Location = new System.Drawing.Point(87, 43);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(165, 20);
             this.label3.TabIndex = 4;
@@ -102,11 +103,20 @@
             this.exit.UseVisualStyleBackColor = true;
             this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(151, 263);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.TabIndex = 7;
+            // 
             // SignIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(338, 307);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.exit);
             this.Controls.Add(this.checkIn);
             this.Controls.Add(this.label3);
@@ -130,5 +140,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button checkIn;
         private System.Windows.Forms.Button exit;
+        private System.Windows.Forms.Label label4;
     }
 }

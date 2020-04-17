@@ -12,11 +12,15 @@ namespace solpr
 {
     public partial class SignIn : Form
     {
+        Timer myTimer = new Timer();
+        int timeLeft = 10;
+        int attemptLeft = 3;
         public SignIn()
         {
             InitializeComponent();
             pass.KeyDown += TextBoxKeyDown;
             login.KeyDown += TextBoxKeyDown;
+            
         }
 
         private void exit_Click(object sender, EventArgs e)
@@ -26,19 +30,36 @@ namespace solpr
 
         private void checkIn_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
                 if ((login.Text == "admin") && (pass.Text == "123"))
                 {
                     Program.st.Hide();
                     Program.mf.ShowDialog();
                 }
-                else 
+                else
                 {
                     MessageBox.Show("Данные введены неправильно");
+                    attemptLeft--;
+                    if (attemptLeft == 0)
+                    {
+                        this.Enabled = false;
+                        myTimer.Interval = 1000;
+                        myTimer.Enabled = true;
+
+                        //Set the event handler for the timer, named "myTimer_Tick"
+                        myTimer.Tick += myTimer_Tick;
+
+                        //Start the timer as soon as the form is loaded
+                        myTimer.Start();
+
+                        //Show the time set in the "timeLeft" variable
+                        label4.Text = timeLeft.ToString();
+                    }
                 }
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Найдена ошибка:" + ex.Message);
             }
@@ -51,6 +72,21 @@ namespace solpr
                 checkIn.PerformClick();
                 e.SuppressKeyPress = true;
                 e.Handled = true;
+            }
+        }
+        private void myTimer_Tick(object sender, EventArgs e)
+        {
+            //perform these actions at the interval set in the properties.
+            label4.Text = timeLeft.ToString();
+            timeLeft -= 1;
+
+            if (timeLeft < 0)
+            {
+                myTimer.Stop();
+                this.Enabled = true;
+                attemptLeft = 3;
+                timeLeft = 10;
+                label4.Text = "";
             }
         }
     }
