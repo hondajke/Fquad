@@ -13,7 +13,6 @@ namespace solpr
     public partial class Form1 : Form
     {
         ParkDBEntities db;
-        int dataGridNumber = 1;
 
         List<DataGridViewCell> searchCells;
         int searchCellNum = 0;
@@ -26,12 +25,11 @@ namespace solpr
         private void Form1_Load(object sender, EventArgs e)
         {
             db = new ParkDBEntities();
-            
+
         }
 
         private void tabPage2_Enter(object sender, EventArgs e)
         {
-            dataGridNumber = 3;
             RefreshComponentsGrid();
             List<string> colnames = new List<string>();
             foreach (DataGridViewColumn col in dataGridView3.Columns)
@@ -43,7 +41,6 @@ namespace solpr
 
         private void tabPage1_Enter(object sender, EventArgs e)
         {
-            dataGridNumber = 2;
             RefreshPeripheryGrid();
             dataGridView2.AutoGenerateColumns = false;
             List<string> colnames = new List<string>();
@@ -56,14 +53,18 @@ namespace solpr
 
         private void tabPage3_Enter(object sender, EventArgs e)
         {
-            dataGridNumber = 4;
             RefreshEmployeeGrid();
-            List<string> colnames = new List<string>();
-            foreach (DataGridViewColumn col in dataGridView4.Columns)
-            {
-                colnames.Add(col.Name);
-            }
-            comboBox1.DataSource = colnames;
+            var depQuery = from dep in db.Departments
+                           orderby dep.Name
+                           select new
+                           {
+                               dep.Name,
+                               dep.Id
+                           };
+            comboBox1.DataSource = depQuery.ToList();
+            comboBox1.DisplayMember = "Name";
+            comboBox1.ValueMember = "Id";
+            comboBox1.Text = "По отделам";
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -73,7 +74,6 @@ namespace solpr
 
         private void tabPage0_Enter(object sender, EventArgs e)
         {
-            dataGridNumber = 1;
             dataGridView1.DataSource = db.Computers.ToList();
             List<string> colnames = new List<string>();
             foreach (DataGridViewColumn col in dataGridView1.Columns)
@@ -120,9 +120,9 @@ namespace solpr
                     if (converted == false)
                         return;
                     System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@param", id);
-                    int numberOfRowDeleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.Specs WHERE PeripheryId=@param",param);
+                    int numberOfRowDeleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.Specs WHERE PeripheryId=@param", param);
                     db.SaveChanges();
-                    
+
                     Periphery peri = db.Peripheries
                         .Where(p => p.Id == id)
                         .FirstOrDefault();
@@ -132,12 +132,12 @@ namespace solpr
                     RefreshPeripheryGrid();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        public void RefreshPeripheryGrid() 
+        public void RefreshPeripheryGrid()
         {
             var result = from periphery in db.Peripheries
                          join manufac in db.Manufacturers on periphery.ManufacturerId equals manufac.Id
@@ -342,7 +342,7 @@ namespace solpr
                 bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
                 if (converted == false)
                     return;
-                
+
                 FormComponentEdit Edit = new FormComponentEdit();
                 Edit.ShowDialog();
             }
@@ -369,43 +369,11 @@ namespace solpr
              bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
              dataGridView4.DataSource = bs;
              dataGridView4.Refresh();*/
-          /*  BindingSource bs = new BindingSource();
-            bs.DataSource = dataGridView4.DataSource;
-            bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
-            dataGridView4.DataSource = bs;
-            dataGridView4.Refresh();*/
-        }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            //FilterDataView();
-            BindingSource bs = new BindingSource();
-            switch (dataGridNumber)
-            {
-                case 1:
-                    bs.DataSource = dataGridView1.DataSource;
-                    bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
-                    dataGridView1.DataSource = bs;
-                    dataGridView1.Refresh();
-                    break;
-                case 2:
-                    bs.DataSource = dataGridView2.DataSource;
-                    bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
-                    dataGridView2.DataSource = bs;
-                    dataGridView2.Refresh();
-                    break;
-                case 3:
-                    bs.DataSource = dataGridView3.DataSource;
-                    bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
-                    dataGridView3.DataSource = bs;
-                    dataGridView3.Refresh();
-                    break;
-                case 4:
-                    bs.DataSource = dataGridView4.DataSource;
-                    bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
-                    dataGridView4.DataSource = bs;
-                    dataGridView4.Refresh();
-                    break;
-            }
+            /*  BindingSource bs = new BindingSource();
+              bs.DataSource = dataGridView4.DataSource;
+              bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
+              dataGridView4.DataSource = bs;
+              dataGridView4.Refresh();*/
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -437,7 +405,7 @@ namespace solpr
             switch (tabControl1.SelectedIndex)
             {
                 case 0:
-                    
+
                     break;
                 case 1:
                     RefreshPeripheryGrid();
@@ -510,6 +478,22 @@ namespace solpr
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < activeGrid().Rows.Count - 1; i++)
+            {
+                activeGrid().Rows[i].Visible = false;
+                for (int c = 0; c < activeGrid().Columns.Count; c++)
+                {
+                    if (activeGrid()[c, i].Value.ToString() == comboBox1.Text)
+                    {
+                        activeGrid().Rows[i].Visible = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 }
