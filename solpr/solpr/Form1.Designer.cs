@@ -89,6 +89,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(662, 439);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage0
             // 
@@ -375,6 +376,19 @@
             this.выToolStripMenuItem.Text = "Редактировать";
             // 
             // закрытьToolStripMenuItem
+            // 
+            this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
+            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.закрытьToolStripMenuItem.Text = "Закрыть";
+            this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            // 
+            // textBox1
             // 
             this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
             this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
