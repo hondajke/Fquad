@@ -28,18 +28,7 @@ namespace solpr
 
         }
 
-        private void tabPage2_Enter(object sender, EventArgs e)
-        {
-            RefreshComponentsGrid();
-            List<string> colnames = new List<string>();
-            foreach (DataGridViewColumn col in dataGridView3.Columns)
-            {
-                colnames.Add(col.Name);
-            }
-            comboBox1.DataSource = colnames;
-        }
-
-        private void tabPage1_Enter(object sender, EventArgs e)
+        private void peripheryTabShow()
         {
             RefreshPeripheryGrid();
             dataGridView2.AutoGenerateColumns = false;
@@ -51,7 +40,18 @@ namespace solpr
             comboBox1.DataSource = colnames;
         }
 
-        private void tabPage3_Enter(object sender, EventArgs e)
+        private void componentsTabShow()
+        {
+            RefreshComponentsGrid();
+            List<string> colnames = new List<string>();
+            foreach (DataGridViewColumn col in dataGridView3.Columns)
+            {
+                colnames.Add(col.Name);
+            }
+            comboBox1.DataSource = colnames;
+        }
+
+        private void employeeTabShow() 
         {
             RefreshEmployeeGrid();
             var depQuery = from dep in db.Departments
@@ -65,6 +65,66 @@ namespace solpr
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "Id";
             comboBox1.Text = "По отделам";
+        }
+        public void RefreshEmployeeGrid()
+        {
+            var result = from employee in db.Employees
+                         join department in db.Departments on employee.DepartmentId equals department.Id
+                         select new
+                         {
+                             ID = employee.Id,
+                             Фамилия = employee.Surname,
+                             Имя = employee.Name,
+                             Отчество = employee.Patronymic_Name,
+                             ID_отдела = employee.DepartmentId,
+                             Отдел = department.Name
+                         };
+            dataGridView4.DataSource = result.ToList();
+        }
+        public void RefreshPeripheryGrid()
+        {
+            var result = from periphery in db.Peripheries
+                         join manufac in db.Manufacturers on periphery.ManufacturerId equals manufac.Id
+                         join specs in db.Specs on periphery.Id equals specs.PeripheryId
+                         join empl in db.Employees on periphery.EmployeeId equals empl.Id
+                         select new
+                         {
+                             ID = periphery.Id,
+                             Тип = periphery.Type,
+                             Модель = periphery.Model,
+                             Производитель = manufac.Name,
+                             Характеристики = specs.Name + " - " + specs.Value,
+                             Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
+                         };
+            dataGridView2.DataSource = result.ToList();
+        }
+
+        public void RefreshComponentsGrid()
+        {
+            var result = from comps in db.Components
+                         join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
+                         select new
+                         {
+                             ID = comps.Id,
+                             Тип = comps.Type,
+                             Производитель = manufac.Name,
+                             //Характеристики = specs.Name + " - " + specs.Value
+                         };
+            dataGridView3.DataSource = result.ToList();
+        }
+        private void tabPage2_Enter(object sender, EventArgs e)
+        {
+            componentsTabShow();
+        }
+
+        private void tabPage1_Enter(object sender, EventArgs e)
+        {
+            peripheryTabShow();
+        }
+
+        private void tabPage3_Enter(object sender, EventArgs e)
+        {
+            employeeTabShow();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -137,23 +197,7 @@ namespace solpr
                 MessageBox.Show(ex.Message);
             }
         }
-        public void RefreshPeripheryGrid()
-        {
-            var result = from periphery in db.Peripheries
-                         join manufac in db.Manufacturers on periphery.ManufacturerId equals manufac.Id
-                         join specs in db.Specs on periphery.Id equals specs.PeripheryId
-                         join empl in db.Employees on periphery.EmployeeId equals empl.Id
-                         select new
-                         {
-                             ID = periphery.Id,
-                             Тип = periphery.Type,
-                             Модель = periphery.Model,
-                             Производитель = manufac.Name,
-                             Характеристики = specs.Name + " - " + specs.Value,
-                             Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
-                         };
-            dataGridView2.DataSource = result.ToList();
-        }
+        
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -181,21 +225,6 @@ namespace solpr
             }
         }
 
-        public void RefreshEmployeeGrid()
-        {
-            var result = from employee in db.Employees
-                         join department in db.Departments on employee.DepartmentId equals department.Id
-                         select new
-                         {
-                             ID = employee.Id,
-                             Фамилия = employee.Surname,
-                             Имя = employee.Name,
-                             Отчество = employee.Patronymic_Name,
-                             ID_отдела = employee.DepartmentId,
-                             Отдел = department.Name
-                         };
-            dataGridView4.DataSource = result.ToList();
-        }
 
         bool IsTheSameCellValue(int column, int row)
         {
@@ -314,19 +343,6 @@ namespace solpr
             }
         }
 
-        public void RefreshComponentsGrid()
-        {
-            var result = from comps in db.Components
-                         join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
-                         select new
-                         {
-                             ID = comps.Id,
-                             Тип = comps.Type,
-                             Производитель = manufac.Name,
-                             //Характеристики = specs.Name + " - " + specs.Value
-                         };
-            dataGridView3.DataSource = result.ToList();
-        }
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -470,6 +486,7 @@ namespace solpr
             }
         }
 
+
         private void файлToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -501,6 +518,41 @@ namespace solpr
                 searchCells = new List<DataGridViewCell>();
                 searchCellNum = 0;
             }
+
+        private void пКToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabControl1.TabPages["tabPage0"];
+            dataGridView1.DataSource = db.Computers.ToList();
+            List<string> colnames = new List<string>();
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                colnames.Add(col.Name);
+            }
+            comboBox1.DataSource = colnames;
         }
+
+        private void периферияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabControl1.TabPages["tabPage1"];
+            peripheryTabShow();
+        }
+
+        private void комплектующиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabControl1.TabPages["tabPage2"];
+            componentsTabShow();
+        }
+
+        private void сотрудникиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabControl1.TabPages["tabPage3"];
+            employeeTabShow();
+        }
+
+        private void отчетыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabControl1.TabPages["tabPage4"];
+        }
+    }
     }
 
