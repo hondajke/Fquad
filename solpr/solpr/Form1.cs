@@ -426,11 +426,7 @@ namespace solpr
                               ID_отдела = employee.DepartmentId,
                               Отдел = department.Name
                           };
-            BindingSource FilterResult = new BindingSource();
-            FilterResult.DataSource = result.ToList();
-            FilterResult.Filter = string.Format("{0} = '{1}'", "Отдел", comboBox1.Text);
-            dataGridView4.DataSource = FilterResult;
-            dataGridView4.Refresh();
+            dataGridView4.DataSource = result.Where(x => x.Отдел == comboBox1.Text).ToList();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -746,6 +742,7 @@ namespace solpr
             FilterResult.Filter = string.Format("{0} = '{1}'", "Производитель", comboBox1.Text);
             dataGridView3.DataSource = FilterResult;
             dataGridView3.Refresh();
+            
         }
 
     }
