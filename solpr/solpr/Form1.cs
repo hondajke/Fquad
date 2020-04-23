@@ -43,12 +43,17 @@ namespace solpr
         private void componentsTabShow()
         {
             RefreshComponentsGrid();
-            List<string> colnames = new List<string>();
-            foreach (DataGridViewColumn col in dataGridView3.Columns)
-            {
-                colnames.Add(col.Name);
-            }
-            comboBox1.DataSource = colnames;
+            var manufQuery = from man in db.Manufacturers
+                             orderby man.Name
+                             select new
+                             {
+                                 man.Name,
+                                 man.Id
+                             };
+            comboBox1.DataSource = manufQuery.ToList();
+            comboBox1.DisplayMember = "Name";
+            comboBox1.ValueMember = "Id";
+            comboBox1.Text = "По производителям";
         }
 
         private void employeeTabShow() 
@@ -410,7 +415,6 @@ namespace solpr
 
         public void FilterByDepartment()
         {
-
             var result = from employee in db.Employees
                           join department in db.Departments on employee.DepartmentId equals department.Id
                           select new
@@ -725,6 +729,25 @@ namespace solpr
              dataGridView4.Refresh();*/
             FilterByDepartment();
         }
+        public void FilterByManufacturers()
+        {
+            var result = from comps in db.Components
+                         join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
+                         select new
+                         {
+                             ID = comps.Id,
+                             Тип = comps.Type,
+                             Модель = comps.Model,
+                             Производитель = manufac.Name,
+                             //Характеристики = specs.Name + " - " + specs.Value
+                         };
+            BindingSource FilterResult = new BindingSource();
+            FilterResult.DataSource = result.ToList();
+            FilterResult.Filter = string.Format("{0} = '{1}'", "Производитель", comboBox1.Text);
+            dataGridView3.DataSource = FilterResult;
+            dataGridView3.Refresh();
+        }
+
     }
     }
 
