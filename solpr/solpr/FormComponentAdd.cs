@@ -32,10 +32,19 @@ namespace solpr
             if (checkManufacturerExistence(comboBox2.Text))
             {
                 Component comp = new Component();
+                Specs spec = new Specs();
                 comp.Type = (ComponentType)comboBox1.SelectedValue;
                 comp.Model = textBox1.Text;
                 comp.ManufacturerId = (int)comboBox2.SelectedValue;
                 db.Components.Add(comp);
+                db.SaveChanges();
+                spec.ComponentId = comp.Id;
+                foreach(DataGridViewRow row in dataGridView1.Rows)
+                {
+                    spec.Name += row.Cells[0].ToString() + "|";
+                    spec.Value += row.Cells[1].ToString() + "|";
+                }
+                db.Specs.Add(spec);
                 db.SaveChanges();
                 
                 Close();
@@ -92,5 +101,6 @@ namespace solpr
             }
             return false;
         }
+        
     }
 }
