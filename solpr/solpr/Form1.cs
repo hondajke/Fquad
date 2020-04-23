@@ -107,6 +107,7 @@ namespace solpr
                          {
                              ID = comps.Id,
                              Тип = comps.Type,
+                             Модель = comps.Model,
                              Производитель = manufac.Name,
                              //Характеристики = specs.Name + " - " + specs.Value
                          };

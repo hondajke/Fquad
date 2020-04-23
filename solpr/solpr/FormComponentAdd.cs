@@ -33,6 +33,7 @@ namespace solpr
             {
                 Component comp = new Component();
                 comp.Type = (ComponentType)comboBox1.SelectedValue;
+                comp.Model = textBox1.Text;
                 comp.ManufacturerId = (int)comboBox2.SelectedValue;
                 db.Components.Add(comp);
                 db.SaveChanges();
