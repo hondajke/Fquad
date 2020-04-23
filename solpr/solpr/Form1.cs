@@ -112,6 +112,164 @@ namespace solpr
                          };
             dataGridView3.DataSource = result.ToList();
         }
+
+        public void deletePeriphery() 
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                int index = dataGridView2.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+                System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@param", id);
+                int numberOfRowDeleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.Specs WHERE PeripheryId=@param", param);
+                db.SaveChanges();
+
+                Periphery peri = db.Peripheries
+                    .Where(p => p.Id == id)
+                    .FirstOrDefault();
+
+                db.Peripheries.Remove(peri);
+                db.SaveChanges();
+                RefreshPeripheryGrid();
+            }
+            else 
+            {
+                MessageBox.Show("Сначала выберите");
+            }
+        }
+
+        public void deleteComponent() 
+        {
+            try
+            {
+                if (dataGridView3.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView3.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+                    Component comp = db.Components
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+
+                    db.Components.Remove(comp);
+                    db.SaveChanges();
+                    RefreshComponentsGrid();
+                }
+                else 
+                {
+                    MessageBox.Show("Сначала выберите");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void deleteEmployee() 
+        {
+            try
+            {
+                if (dataGridView4.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView4.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+                    Employee emplo = db.Employees
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+
+                    db.Employees.Remove(emplo);
+                    db.SaveChanges();
+                    RefreshEmployeeGrid();
+                }
+                else 
+                {
+                    MessageBox.Show("Сначала выберите");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public void editPeriphery() 
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                int index = dataGridView2.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+
+                Periphery peri = db.Peripheries
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+
+                FormPeripheryEdit Edit = new FormPeripheryEdit(peri);
+                Edit.ShowDialog();
+
+                /*peri.Age = (int)Edit.numericUpDown1.Value;
+                peri.Name = Edit.textBox1.Text;
+                peri.Position = Edit.comboBox1.SelectedItem.ToString();
+                peri.Team = (Team)Edit.comboBox2.SelectedItem;
+
+                db.Entry(peri).State = EntityState.Modified;
+                db.SaveChanges();*/
+
+                //MessageBox.Show("Объект обновлен");
+            }
+            else 
+            {
+                MessageBox.Show("Сначала выберите");
+            }
+        }
+
+        public void editComponent() 
+        {
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                int index = dataGridView3.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+
+                FormComponentEdit Edit = new FormComponentEdit();
+                Edit.ShowDialog();
+            }
+        }
+
+        public void editEmployee() 
+        {
+            if (dataGridView4.SelectedRows.Count > 0)
+            {
+                int index = dataGridView4.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+
+                /* Employee emplo = db.Employees
+                         .Where(p => p.Id == id)
+                         .FirstOrDefault();*/
+
+                FormEmployeeEdit Edit = new FormEmployeeEdit();
+                Edit.ShowDialog();
+            }
+            else 
+            {
+                MessageBox.Show("Сначала выберите");
+            }
+        }
+
         private void tabPage2_Enter(object sender, EventArgs e)
         {
             componentsTabShow();
@@ -170,59 +328,13 @@ namespace solpr
 
         private void button5_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dataGridView2.SelectedRows.Count > 0)
-                {
-                    int index = dataGridView2.SelectedRows[0].Index;
-                    int id = 0;
-                    bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
-                    if (converted == false)
-                        return;
-                    System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@param", id);
-                    int numberOfRowDeleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.Specs WHERE PeripheryId=@param", param);
-                    db.SaveChanges();
-
-                    Periphery peri = db.Peripheries
-                        .Where(p => p.Id == id)
-                        .FirstOrDefault();
-
-                    db.Peripheries.Remove(peri);
-                    db.SaveChanges();
-                    RefreshPeripheryGrid();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            deletePeriphery();
         }
         
 
         private void button6_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dataGridView4.SelectedRows.Count > 0)
-                {
-                    int index = dataGridView4.SelectedRows[0].Index;
-                    int id = 0;
-                    bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
-                    if (converted == false)
-                        return;
-                    Employee emplo = db.Employees
-                        .Where(p => p.Id == id)
-                        .FirstOrDefault();
-
-                    db.Employees.Remove(emplo);
-                    db.SaveChanges();
-                    RefreshEmployeeGrid();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            deleteEmployee();
         }
 
 
@@ -271,76 +383,17 @@ namespace solpr
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (dataGridView2.SelectedRows.Count > 0)
-            {
-                int index = dataGridView2.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
-                if (converted == false)
-                    return;
-
-                Periphery peri = db.Peripheries
-                        .Where(p => p.Id == id)
-                        .FirstOrDefault();
-
-                FormPeripheryEdit Edit = new FormPeripheryEdit(peri);
-                Edit.ShowDialog();
-
-                /*peri.Age = (int)Edit.numericUpDown1.Value;
-                peri.Name = Edit.textBox1.Text;
-                peri.Position = Edit.comboBox1.SelectedItem.ToString();
-                peri.Team = (Team)Edit.comboBox2.SelectedItem;
-
-                db.Entry(peri).State = EntityState.Modified;
-                db.SaveChanges();*/
-
-                //MessageBox.Show("Объект обновлен");
-            }
+            editPeriphery();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if (dataGridView4.SelectedRows.Count > 0)
-            {
-                int index = dataGridView4.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
-                if (converted == false)
-                    return;
-
-                /* Employee emplo = db.Employees
-                         .Where(p => p.Id == id)
-                         .FirstOrDefault();*/
-
-                FormEmployeeEdit Edit = new FormEmployeeEdit();
-                Edit.ShowDialog();
-            }
+            editEmployee();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dataGridView3.SelectedRows.Count > 0)
-                {
-                    int index = dataGridView3.SelectedRows[0].Index;
-                    int id = 0;
-                    bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
-                    if (converted == false)
-                        return;
-                    Component comp = db.Components
-                        .Where(p => p.Id == id)
-                        .FirstOrDefault();
-
-                    db.Components.Remove(comp);
-                    db.SaveChanges();
-                    RefreshComponentsGrid();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            deleteComponent();
         }
 
 
@@ -351,17 +404,7 @@ namespace solpr
 
         private void button12_Click(object sender, EventArgs e)
         {
-            if (dataGridView3.SelectedRows.Count > 0)
-            {
-                int index = dataGridView3.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
-                if (converted == false)
-                    return;
-
-                FormComponentEdit Edit = new FormComponentEdit();
-                Edit.ShowDialog();
-            }
+            editComponent();
         }
 
         private void FilterDataView()
@@ -552,6 +595,131 @@ namespace solpr
         private void отчетыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage4"];
+        }
+
+        private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage1"]) 
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Периферия");
+            }
+            else 
+            {
+                FormPeripheryAdd dial = new FormPeripheryAdd();
+                dial.ShowDialog();
+            }
+        }
+
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage1"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Периферия");
+            }
+            else
+            {
+                deletePeriphery();
+            }
+        }
+
+        private void редактироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage1"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Периферия");
+            }
+            else
+            {
+                editPeriphery();
+            }
+        }
+
+        private void добавитьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage2"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Комплектующие");
+            }
+            else
+            {
+                FormComponentAdd dial = new FormComponentAdd();
+                dial.ShowDialog();
+                RefreshComponentsGrid();
+            }
+        }
+
+        private void удалитьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage2"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Комплектующие");
+            }
+            else
+            {
+                deleteComponent();
+            }
+        }
+
+        private void редактироватьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage2"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Комплектующие");
+            }
+            else
+            {
+                editComponent();
+            }
+        }
+
+        private void добавитьToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage3"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Сотрудники");
+            }
+            else
+            {
+                FormEmployeeAdd dial = new FormEmployeeAdd();
+                dial.ShowDialog();
+            }
+        }
+
+        private void удалитьToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage3"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Сотрудники");
+            }
+            else
+            {
+                deleteEmployee();
+            }
+        }
+
+        private void редактироватьToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage3"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Сотрудники");
+            }
+            else
+            {
+                editEmployee();
+            }
+        }
+
+        private void добавитьОтделToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage3"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: Сотрудники");
+            }
+            else
+            {
+                FormDepartmentAdd dial = new FormDepartmentAdd();
+                dial.ShowDialog();
+            }
         }
     }
     }
