@@ -33,6 +33,8 @@ namespace solpr
             {
                 Component comp = new Component();
                 Specs spec = new Specs();
+                string specnames = "";
+                string specvalues = "";
                 comp.Type = (ComponentType)comboBox1.SelectedValue;
                 comp.Model = textBox1.Text;
                 comp.ManufacturerId = (int)comboBox2.SelectedValue;
@@ -41,9 +43,11 @@ namespace solpr
                 spec.ComponentId = comp.Id;
                 foreach(DataGridViewRow row in dataGridView1.Rows)
                 {
-                    spec.Name += row.Cells[0].ToString() + "|";
-                    spec.Value += row.Cells[1].ToString() + "|";
+                    specnames += row.Cells[0] + "|";
+                    specvalues += row.Cells[1] + "|";
                 }
+                spec.Name = specnames;
+                spec.Value = specvalues;
                 db.Specs.Add(spec);
                 db.SaveChanges();
                 
