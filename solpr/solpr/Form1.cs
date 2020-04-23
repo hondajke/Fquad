@@ -292,13 +292,13 @@ namespace solpr
 
         private void tabPage0_Enter(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = db.Computers.ToList();
+           /* dataGridView1.DataSource = db.Computers.ToList();
             List<string> colnames = new List<string>();
             foreach (DataGridViewColumn col in dataGridView1.Columns)
             {
                 colnames.Add(col.Name);
             }
-            comboBox1.DataSource = colnames;
+            comboBox1.DataSource = colnames;*/
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -407,32 +407,25 @@ namespace solpr
             editComponent();
         }
 
-        private void FilterDataView()
+        public void FilterByDepartment()
         {
-            /*DataTable dt = new DataTable();
-            DataView view = new DataView();
 
-            view = dt.DefaultView;
-            string filter = string.Format("CONVERT(" + dataGridView4.Columns[2].DataPropertyName + ", System.String)  LIKE '" + textBox1.Text + "*'");
-            view.RowFilter = filter;
-            dataGridView4.DataSource = view;*/
-
-
-            //dt.DefaultView.RowFilter = string.Format(comboBox1.Text + " like '%{0}%'", textBox1.Text);
-            //dataGridView4.Refresh();
-
-
-            // (dataGridView4.DataSource as DataTable).DefaultView.RowFilter = string.Format(comboBox1.Text + " like '{0}%'", textBox1.Text);
-            /* BindingSource bs = new BindingSource();
-             bs.DataSource = dataGridView4.DataSource;
-             bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
-             dataGridView4.DataSource = bs;
-             dataGridView4.Refresh();*/
-            /*  BindingSource bs = new BindingSource();
-              bs.DataSource = dataGridView4.DataSource;
-              bs.Filter = string.Format(comboBox1.Text + " like '" + textBox1.Text + "*'");
-              dataGridView4.DataSource = bs;
-              dataGridView4.Refresh();*/
+            var result = from employee in db.Employees
+                          join department in db.Departments on employee.DepartmentId equals department.Id
+                          select new
+                          {
+                              ID = employee.Id,
+                              Фамилия = employee.Surname,
+                              Имя = employee.Name,
+                              Отчество = employee.Patronymic_Name,
+                              ID_отдела = employee.DepartmentId,
+                              Отдел = department.Name
+                          };
+            BindingSource FilterResult = new BindingSource();
+            FilterResult.DataSource = result.ToList();
+            FilterResult.Filter = string.Format("{0} = '{1}'", "Отдел", comboBox1.Text);
+            dataGridView4.DataSource = FilterResult;
+            dataGridView4.Refresh();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -540,21 +533,10 @@ namespace solpr
             Application.Exit();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+  /*      private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < activeGrid().Rows.Count - 1; i++)
-            {
-                activeGrid().Rows[i].Visible = false;
-                for (int c = 0; c < activeGrid().Columns.Count; c++)
-                {
-                    if (activeGrid()[c, i].Value.ToString() == comboBox1.Text)
-                    {
-                        activeGrid().Rows[i].Visible = true;
-                        break;
-                    }
-                }
-            }
-        }
+            FilterByDepartment();
+        }*/
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
             {
@@ -720,6 +702,27 @@ namespace solpr
                 FormDepartmentAdd dial = new FormDepartmentAdd();
                 dial.ShowDialog();
             }
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            /* var result = from employee in db.Employees
+                          join department in db.Departments on employee.DepartmentId equals department.Id
+                          select new
+                          {
+                              ID = employee.Id,
+                              Фамилия = employee.Surname,
+                              Имя = employee.Name,
+                              Отчество = employee.Patronymic_Name,
+                              ID_отдела = employee.DepartmentId,
+                              Отдел = department.Name
+                          };
+             BindingSource FilterResult = new BindingSource();
+             FilterResult.DataSource = result.ToList();
+             FilterResult.Filter = string.Format("Отдел like '{0}%'", comboBox1.Text);
+             dataGridView4.DataSource = FilterResult;
+             dataGridView4.Refresh();*/
+            FilterByDepartment();
         }
     }
     }
