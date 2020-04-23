@@ -50,6 +50,8 @@ namespace solpr
         [Key]
         public int Id { get; set; }
         public ComponentType Type { get; set; }
+        [StringLength(100)]
+        public string Model { get; set; }
         public int ManufacturerId { get; set; }
         [ForeignKey("ManufacturerId")]
         public Manufacturer Manufacturer { get; set; }

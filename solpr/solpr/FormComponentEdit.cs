@@ -33,6 +33,7 @@ namespace solpr
                    .Where(p => p.Id == id)
                    .FirstOrDefault();
             comboBox1.SelectedValue = comp.Type;
+            textBox1.Text = comp.Model;
             comboBox2.SelectedValue = comp.ManufacturerId;
         }
 
@@ -52,6 +53,7 @@ namespace solpr
                    .Where(p => p.Id == id)
                    .FirstOrDefault();
             comp.Type = (ComponentType)comboBox1.SelectedValue;
+            comp.Model = textBox1.Text;
             comp.ManufacturerId = (int)comboBox2.SelectedValue;
             db.SaveChanges();
             Close();
