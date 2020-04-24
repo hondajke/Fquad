@@ -754,6 +754,10 @@ namespace solpr
             fil.ShowDialog();
         }
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            RefreshActiveGrid();
+        }
     }
     }
 

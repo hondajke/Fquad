@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage0 = new System.Windows.Forms.TabPage();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -76,8 +78,7 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -107,7 +108,6 @@
             // tabPage0
             // 
             this.tabPage0.Controls.Add(this.button16);
-            this.tabPage0.Controls.Add(this.button11);
             this.tabPage0.Controls.Add(this.button4);
             this.tabPage0.Controls.Add(this.dataGridView1);
             this.tabPage0.Location = new System.Drawing.Point(4, 22);
@@ -118,6 +118,26 @@
             this.tabPage0.Text = "ПК";
             this.tabPage0.UseVisualStyleBackColor = true;
             this.tabPage0.Enter += new System.EventHandler(this.tabPage0_Enter);
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(509, 99);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(139, 40);
+            this.button16.TabIndex = 3;
+            this.button16.Text = "Редактировать ПК";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(509, 53);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(139, 40);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "Удалить ПК";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button4
             // 
@@ -550,32 +570,22 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
-            // button11
+            // button17
             // 
-            // 
-            this.button11.Location = new System.Drawing.Point(509, 53);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(139, 40);
-            this.button11.TabIndex = 2;
-            this.button11.Text = "Удалить ПК";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(509, 99);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(139, 40);
-            this.button16.TabIndex = 3;
-            this.button16.Text = "Редактировать ПК";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
+            this.button17.Location = new System.Drawing.Point(22, 84);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(75, 36);
+            this.button17.TabIndex = 10;
+            this.button17.Text = "Очистить фильтр";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(797, 477);
+            this.Controls.Add(this.button17);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
@@ -656,6 +666,7 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
     }
 }
 
