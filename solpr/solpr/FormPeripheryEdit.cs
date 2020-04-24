@@ -21,7 +21,7 @@ namespace solpr
         {
             InitializeComponent();
         }
-        public FormPeripheryEdit(Periphery peri) 
+        public FormPeripheryEdit(Periphery peri)
         {
             InitializeComponent();
             db = new ParkDBEntities();
@@ -38,7 +38,7 @@ namespace solpr
             type.DisplayMember = "Description";
             type.ValueMember = "value";
             System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@name", peri.ManufacturerId);
-            var manuf = db.Database.SqlQuery<Manufacturer>("SELECT * FROM dbo.Manufacturers WHERE Id LIKE @name",param);
+            var manuf = db.Database.SqlQuery<Manufacturer>("SELECT * FROM dbo.Manufacturers WHERE Id LIKE @name", param);
             manufac.DataSource = manuf.ToList();
             manufac.DisplayMember = "Name";
             manufac.ValueMember = "Id";
@@ -47,7 +47,7 @@ namespace solpr
             var spe = db.Database.SqlQuery<Specs>("SELECT * FROM dbo.Specs WHERE PeripheryId LIKE @name", param1);
             //Spe.DataSource = spe.ToList();
             string display = "";
-            foreach(var s in spe)
+            foreach (var s in spe)
                 display += s.Name + " - " + s.Value + ";";
             Spe.Text = display;
             System.Data.SqlClient.SqlParameter param2 = new System.Data.SqlClient.SqlParameter("@name", peri.EmployeeId);
@@ -165,6 +165,6 @@ namespace solpr
             }
             return false;
         }
-        
+
     }
 }

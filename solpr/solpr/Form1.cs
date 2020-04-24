@@ -119,7 +119,7 @@ namespace solpr
             dataGridView3.DataSource = result.ToList();
         }
 
-        public void deletePeriphery() 
+        private void deletePeriphery() 
         {
             if (dataGridView2.SelectedRows.Count > 0)
             {
@@ -146,7 +146,7 @@ namespace solpr
             }
         }
 
-        public void deleteComponent() 
+        private void deleteComponent() 
         {
             try
             {
@@ -176,7 +176,7 @@ namespace solpr
             }
         }
 
-        public void deleteEmployee() 
+        private void deleteEmployee() 
         {
             try
             {
@@ -205,7 +205,7 @@ namespace solpr
                 MessageBox.Show(ex.Message);
             }
         }
-        public void editPeriphery() 
+        private void editPeriphery() 
         {
             if (dataGridView2.SelectedRows.Count > 0)
             {
@@ -238,7 +238,7 @@ namespace solpr
             }
         }
 
-        public void editComponent() 
+        private void editComponent() 
         {
             if (dataGridView3.SelectedRows.Count > 0)
             {
@@ -253,7 +253,7 @@ namespace solpr
             }
         }
 
-        public void editEmployee() 
+        private void editEmployee() 
         {
             if (dataGridView4.SelectedRows.Count > 0)
             {
@@ -318,6 +318,7 @@ namespace solpr
         {
             FormPeripheryAdd dial = new FormPeripheryAdd();
             dial.ShowDialog();
+            RefreshPeripheryGrid();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -390,6 +391,7 @@ namespace solpr
         private void button8_Click(object sender, EventArgs e)
         {
             editPeriphery();
+            RefreshPeripheryGrid();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -402,11 +404,6 @@ namespace solpr
             deleteComponent();
         }
 
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            RefreshPeripheryGrid();
-        }
 
         private void button12_Click(object sender, EventArgs e)
         {
