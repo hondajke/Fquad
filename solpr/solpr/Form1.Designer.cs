@@ -71,13 +71,12 @@
             this.редактироватьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьОтделToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button15 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -497,15 +496,6 @@
             this.отчетыToolStripMenuItem.Text = "Отчеты";
             this.отчетыToolStripMenuItem.Click += new System.EventHandler(this.отчетыToolStripMenuItem_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 59);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Фильтрация";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -547,17 +537,9 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 73);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 8;
-            // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(23, 102);
+            this.button15.Location = new System.Drawing.Point(22, 55);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(75, 23);
             this.button15.TabIndex = 9;
@@ -565,18 +547,27 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(22, 95);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 41);
+            this.button11.TabIndex = 10;
+            this.button11.Text = "Очистить фильтр";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(797, 477);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.button15);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -602,12 +593,12 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage0;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        public System.Windows.Forms.TabPage tabPage0;
+        internal System.Windows.Forms.DataGridView dataGridView1;
+        public System.Windows.Forms.TabPage tabPage1;
+        internal System.Windows.Forms.DataGridView dataGridView2;
+        public System.Windows.Forms.TabPage tabPage2;
+        public System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         internal System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -626,7 +617,6 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.ToolStripMenuItem выToolStripMenuItem;
         private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button13;
@@ -649,8 +639,8 @@
         private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem добавитьОтделToolStripMenuItem;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button11;
     }
 }
 

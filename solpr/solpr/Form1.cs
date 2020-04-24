@@ -17,6 +17,8 @@ namespace solpr
         List<DataGridViewCell> searchCells;
         int searchCellNum = 0;
 
+        public int dataGridNumber = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -32,44 +34,16 @@ namespace solpr
         {
             RefreshPeripheryGrid();
             dataGridView2.AutoGenerateColumns = false;
-            List<string> colnames = new List<string>();
-            foreach (DataGridViewColumn col in dataGridView2.Columns)
-            {
-                colnames.Add(col.Name);
-            }
-            comboBox1.DataSource = colnames;
         }
 
         private void componentsTabShow()
         {
             RefreshComponentsGrid();
-            var manufQuery = from man in db.Manufacturers
-                             orderby man.Name
-                             select new
-                             {
-                                 man.Name,
-                                 man.Id
-                             };
-            comboBox1.DataSource = manufQuery.ToList();
-            comboBox1.DisplayMember = "Name";
-            comboBox1.ValueMember = "Id";
-            comboBox1.Text = "По производителям";
         }
 
         private void employeeTabShow() 
         {
             RefreshEmployeeGrid();
-            var depQuery = from dep in db.Departments
-                           orderby dep.Name
-                           select new
-                           {
-                               dep.Name,
-                               dep.Id
-                           };
-            comboBox1.DataSource = depQuery.ToList();
-            comboBox1.DisplayMember = "Name";
-            comboBox1.ValueMember = "Id";
-            comboBox1.Text = "По отделам";
         }
         public void RefreshEmployeeGrid()
         {
@@ -279,32 +253,30 @@ namespace solpr
         private void tabPage2_Enter(object sender, EventArgs e)
         {
             componentsTabShow();
+            dataGridNumber = 3;
         }
 
         private void tabPage1_Enter(object sender, EventArgs e)
         {
             peripheryTabShow();
+            dataGridNumber = 2;
         }
 
         private void tabPage3_Enter(object sender, EventArgs e)
         {
             employeeTabShow();
+            dataGridNumber = 4;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
         private void tabPage0_Enter(object sender, EventArgs e)
         {
-           /* dataGridView1.DataSource = db.Computers.ToList();
-            List<string> colnames = new List<string>();
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
-            {
-                colnames.Add(col.Name);
-            }
-            comboBox1.DataSource = colnames;*/
+           
+            dataGridNumber = 1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -423,7 +395,7 @@ namespace solpr
                               ID_отдела = employee.DepartmentId,
                               Отдел = department.Name
                           };
-            dataGridView4.DataSource = result.Where(x => x.Отдел == comboBox1.Text).ToList();
+           // dataGridView4.DataSource = result.Where(x => x.Отдел == comboBox1.Text).ToList();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -544,14 +516,14 @@ namespace solpr
 
         private void пКToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabControl1.TabPages["tabPage0"];
+           /* tabControl1.SelectedTab = tabControl1.TabPages["tabPage0"];
             dataGridView1.DataSource = db.Computers.ToList();
             List<string> colnames = new List<string>();
             foreach (DataGridViewColumn col in dataGridView1.Columns)
             {
                 colnames.Add(col.Name);
             }
-            comboBox1.DataSource = colnames;
+            comboBox1.DataSource = colnames;*/
         }
 
         private void периферияToolStripMenuItem_Click(object sender, EventArgs e)
@@ -704,27 +676,12 @@ namespace solpr
 
         private void button15_Click(object sender, EventArgs e)
         {
-            /* var result = from employee in db.Employees
-                          join department in db.Departments on employee.DepartmentId equals department.Id
-                          select new
-                          {
-                              ID = employee.Id,
-                              Фамилия = employee.Surname,
-                              Имя = employee.Name,
-                              Отчество = employee.Patronymic_Name,
-                              ID_отдела = employee.DepartmentId,
-                              Отдел = department.Name
-                          };
-             BindingSource FilterResult = new BindingSource();
-             FilterResult.DataSource = result.ToList();
-             FilterResult.Filter = string.Format("Отдел like '{0}%'", comboBox1.Text);
-             dataGridView4.DataSource = FilterResult;
-             dataGridView4.Refresh();*/
-            FilterByDepartment();
+            Filter fil = new Filter();
+            fil.ShowDialog();
         }
         public void FilterByManufacturers()
         {
-            var result = from comps in db.Components
+            /*var result = from comps in db.Components
                          join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
                          select new
                          {
@@ -738,10 +695,14 @@ namespace solpr
             FilterResult.DataSource = result.ToList();
             FilterResult.Filter = string.Format("{0} = '{1}'", "Производитель", comboBox1.Text);
             dataGridView3.DataSource = FilterResult;
-            dataGridView3.Refresh();
+            dataGridView3.Refresh();*/
             
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            RefreshActiveGrid();
+        }
     }
     }
 
