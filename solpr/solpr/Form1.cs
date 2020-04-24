@@ -80,17 +80,33 @@ namespace solpr
 
         public void RefreshComponentsGrid()
         {
+            string specnames = "";
+            string specvalues = "";
             var result = from comps in db.Components
                          join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
+                         join specs in db.Specs on comps.Id equals specs.ComponentId
                          select new
                          {
                              ID = comps.Id,
                              Тип = comps.Type,
                              Модель = comps.Model,
                              Производитель = manufac.Name,
-                             //Характеристики = specs.Name + " - " + specs.Value
+                             Характеристики = specs.Name + " - " + specs.Value
                          };
+            
             dataGridView3.DataSource = result.ToList();
+        }
+        public void RefreshComputersGrid()
+        {
+            var result = from pc in db.Computers
+                         join empl in db.Employees on pc.EmployeeId equals empl.Id
+                         select new
+                         {
+                             ID = pc.Id,
+                             Статус = pc.Status,
+                             Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
+                         };
+            dataGridView1.DataSource = result.ToList();
         }
 
         private void deletePeriphery() 
@@ -134,8 +150,11 @@ namespace solpr
                     Component comp = db.Components
                         .Where(p => p.Id == id)
                         .FirstOrDefault();
-
+                    Specs spec = db.Specs
+                        .Where(p => p.ComponentId == id)
+                        .FirstOrDefault();
                     db.Components.Remove(comp);
+                    db.Specs.Remove(spec);
                     db.SaveChanges();
                     RefreshComponentsGrid();
                 }
@@ -179,6 +198,37 @@ namespace solpr
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void deleteComputer()
+        {
+            try
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+                    Computer pc = db.Computers
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+
+                    db.Computers.Remove(pc);
+                    db.SaveChanges();
+                    RefreshComputersGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Сначала выберите");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void editPeriphery() 
         {
             if (dataGridView2.SelectedRows.Count > 0)
@@ -250,6 +300,21 @@ namespace solpr
             }
         }
 
+        private void editComputer()
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int index = dataGridView1.SelectedRows[0].Index;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+
+                FormComputerEdit Edit = new FormComputerEdit();
+                Edit.ShowDialog();
+            }
+        }
+
         private void tabPage2_Enter(object sender, EventArgs e)
         {
             componentsTabShow();
@@ -316,6 +381,10 @@ namespace solpr
             deleteEmployee();
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            deleteComputer();
+        }
 
         bool IsTheSameCellValue(int column, int row)
         {
@@ -380,6 +449,11 @@ namespace solpr
         private void button12_Click(object sender, EventArgs e)
         {
             editComponent();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            editComputer();
         }
 
         public void FilterByDepartment()
@@ -679,30 +753,7 @@ namespace solpr
             Filter fil = new Filter();
             fil.ShowDialog();
         }
-        public void FilterByManufacturers()
-        {
-            /*var result = from comps in db.Components
-                         join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
-                         select new
-                         {
-                             ID = comps.Id,
-                             Тип = comps.Type,
-                             Модель = comps.Model,
-                             Производитель = manufac.Name,
-                             //Характеристики = specs.Name + " - " + specs.Value
-                         };
-            BindingSource FilterResult = new BindingSource();
-            FilterResult.DataSource = result.ToList();
-            FilterResult.Filter = string.Format("{0} = '{1}'", "Производитель", comboBox1.Text);
-            dataGridView3.DataSource = FilterResult;
-            dataGridView3.Refresh();*/
-            
-        }
 
-        private void button11_Click(object sender, EventArgs e)
-        {
-            RefreshActiveGrid();
-        }
     }
     }
 

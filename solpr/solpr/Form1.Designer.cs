@@ -77,6 +77,7 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -105,6 +106,8 @@
             // 
             // tabPage0
             // 
+            this.tabPage0.Controls.Add(this.button16);
+            this.tabPage0.Controls.Add(this.button11);
             this.tabPage0.Controls.Add(this.button4);
             this.tabPage0.Controls.Add(this.dataGridView1);
             this.tabPage0.Location = new System.Drawing.Point(4, 22);
@@ -549,13 +552,24 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(22, 95);
+            // 
+            this.button11.Location = new System.Drawing.Point(509, 53);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 41);
-            this.button11.TabIndex = 10;
-            this.button11.Text = "Очистить фильтр";
+            this.button11.Size = new System.Drawing.Size(139, 40);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "Удалить ПК";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(509, 99);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(139, 40);
+            this.button16.TabIndex = 3;
+            this.button16.Text = "Редактировать ПК";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // Form1
             // 
@@ -641,6 +655,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button16;
     }
 }
 

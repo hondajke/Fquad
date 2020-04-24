@@ -41,10 +41,10 @@ namespace solpr
                 db.Components.Add(comp);
                 db.SaveChanges();
                 spec.ComponentId = comp.Id;
-                foreach(DataGridViewRow row in dataGridView1.Rows)
+                for(int i = 0; i < dataGridView1.Rows.Count - 1; i++)
                 {
-                    specnames += row.Cells[0] + "|";
-                    specvalues += row.Cells[1] + "|";
+                    specnames += dataGridView1.Rows[i].Cells[0].Value + "|";
+                    specvalues += dataGridView1.Rows[i].Cells[1].Value + "|";
                 }
                 spec.Name = specnames;
                 spec.Value = specvalues;
@@ -106,5 +106,10 @@ namespace solpr
             return false;
         }
         
+
+        private void dataGridView1_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
