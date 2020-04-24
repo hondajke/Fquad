@@ -31,7 +31,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage0 = new System.Windows.Forms.TabPage();
             this.button16 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -53,6 +52,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button11 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,6 +108,7 @@
             // tabPage0
             // 
             this.tabPage0.Controls.Add(this.button16);
+            this.tabPage0.Controls.Add(this.button11);
             this.tabPage0.Controls.Add(this.button4);
             this.tabPage0.Controls.Add(this.dataGridView1);
             this.tabPage0.Location = new System.Drawing.Point(4, 22);
@@ -128,16 +129,6 @@
             this.button16.Text = "Редактировать ПК";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(509, 53);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(139, 40);
-            this.button11.TabIndex = 2;
-            this.button11.Text = "Удалить ПК";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button4
             // 
@@ -354,6 +345,16 @@
             this.tabPage4.TabIndex = 4;
             this.tabPage4.Text = "Отчеты";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(509, 52);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(139, 40);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "Удалить ПК";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // menuStrip1
             // 
@@ -586,7 +587,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(797, 477);
             this.Controls.Add(this.button17);
-            this.Controls.Add(this.button11);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);

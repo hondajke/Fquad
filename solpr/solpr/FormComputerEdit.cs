@@ -28,7 +28,7 @@ namespace solpr
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -50,7 +50,6 @@ namespace solpr
             comboBox8.DisplayMember = "Description";
             comboBox8.ValueMember = "value";
         }
-
         private void loadEmployees()
         {
             var empQuery = from emp in db.Employees
