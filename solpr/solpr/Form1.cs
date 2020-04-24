@@ -106,16 +106,20 @@ namespace solpr
 
         public void RefreshComponentsGrid()
         {
+            string specnames = "";
+            string specvalues = "";
             var result = from comps in db.Components
                          join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
+                         join specs in db.Specs on comps.Id equals specs.ComponentId
                          select new
                          {
                              ID = comps.Id,
                              Тип = comps.Type,
                              Модель = comps.Model,
                              Производитель = manufac.Name,
-                             //Характеристики = specs.Name + " - " + specs.Value
+                             Характеристики = specs.Name + " - " + specs.Value
                          };
+            
             dataGridView3.DataSource = result.ToList();
         }
         public void RefreshComputersGrid()
@@ -172,8 +176,11 @@ namespace solpr
                     Component comp = db.Components
                         .Where(p => p.Id == id)
                         .FirstOrDefault();
-
+                    Specs spec = db.Specs
+                        .Where(p => p.ComponentId == id)
+                        .FirstOrDefault();
                     db.Components.Remove(comp);
+                    db.Specs.Remove(spec);
                     db.SaveChanges();
                     RefreshComponentsGrid();
                 }
