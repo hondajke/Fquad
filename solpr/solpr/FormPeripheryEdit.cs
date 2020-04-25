@@ -37,22 +37,23 @@ namespace solpr
                 .ToList();
             type.DisplayMember = "Description";
             type.ValueMember = "value";
-            System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@name", peri.ManufacturerId);
-            var manuf = db.Database.SqlQuery<Manufacturer>("SELECT * FROM dbo.Manufacturers WHERE Id LIKE @name", param);
-            manufac.DataSource = manuf.ToList();
+            var manu = db.Manufacturers.Where(p => p.Id == peri.ManufacturerId);
+            manufac.DataSource = manu.ToList();
             manufac.DisplayMember = "Name";
             manufac.ValueMember = "Id";
             Model.Text = peri.Model;
-            System.Data.SqlClient.SqlParameter param1 = new System.Data.SqlClient.SqlParameter("@name", peri.Id);
-            var spe = db.Database.SqlQuery<Specs>("SELECT * FROM dbo.Specs WHERE PeripheryId LIKE @name", param1);
-            //Spe.DataSource = spe.ToList();
+            var spec = db.Specs.Where(p => p.PeripheryId == peri.Id);
             string display = "";
-            foreach (var s in spe)
+            foreach (var s in spec)
                 display += s.Name + " - " + s.Value + ";";
-            Spe.Text = display;
-            System.Data.SqlClient.SqlParameter param2 = new System.Data.SqlClient.SqlParameter("@name", peri.EmployeeId);
-            var empl = db.Database.SqlQuery<Employee>("SELECT Id, Surname + ' ' + Name + ' ' + Patronymic_Name as Name, Patronymic_Name, Surname, DepartmentId FROM dbo.Employees WHERE Id LIKE @name", param2);
-            comboBox1.DataSource = empl.ToList();
+            Spe.Text = display;  
+            var emplo = db.Employees
+                .Select(p => new
+                {
+                    Id = p.Id,
+                    Name = p.Surname + " " + p.Name + " " + p.Patronymic_Name,
+                });
+            comboBox1.DataSource = emplo.ToList();
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "Id";
 
@@ -89,7 +90,6 @@ namespace solpr
                 if (addedNewOne == true) changedPeri.ManufacturerId = tempManId;
                 else changedPeri.ManufacturerId = (int)manufac.SelectedValue;
                 //SpecId = (int)Spe.SelectedValue,
-
                 changedPeri.EmployeeId = (int)comboBox1.SelectedValue;
                 db.Entry(changedPeri).State = System.Data.Entity.EntityState.Modified;
                 int temp = changedPeri.Id;
@@ -99,10 +99,9 @@ namespace solpr
                 {
                     if (checkSpecsExistence2(Values[i], changedPeri.Id))
                     {
-                        System.Data.SqlClient.SqlParameter param1 = new System.Data.SqlClient.SqlParameter("@param1", Values[i+1]);
-                        System.Data.SqlClient.SqlParameter param2 = new System.Data.SqlClient.SqlParameter("@param2", changedPeri.Id);
-                        System.Data.SqlClient.SqlParameter param3 = new System.Data.SqlClient.SqlParameter("@param3", Values[i]);
-                        int numberOfRowUpdated = db.Database.ExecuteSqlCommand("UPDATE dbo.Specs SET Value=@param1 WHERE PeripheryId=@param2 and Name=@param3",param1,param2,param3);
+                        var result = db.Specs.AsEnumerable()
+                            .Single(p => (p.PeripheryId == changedPeri.Id) && (p.Name == Values[i].ToString()));
+                        result.Value = Values[i + 1];
                         db.SaveChanges();
                     }
                     else if (!checkSpecsExistence(Values[i], Values[i + 1], changedPeri.Id))
