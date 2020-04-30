@@ -758,6 +758,12 @@ namespace solpr
         {
             RefreshActiveGrid();
         }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            FormManufacturerAdd dial = new FormManufacturerAdd();
+            dial.ShowDialog();
+        }
     }
     }
 

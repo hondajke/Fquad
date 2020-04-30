@@ -31,6 +31,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage0 = new System.Windows.Forms.TabPage();
             this.button16 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -52,7 +53,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button11 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +79,7 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -129,6 +130,16 @@
             this.button16.Text = "Редактировать ПК";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(509, 52);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(139, 40);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "Удалить ПК";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button4
             // 
@@ -206,6 +217,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button18);
             this.tabPage2.Controls.Add(this.button12);
             this.tabPage2.Controls.Add(this.button10);
             this.tabPage2.Controls.Add(this.button1);
@@ -345,16 +357,6 @@
             this.tabPage4.TabIndex = 4;
             this.tabPage4.Text = "Отчеты";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(509, 52);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(139, 40);
-            this.button11.TabIndex = 2;
-            this.button11.Text = "Удалить ПК";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // menuStrip1
             // 
@@ -581,6 +583,16 @@
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(509, 143);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(139, 39);
+            this.button18.TabIndex = 4;
+            this.button18.Text = "Добавить производителя";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -667,6 +679,7 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button button18;
     }
 }
 
