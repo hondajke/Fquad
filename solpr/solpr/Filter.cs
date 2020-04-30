@@ -21,10 +21,13 @@ namespace solpr
             loadDepartments();
             loadEmployees();
             loadManufacturers();
+            loadModels();
+            loadTypes();
             comboBox1.Enabled = true;
             comboBox2.Enabled = true;
             comboBox3.Enabled = true;
             comboBox4.Enabled = true;
+            comboBox5.Enabled = true;
             switch (Program.mf.dataGridNumber)
             {
                 case 1:
@@ -41,6 +44,7 @@ namespace solpr
                     comboBox2.Enabled = false;
                     comboBox3.Enabled = false;
                     comboBox4.Enabled = false;
+                    comboBox5.Enabled = false;
                     break;
             }
         }
@@ -87,9 +91,73 @@ namespace solpr
             comboBox2.ValueMember = "Id";
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void loadModels()
+        {
+            var mdlQuery = from mdl in db.Components
+                            orderby mdl.Model
+                            select new
+                            {
+                                Name = mdl.Model,
+                                mdl.Id
+                            };
+            var pmdlQuery = from pmdl in db.Peripheries
+                           orderby pmdl.Model
+                           select new
+                           {
+                               Name = pmdl.Model,
+                               pmdl.Id
+                           };
+            switch(Program.mf.dataGridNumber)
+            {
+                case 2:
+                    comboBox4.DataSource = pmdlQuery.ToList();
+                    comboBox4.DisplayMember = "Name";
+                    comboBox4.ValueMember = "Id";
+                    break;
+                case 3:
+                    comboBox4.DataSource = mdlQuery.ToList();
+                    comboBox4.DisplayMember = "Name";
+                    comboBox4.ValueMember = "Id";
+                    break;
+            }
+        }
+
+        private void loadTypes()
         {
             switch(Program.mf.dataGridNumber)
+            {
+                case 2:
+                    comboBox5.DataSource = Enum.GetValues(typeof(PeripheryType))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+                    comboBox5.DisplayMember = "Description";
+                    comboBox5.ValueMember = "value";
+                    break;
+                case 3:
+                    comboBox5.DataSource = Enum.GetValues(typeof(ComponentType))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+                    comboBox5.DisplayMember = "Description";
+                    comboBox5.ValueMember = "Value";
+                    break;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            switch (Program.mf.dataGridNumber)
             {
                 case 1:
                     comboBox1.Enabled = false;
@@ -97,19 +165,19 @@ namespace solpr
                     break;
                 case 2:
                     var result2 = from periphery in db.Peripheries
-                                 join manufac in db.Manufacturers on periphery.ManufacturerId equals manufac.Id
-                                 join specs in db.Specs on periphery.Id equals specs.PeripheryId
-                                 join empl in db.Employees on periphery.EmployeeId equals empl.Id
-                                 select new
-                                 {
-                                     ID = periphery.Id,
-                                     Тип = periphery.Type,
-                                     Модель = periphery.Model,
-                                     Производитель = manufac.Name,
-                                     Характеристики = specs.Name + " - " + specs.Value,
-                                     Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
-                                 };
-                    Program.mf.dataGridView2.DataSource = result2.Where(x => x.Сотрудник == comboBox2.Text && x.Производитель == comboBox3.Text && x.Модель == comboBox4.Text).ToList();
+                                  join manufac in db.Manufacturers on periphery.ManufacturerId equals manufac.Id
+                                  join specs in db.Specs on periphery.Id equals specs.PeripheryId
+                                  join empl in db.Employees on periphery.EmployeeId equals empl.Id
+                                  select new
+                                  {
+                                      ID = periphery.Id,
+                                      Тип = periphery.Type,
+                                      Модель = periphery.Model,
+                                      Производитель = manufac.Name,
+                                      Характеристики = specs.Name + " - " + specs.Value,
+                                      Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
+                                  };
+                    Program.mf.dataGridView2.DataSource = result2.Where(x => x.Сотрудник == comboBox2.Text || x.Производитель == comboBox3.Text || x.Модель == comboBox4.Text || Convert.ToString(x.Тип) == comboBox5.Text).ToList();
                     this.Close();
                     break;
                 case 3:
@@ -123,7 +191,7 @@ namespace solpr
                                      Производитель = manufac.Name,
                                      //Характеристики = specs.Name + " - " + specs.Value
                                  };
-                    Program.mf.dataGridView3.DataSource = result3.Where(x => x.Производитель == comboBox3.Text && x.Модель == comboBox4.Text).ToList();
+                    Program.mf.dataGridView3.DataSource = result3.Where(x => x.Производитель == comboBox3.Text || x.Модель == comboBox4.Text || Convert.ToString(x.Тип) == Convert.ToString(comboBox5.Text)).ToList();
                     this.Close();
                     break;
                 case 4:
