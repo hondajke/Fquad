@@ -45,6 +45,12 @@ namespace solpr
         {
             RefreshEmployeeGrid();
         }
+
+        private void computerTabShow()
+        {
+            RefreshComputersGrid();
+        }
+
         public void RefreshEmployeeGrid()
         {
             var result = from employee in db.Employees
@@ -338,7 +344,7 @@ namespace solpr
 
         private void tabPage0_Enter(object sender, EventArgs e)
         {
-           
+            computerTabShow();
             dataGridNumber = 1;
         }
 
@@ -366,6 +372,7 @@ namespace solpr
         {
             FormComputerAdd dial = new FormComputerAdd();
             dial.ShowDialog();
+            RefreshComputersGrid();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -499,7 +506,7 @@ namespace solpr
             switch (tabControl1.SelectedIndex)
             {
                 case 0:
-
+                    RefreshComputersGrid();
                     break;
                 case 1:
                     RefreshPeripheryGrid();
@@ -588,7 +595,7 @@ namespace solpr
 
         private void пКToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           /* tabControl1.SelectedTab = tabControl1.TabPages["tabPage0"];
+           /*tabControl1.SelectedTab = tabControl1.TabPages["tabPage0"];
             dataGridView1.DataSource = db.Computers.ToList();
             List<string> colnames = new List<string>();
             foreach (DataGridViewColumn col in dataGridView1.Columns)
@@ -746,6 +753,44 @@ namespace solpr
             }
         }
 
+        private void добавитьToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage0"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: ПК");
+            }
+            else
+            {
+                FormComputerAdd dial = new FormComputerAdd();
+                dial.ShowDialog();
+                RefreshComputersGrid();
+            }
+        }
+
+        private void удалитьToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage0"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: ПК");
+            }
+            else
+            {
+                deleteComputer();
+            }
+        }
+    
+        private void редактироватьToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+             if (tabControl1.SelectedTab != tabControl1.TabPages["tabPage0"])
+            {
+                MessageBox.Show("Сначала перейдите во вкладку: ПК");
+            }
+            else
+            {
+                editComputer();
+            }
+        }
+
         private void button15_Click(object sender, EventArgs e)
         {
             Filter fil = new Filter();
@@ -794,7 +839,7 @@ namespace solpr
         {
             FormManufacturerAdd dial = new FormManufacturerAdd();
             dial.ShowDialog();
-        }
+        }  
     }
 
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage0 = new System.Windows.Forms.TabPage();
             this.button16 = new System.Windows.Forms.Button();
@@ -36,6 +36,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button19 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -81,7 +82,9 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
+            this.добавитьToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.редактироватьToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -177,6 +180,16 @@
             this.tabPage1.Text = "Периферия";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(509, 142);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(139, 39);
+            this.button19.TabIndex = 6;
+            this.button19.Text = "Добавить производителя";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button8
             // 
@@ -276,14 +289,14 @@
             // dataGridView3
             // 
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView3.Location = new System.Drawing.Point(6, 6);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.Size = new System.Drawing.Size(500, 400);
@@ -428,6 +441,10 @@
             // 
             // пКToolStripMenuItem
             // 
+            this.пКToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьToolStripMenuItem3,
+            this.удалитьToolStripMenuItem3,
+            this.редактироватьToolStripMenuItem3});
             this.пКToolStripMenuItem.Name = "пКToolStripMenuItem";
             this.пКToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.пКToolStripMenuItem.Text = "ПК";
@@ -447,21 +464,21 @@
             // добавитьToolStripMenuItem
             // 
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.добавитьToolStripMenuItem.Text = "Добавить";
             this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
             // удалитьToolStripMenuItem
             // 
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
             // редактироватьToolStripMenuItem
             // 
             this.редактироватьToolStripMenuItem.Name = "редактироватьToolStripMenuItem";
-            this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.редактироватьToolStripMenuItem.Text = "Редактировать";
             this.редактироватьToolStripMenuItem.Click += new System.EventHandler(this.редактироватьToolStripMenuItem_Click);
             // 
@@ -605,15 +622,26 @@
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
-            // button19
+            // добавитьToolStripMenuItem3
             // 
-            this.button19.Location = new System.Drawing.Point(509, 142);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(139, 39);
-            this.button19.TabIndex = 6;
-            this.button19.Text = "Добавить производителя";
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
+            this.добавитьToolStripMenuItem3.Name = "добавитьToolStripMenuItem3";
+            this.добавитьToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.добавитьToolStripMenuItem3.Text = "Добавить";
+            this.добавитьToolStripMenuItem3.Click += new System.EventHandler(this.добавитьToolStripMenuItem3_Click);
+            // 
+            // удалитьToolStripMenuItem3
+            // 
+            this.удалитьToolStripMenuItem3.Name = "удалитьToolStripMenuItem3";
+            this.удалитьToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.удалитьToolStripMenuItem3.Text = "Удалить";
+            this.удалитьToolStripMenuItem3.Click += new System.EventHandler(this.удалитьToolStripMenuItem3_Click);
+            // 
+            // редактироватьToolStripMenuItem3
+            // 
+            this.редактироватьToolStripMenuItem3.Name = "редактироватьToolStripMenuItem3";
+            this.редактироватьToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.редактироватьToolStripMenuItem3.Text = "Редактировать";
+            this.редактироватьToolStripMenuItem3.Click += new System.EventHandler(this.редактироватьToolStripMenuItem3_Click);
             // 
             // Form1
             // 
@@ -703,6 +731,9 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem3;
     }
 }
 
