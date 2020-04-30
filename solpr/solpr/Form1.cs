@@ -764,6 +764,12 @@ namespace solpr
             FormManufacturerAdd dial = new FormManufacturerAdd();
             dial.ShowDialog();
         }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            FormManufacturerAdd dial = new FormManufacturerAdd();
+            dial.ShowDialog();
+        }
     }
     }
 

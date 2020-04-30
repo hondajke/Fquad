@@ -42,11 +42,28 @@ namespace solpr
             manufac.DisplayMember = "Name";
             manufac.ValueMember = "Id";
             Model.Text = peri.Model;
-            var spec = db.Specs.Where(p => p.PeripheryId == peri.Id);
-            string display = "";
-            foreach (var s in spec)
-                display += s.Name + " - " + s.Value + ";";
-            Spe.Text = display;  
+            var spec = db.Specs.Where(p => p.PeripheryId == peri.Id)
+                .Select(p => new
+                {
+                    Id = p.Id,
+                    Название = p.Name,
+                    Значение = p.Value,
+                });
+            int j = 0;
+            foreach (var s in spec) 
+            {
+                Spe.Rows.Add();
+                Spe.Rows[Spe.Rows.Count - 2].Cells[0].Value = s.Название;
+                Spe.Rows[Spe.Rows.Count - 2].Cells[1].Value = s.Значение;
+                Spe.Rows[Spe.Rows.Count - 1].Cells[0].Value = "";
+                Spe.Rows[Spe.Rows.Count - 1].Cells[1].Value = "";
+            }
+            Console.WriteLine(j);
+            
+            //Spe.Rows.Add();
+            //Spe.DataSource = spec.ToList();
+            //Spe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //Spe.Rows.Insert(Spe.Rows.);
             var emplo = db.Employees
                 .Select(p => new
                 {
@@ -94,8 +111,26 @@ namespace solpr
                 db.Entry(changedPeri).State = System.Data.Entity.EntityState.Modified;
                 int temp = changedPeri.Id;
                 db.SaveChanges();
-                SplitSpecs();
-                for (int i = 0; i < length - 1; i = i + 2)
+                for (int i = 0; i < Spe.Rows.Count - 1; i++) 
+                {
+                    if (checkSpecsExistence2(Spe.Rows[i].Cells[0].Value.ToString(), changedPeri.Id))
+                    {
+                        var result = db.Specs.AsEnumerable()
+                            .Single(p => (p.PeripheryId == changedPeri.Id) && (p.Name == Spe.Rows[i].Cells[0].Value.ToString()));
+                        result.Value = Spe.Rows[i].Cells[1].Value.ToString();
+                        db.SaveChanges();
+                    }else if (!checkSpecsExistence(Spe.Rows[i].Cells[0].Value.ToString(), Spe.Rows[i].Cells[1].Value.ToString(), changedPeri.Id))
+                    {
+                        Specs spec = new Specs();
+                        //spec.PeripheryId = example.Id;
+                        spec.PeripheryId = changedPeri.Id;
+                        spec.Name = Spe.Rows[i].Cells[0].Value.ToString();
+                        spec.Value = Spe.Rows[i].Cells[1].Value.ToString();
+                        db.Specs.Add(spec);
+                        db.SaveChanges();
+                    }
+                }
+                /*for (int i = 0; i < length - 1; i = i + 2)
                 {
                     if (checkSpecsExistence2(Values[i], changedPeri.Id))
                     {
@@ -104,19 +139,20 @@ namespace solpr
                         result.Value = Values[i + 1];
                         db.SaveChanges();
                     }
-                    else if (!checkSpecsExistence(Values[i], Values[i + 1], changedPeri.Id))
+                    else if (!checkSpecsExistence(Values[j], Values[j + 1], changedPeri.Id))
                     {
-                        Specs spe = new Specs
+                        Specs spec = new Specs();
+                        //spec.PeripheryId = example.Id;
+                        for (int j = 0; j < Spe.Rows.Count - 1; j++)
                         {
-                            Name = Values[i],
-                            Value = Values[i + 1],
-                            PeripheryId = changedPeri.Id,
-                        };
-                        db.Specs.Attach(spe);
-                        db.Specs.Add(spe);
-                        db.SaveChanges();
+                            spec.PeripheryId = changedPeri.Id;
+                            spec.Name = Spe.Rows[j].Cells[0].Value.ToString();
+                            spec.Value = Spe.Rows[j].Cells[1].Value.ToString();
+                            db.Specs.Add(spec);
+                            db.SaveChanges();
+                        }
                     }
-                }
+                }*/
             }
             this.Close();
         }
