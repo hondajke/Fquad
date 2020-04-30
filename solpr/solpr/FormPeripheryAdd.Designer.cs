@@ -37,15 +37,18 @@
             this.button2 = new System.Windows.Forms.Button();
             this.manufac = new System.Windows.Forms.ComboBox();
             this.Model = new System.Windows.Forms.ComboBox();
-            this.Spe = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.Spe = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.Spe)).BeginInit();
             this.SuspendLayout();
             // 
             // type
             // 
             this.type.FormattingEnabled = true;
-            this.type.Location = new System.Drawing.Point(178, 42);
+            this.type.Location = new System.Drawing.Point(146, 22);
             this.type.Name = "type";
             this.type.Size = new System.Drawing.Size(121, 21);
             this.type.TabIndex = 0;
@@ -53,7 +56,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(61, 45);
+            this.label1.Location = new System.Drawing.Point(29, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 2;
@@ -62,7 +65,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(61, 91);
+            this.label2.Location = new System.Drawing.Point(29, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 3;
@@ -71,7 +74,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(61, 143);
+            this.label3.Location = new System.Drawing.Point(29, 123);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 4;
@@ -80,7 +83,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(61, 187);
+            this.label4.Location = new System.Drawing.Point(29, 167);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 13);
             this.label4.TabIndex = 5;
@@ -88,7 +91,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(215, 284);
+            this.button1.Location = new System.Drawing.Point(252, 354);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(84, 23);
             this.button1.TabIndex = 10;
@@ -98,7 +101,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(64, 284);
+            this.button2.Location = new System.Drawing.Point(32, 354);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 11;
@@ -109,31 +112,23 @@
             // manufac
             // 
             this.manufac.FormattingEnabled = true;
-            this.manufac.Location = new System.Drawing.Point(178, 91);
+            this.manufac.Location = new System.Drawing.Point(146, 71);
             this.manufac.Name = "manufac";
             this.manufac.Size = new System.Drawing.Size(121, 21);
             this.manufac.TabIndex = 12;
             // 
-            // model
+            // Model
             // 
             this.Model.FormattingEnabled = true;
-            this.Model.Location = new System.Drawing.Point(178, 143);
-            this.Model.Name = "model";
+            this.Model.Location = new System.Drawing.Point(146, 123);
+            this.Model.Name = "Model";
             this.Model.Size = new System.Drawing.Size(121, 21);
             this.Model.TabIndex = 13;
-            // 
-            // Spe
-            // 
-            this.Spe.FormattingEnabled = true;
-            this.Spe.Location = new System.Drawing.Point(178, 187);
-            this.Spe.Name = "Spe";
-            this.Spe.Size = new System.Drawing.Size(121, 21);
-            this.Spe.TabIndex = 14;
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(178, 230);
+            this.comboBox1.Location = new System.Drawing.Point(146, 305);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 15;
@@ -141,20 +136,45 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(61, 233);
+            this.label5.Location = new System.Drawing.Point(29, 308);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 13);
             this.label5.TabIndex = 16;
             this.label5.Text = "Сотрудник";
             // 
+            // Spe
+            // 
+            this.Spe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Spe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
+            this.Spe.Location = new System.Drawing.Point(146, 167);
+            this.Spe.Name = "Spe";
+            this.Spe.RowHeadersVisible = false;
+            this.Spe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.Spe.Size = new System.Drawing.Size(203, 116);
+            this.Spe.TabIndex = 17;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Название";
+            this.Column1.MaxInputLength = 100;
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Значение";
+            this.Column2.MaxInputLength = 100;
+            this.Column2.Name = "Column2";
+            // 
             // FormPeripheryAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 339);
+            this.ClientSize = new System.Drawing.Size(391, 389);
+            this.Controls.Add(this.Spe);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.Spe);
             this.Controls.Add(this.Model);
             this.Controls.Add(this.manufac);
             this.Controls.Add(this.button2);
@@ -167,6 +187,7 @@
             this.Name = "FormPeripheryAdd";
             this.Text = "FormPeripheryAdd";
             this.Load += new System.EventHandler(this.FormPeripheryAdd_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.Spe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,8 +203,10 @@
         private System.Windows.Forms.ComboBox type;
         private System.Windows.Forms.ComboBox manufac;
         private System.Windows.Forms.ComboBox Model;
-        private System.Windows.Forms.ComboBox Spe;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridView Spe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }

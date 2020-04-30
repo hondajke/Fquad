@@ -762,7 +762,7 @@ namespace solpr
             FormManufacturerAdd dial = new FormManufacturerAdd();
             dial.ShowDialog();
         }
-
+        
         private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dataGridView3.Columns[e.ColumnIndex].Name == "Тип")
@@ -789,8 +789,12 @@ namespace solpr
                 e.Value = specstring;
             }
         }
-
-
+        
+        private void button19_Click(object sender, EventArgs e)
+        {
+            FormManufacturerAdd dial = new FormManufacturerAdd();
+            dial.ShowDialog();
+        }
     }
 
 }
