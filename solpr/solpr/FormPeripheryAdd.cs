@@ -25,7 +25,7 @@ namespace solpr
             db = new ParkDBEntities();
             loadPeripheryTypes();
             loadManufacturers();
-            loadSpecs();
+            //loadSpecs();
             loadModels();
             loadEmployee();
         }
@@ -68,8 +68,6 @@ namespace solpr
                 Name = p.Name + " - " + p.Value,
             });
             Spe.DataSource = spe.ToList();
-            Spe.DisplayMember = "Name";
-            Spe.ValueMember = "Id";
         }
 
         private void loadModels()
@@ -120,7 +118,7 @@ namespace solpr
                 db.Peripheries.Add(example);
                 int temp = example.Id;
                 db.SaveChanges();
-                SplitSpecs();
+                /*SplitSpecs();
                 for (int i = 0; i < length - 1; i = i + 2)
                 {
                     if (!checkSpecsExistence(Values[i], Values[i + 1], example.Id))
@@ -136,7 +134,24 @@ namespace solpr
                         db.SaveChanges();
 
                     }
+                }*/
+                //string specnames = "";
+                //string specvalues = "";
+                Specs spec = new Specs();
+                //spec.PeripheryId = example.Id;
+                for (int i = 0; i < Spe.Rows.Count - 1; i++)
+                {
+                    //specnames += Spe.Rows[i].Cells[0].Value + "|";
+                    //specvalues += Spe.Rows[i].Cells[1].Value + "|";
+                    spec.PeripheryId = example.Id;
+                    spec.Name = Spe.Rows[i].Cells[0].Value.ToString();
+                    spec.Value = Spe.Rows[i].Cells[1].Value.ToString();
+                    db.Specs.Add(spec);
+                    db.SaveChanges();
                 }
+                //spec.Name = specnames;
+                //spec.Value = specvalues;
+                //db.Specs.Add(spec);
             }
                 this.Close();
             }

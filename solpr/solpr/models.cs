@@ -17,7 +17,11 @@ namespace solpr
         [Description("Материнская плата")] mboard,
         [Description("Видеокарта")] video,
         [Description("Оперативная память")] ram,
-        [Description("Жесткий диск")] disk
+        [Description("Жесткий диск")] hdd,
+        [Description("Твердотельный накопитель")] ssd,
+        [Description("Аудиокарта")] sound,
+        [Description("Привод")] drive,
+        [Description("Другое")] other
     }
     public enum PeripheryType
     {
@@ -122,9 +126,9 @@ namespace solpr
         public Component Component { get; set; }
     }
 
-    public static class GetTypes
+    public class GetTypes
     {
-        static string GetDescription(Enum enumElement)
+        public string GetDescription(Enum enumElement)
         {
             Type type = enumElement.GetType();
 

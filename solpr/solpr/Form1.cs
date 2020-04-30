@@ -80,8 +80,6 @@ namespace solpr
 
         public void RefreshComponentsGrid()
         {
-            string specnames = "";
-            string specvalues = "";
             var result = from comps in db.Components
                          join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
                          join specs in db.Specs on comps.Id equals specs.ComponentId
@@ -91,7 +89,7 @@ namespace solpr
                              Тип = comps.Type,
                              Модель = comps.Model,
                              Производитель = manufac.Name,
-                             Характеристики = specs.Name + " - " + specs.Value
+                             Характеристики = specs.Name + "−" + specs.Value
                          };
             
             dataGridView3.DataSource = result.ToList();
@@ -764,6 +762,40 @@ namespace solpr
             FormManufacturerAdd dial = new FormManufacturerAdd();
             dial.ShowDialog();
         }
+        
+        private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView3.Columns[e.ColumnIndex].Name == "Тип")
+            {
+                ComponentType enumValue = (ComponentType)e.Value;
+                GetTypes a = new GetTypes();
+                string enumstring = a.GetDescription(enumValue);
+                e.Value = enumstring;
+            }
+            if (dataGridView3.Columns[e.ColumnIndex].Name == "Характеристики")
+            {
+                string[] specs = e.Value.ToString().Split('−');
+                int maxNumOfSpecs = specs[0].Count(x => x == '|');
+                if (specs[1].Count(x => x == '|') > maxNumOfSpecs) {
+                    maxNumOfSpecs = specs[1].Count(x => x == '|');
+                }
+                string specstring = "";
+                string[] specNames = specs[0].Split('|');
+                string[] specValues = specs[1].Split('|');
+                for (int i = 0; i < maxNumOfSpecs; i++)
+                {
+                    specstring += specNames[i] + " - " + specValues[i] + "\n";
+                }
+                e.Value = specstring;
+            }
+        }
+        
+        private void button19_Click(object sender, EventArgs e)
+        {
+            FormManufacturerAdd dial = new FormManufacturerAdd();
+            dial.ShowDialog();
+        }
     }
-    }
+
+}
 
