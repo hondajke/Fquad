@@ -130,7 +130,7 @@
             this.Controls.Add(this.pass);
             this.Controls.Add(this.login);
             this.Name = "SignIn";
-            this.Text = "SignIn";
+            this.Text = "Вход";
             this.ResumeLayout(false);
             this.PerformLayout();
 
