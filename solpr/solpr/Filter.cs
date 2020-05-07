@@ -23,28 +23,28 @@ namespace solpr
             loadManufacturers();
             loadModels();
             loadTypes();
-            comboBox1.Enabled = true;
-            comboBox2.Enabled = true;
-            comboBox3.Enabled = true;
-            comboBox4.Enabled = true;
-            comboBox5.Enabled = true;
+            checkBox1.Enabled = true;
+            checkBox2.Enabled = true;
+            checkBox3.Enabled = true;
+            checkBox4.Enabled = true;
+            checkBox5.Enabled = true;
             switch (Program.mf.dataGridNumber)
             {
                 case 1:
                     comboBox1.Enabled = false;
                     break;
                 case 2:
-                    comboBox1.Enabled = false;
+                    checkBox1.Enabled = false;
                     break;
                 case 3:
-                    comboBox1.Enabled = false;
-                    comboBox2.Enabled = false;
+                    checkBox1.Enabled = false;
+                    checkBox2.Enabled = false;
                     break;
                 case 4:
-                    comboBox2.Enabled = false;
-                    comboBox3.Enabled = false;
-                    comboBox4.Enabled = false;
-                    comboBox5.Enabled = false;
+                    checkBox2.Enabled = false;
+                    checkBox3.Enabled = false;
+                    checkBox4.Enabled = false;
+                    checkBox5.Enabled = false;
                     break;
             }
         }
@@ -177,8 +177,23 @@ namespace solpr
                                       Характеристики = specs.Name + " - " + specs.Value,
                                       Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                                   };
-                    Program.mf.dataGridView2.DataSource = result2.Where(x => x.Сотрудник == comboBox2.Text || x.Производитель == comboBox3.Text || x.Модель == comboBox4.Text || Convert.ToString(x.Тип) == comboBox5.Text).ToList();
-                    this.Close();
+                    if (comboBox3.Enabled == true && comboBox4.Enabled == true)
+                    {
+                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Производитель == comboBox3.Text && x.Модель == comboBox4.Text).ToList();
+                    }
+                    if (comboBox3.Enabled == true && comboBox4.Enabled == false)
+                    {
+                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Производитель == comboBox3.Text).ToList();
+                    }
+                    if (comboBox3.Enabled == false && comboBox4.Enabled == true)
+                    {
+                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Модель == comboBox4.Text).ToList();
+                    }
+                    if (comboBox2.Enabled == true && comboBox3.Enabled == true && comboBox4.Enabled == true)
+                    {
+                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Производитель == comboBox3.Text && x.Модель == comboBox4.Text && x.Сотрудник == comboBox2.Text).ToList();
+                    }
+                        this.Close();
                     break;
                 case 3:
                     var result3 = from comps in db.Components
@@ -191,7 +206,18 @@ namespace solpr
                                      Производитель = manufac.Name,
                                      //Характеристики = specs.Name + " - " + specs.Value
                                  };
-                    Program.mf.dataGridView3.DataSource = result3.Where(x => x.Производитель == comboBox3.Text || x.Модель == comboBox4.Text || Convert.ToString(x.Тип) == Convert.ToString(comboBox5.Text)).ToList();
+                    if (comboBox3.Enabled == true && comboBox4.Enabled == true)
+                    {
+                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Производитель == comboBox3.Text && x.Модель == comboBox4.Text).ToList();
+                    }
+                    if (comboBox3.Enabled == true && comboBox4.Enabled == false)
+                    {
+                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Производитель == comboBox3.Text).ToList();
+                    }
+                    if (comboBox3.Enabled == false && comboBox4.Enabled == true)
+                    {
+                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Модель == comboBox4.Text).ToList();
+                    }
                     this.Close();
                     break;
                 case 4:
@@ -215,6 +241,66 @@ namespace solpr
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                comboBox1.Enabled = true;
+            }
+            else
+            {
+                comboBox1.Enabled = false;
+            }
+        }
+
+        private void checkBox2_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == true)
+            {
+                comboBox2.Enabled = true;
+            }
+            else
+            {
+                comboBox2.Enabled = false;
+            }
+        }
+
+        private void checkBox3_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked == true)
+            {
+                comboBox3.Enabled = true;
+            }
+            else
+            {
+                comboBox3.Enabled = false;
+            }
+        }
+
+        private void checkBox4_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked == true)
+            {
+                comboBox4.Enabled = true;
+            }
+            else
+            {
+                comboBox4.Enabled = false;
+            }
+        }
+
+        private void checkBox5_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+                comboBox5.Enabled = true;
+            }
+            else
+            {
+                comboBox5.Enabled = false;
+            }
         }
     }
 }
