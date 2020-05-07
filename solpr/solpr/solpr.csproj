@@ -128,6 +128,12 @@
     <Compile Include="FormPeripheryEdit.Designer.cs">
       <DependentUpon>FormPeripheryEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportAdd.Designer.cs">
+      <DependentUpon>FormReportAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202003260553405_First.cs" />
     <Compile Include="Migrations\202003260553405_First.designer.cs">
       <DependentUpon>202003260553405_First.cs</DependentUpon>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPeripheryEdit.resx">
       <DependentUpon>FormPeripheryEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportAdd.resx">
+      <DependentUpon>FormReportAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003260553405_First.resx">
       <DependentUpon>202003260553405_First.cs</DependentUpon>

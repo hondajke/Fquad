@@ -935,6 +935,26 @@ namespace solpr
             /*toolTip1.Hide(button2);
             inButton = false;*/
         }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            FormReportAdd dial = new FormReportAdd();
+            dial.ShowDialog();
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            DialogResult dial = openFileDialog1.ShowDialog();
+            if (dial == DialogResult.OK)
+            {
+
+            }
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+        }
     }
 
 }

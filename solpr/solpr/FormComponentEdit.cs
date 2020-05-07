@@ -156,7 +156,6 @@ namespace solpr
             }
             return false;
         }
-
         
     }
 }
