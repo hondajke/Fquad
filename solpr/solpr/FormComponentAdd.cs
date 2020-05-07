@@ -29,34 +29,38 @@ namespace solpr
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Component comp = new Component();
+            Specs spec = new Specs();
+            string specnames = "";
+            string specvalues = "";
+            comp.Type = (ComponentType)comboBox1.SelectedValue;
+            comp.Model = textBox1.Text;
             if (checkManufacturerExistence(comboBox2.Text))
             {
-                Component comp = new Component();
-                Specs spec = new Specs();
-                string specnames = "";
-                string specvalues = "";
-                comp.Type = (ComponentType)comboBox1.SelectedValue;
-                comp.Model = textBox1.Text;
                 comp.ManufacturerId = (int)comboBox2.SelectedValue;
-                db.Components.Add(comp);
-                db.SaveChanges();
-                spec.ComponentId = comp.Id;
-                for(int i = 0; i < dataGridView1.Rows.Count - 1; i++)
-                {
-                    specnames += dataGridView1.Rows[i].Cells[0].Value + "|";
-                    specvalues += dataGridView1.Rows[i].Cells[1].Value + "|";
-                }
-                spec.Name = specnames;
-                spec.Value = specvalues;
-                db.Specs.Add(spec);
-                db.SaveChanges();
-                
-                Close();
             }
             else
             {
-
+                Manufacturer man = new Manufacturer();
+                man.Name = comboBox2.Text;
+                db.Manufacturers.Add(man);
+                db.SaveChanges();
+                comp.ManufacturerId = man.Id;
             }
+            db.Components.Add(comp);
+            db.SaveChanges();
+            spec.ComponentId = comp.Id;
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                specnames += dataGridView1.Rows[i].Cells[0].Value + "|";
+                specvalues += dataGridView1.Rows[i].Cells[1].Value + "|";
+            }
+            spec.Name = specnames;
+            spec.Value = specvalues;
+            db.Specs.Add(spec);
+            db.SaveChanges();
+
+            Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
