@@ -13,7 +13,8 @@ namespace solpr
     public partial class Form1 : Form
     {
         ParkDBEntities db;
-
+        ToolTip toolTip1 = new ToolTip();
+        bool inButton = false;
         List<DataGridViewCell> searchCells;
         int searchCellNum = 0;
 
@@ -27,7 +28,7 @@ namespace solpr
         private void Form1_Load(object sender, EventArgs e)
         {
             db = new ParkDBEntities();
-
+            this.KeyPreview = true;
         }
 
         private void peripheryTabShow()
@@ -839,7 +840,101 @@ namespace solpr
         {
             FormManufacturerAdd dial = new FormManufacturerAdd();
             dial.ShowDialog();
-        }  
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control == true && e.KeyCode == Keys.A)
+            {
+                Form add = returnAddForm();
+                add.ShowDialog();
+            }
+            if (e.Control == true && e.KeyCode == Keys.D) 
+            {
+                deleteHotkey();
+            }
+            if (e.Control == true && e.KeyCode == Keys.E) 
+            {
+                editHotkey();
+            }
+        }
+
+        private Form returnAddForm() 
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    FormComputerAdd dial = new FormComputerAdd();
+                    RefreshComputersGrid();
+                    return dial;
+                case 1:
+                    FormPeripheryAdd dial1 = new FormPeripheryAdd();
+                    RefreshPeripheryGrid();
+                    return dial1;
+                case 2:
+                    FormComponentAdd dial2 = new FormComponentAdd();
+                    return dial2;
+                case 3:
+                    FormEmployeeAdd dial3 = new FormEmployeeAdd();
+                    return dial3;
+                default:
+                    return null;
+            }
+        }
+
+        private void deleteHotkey() 
+        {
+            switch (tabControl1.SelectedIndex) 
+            {
+                case 0:
+                    deleteComputer();
+                    break;
+                case 1:
+                    deletePeriphery();
+                    break;
+                case 2:
+                    deleteComponent();
+                    break;
+                case 3:
+                    deleteEmployee();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void editHotkey() 
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    editComputer();
+                    break;
+                case 1:
+                    editPeriphery();
+                    break;
+                case 2:
+                    editComponent();
+                    break;
+                case 3:
+                    editEmployee();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void button2_MouseHover(object sender, EventArgs e)
+        {
+            var pos = button2.PointToClient(Cursor.Position);
+            toolTip1.Show("Ctrl + A", button2, pos);
+        }
+
+        private void button2_MouseLeave(object sender, EventArgs e)
+        {
+            /*toolTip1.Hide(button2);
+            inButton = false;*/
+        }
     }
 
 }
