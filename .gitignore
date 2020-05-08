@@ -3,6 +3,7 @@ vs
 obj
 
 EntityFramework.6.4.0
+Report.NET.0.9.8
 
 
 *.oob
