@@ -15,6 +15,14 @@ namespace solpr
         Timer myTimer = new Timer();
         int timeLeft = 10;
         int attemptLeft = 3;
+        ToolTip toolTip1 = new ToolTip()
+        {
+            AutoPopDelay = 5000,
+            InitialDelay = 500,
+            ReshowDelay = 100,
+            ShowAlways = true,
+        };
+
         public SignIn()
         {
             InitializeComponent();
@@ -46,14 +54,8 @@ namespace solpr
                         this.Enabled = false;
                         myTimer.Interval = 1000;
                         myTimer.Enabled = true;
-
-                        //Set the event handler for the timer, named "myTimer_Tick"
                         myTimer.Tick += myTimer_Tick;
-
-                        //Start the timer as soon as the form is loaded
                         myTimer.Start();
-
-                        //Show the time set in the "timeLeft" variable
                         label4.Text = timeLeft.ToString();
                     }
                 }
@@ -76,7 +78,6 @@ namespace solpr
         }
         private void myTimer_Tick(object sender, EventArgs e)
         {
-            //perform these actions at the interval set in the properties.
             label4.Text = timeLeft.ToString();
             timeLeft -= 1;
 
@@ -93,6 +94,16 @@ namespace solpr
         private void login_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void login_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Поле для ввода логина", login, 10000);
+        }
+
+        private void pass_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Поле для ввода пароля", pass, 10000);
         }
     }
 }

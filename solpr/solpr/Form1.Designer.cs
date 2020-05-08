@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage0 = new System.Windows.Forms.TabPage();
             this.button16 = new System.Windows.Forms.Button();
@@ -36,7 +36,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
             this.button19 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -57,6 +56,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button22 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,10 +88,7 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button22 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
@@ -142,6 +141,7 @@
             this.button16.Text = "Редактировать ПК";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
+            this.button16.MouseHover += new System.EventHandler(this.button16_MouseHover);
             // 
             // button11
             // 
@@ -152,6 +152,7 @@
             this.button11.Text = "Удалить ПК";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.button11.MouseHover += new System.EventHandler(this.button11_MouseHover);
             // 
             // button4
             // 
@@ -162,6 +163,7 @@
             this.button4.Text = "Добавить ПК";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.MouseHover += new System.EventHandler(this.button4_MouseHover);
             // 
             // dataGridView1
             // 
@@ -174,7 +176,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.button19);
             this.tabPage1.Controls.Add(this.button8);
             this.tabPage1.Controls.Add(this.button5);
@@ -188,15 +189,6 @@
             this.tabPage1.Text = "Периферия";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(547, 216);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
             // 
             // button19
             // 
@@ -217,6 +209,7 @@
             this.button8.Text = "Редактировать периферию";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button8.MouseHover += new System.EventHandler(this.button8_MouseHover);
             // 
             // button5
             // 
@@ -227,6 +220,7 @@
             this.button5.Text = "Удалить периферию";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.MouseHover += new System.EventHandler(this.button5_MouseHover);
             // 
             // button2
             // 
@@ -284,6 +278,7 @@
             this.button12.Text = "Редактировать комплектующее";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.button12.MouseHover += new System.EventHandler(this.button12_MouseHover);
             // 
             // button10
             // 
@@ -294,6 +289,7 @@
             this.button10.Text = "Удалить комплектующее";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button10.MouseHover += new System.EventHandler(this.button10_MouseHover);
             // 
             // button1
             // 
@@ -304,18 +300,19 @@
             this.button1.Text = "Добавить комплектующее";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.MouseHover += new System.EventHandler(this.button1_MouseHover);
             // 
             // dataGridView3
             // 
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridView3.Location = new System.Drawing.Point(6, 6);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.Size = new System.Drawing.Size(500, 400);
@@ -356,6 +353,7 @@
             this.button9.Text = "Редактировать сотрудника";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button9.MouseHover += new System.EventHandler(this.button9_MouseHover);
             // 
             // button7
             // 
@@ -384,6 +382,7 @@
             this.button6.Text = "Удалить сотрудника";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.MouseHover += new System.EventHandler(this.button6_MouseHover);
             // 
             // button3
             // 
@@ -394,6 +393,7 @@
             this.button3.Text = "Добавить сотрудника";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.MouseHover += new System.EventHandler(this.button3_MouseHover);
             // 
             // dataGridView4
             // 
@@ -414,6 +414,36 @@
             this.tabPage4.TabIndex = 4;
             this.tabPage4.Text = "Отчеты";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(3, 64);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(124, 23);
+            this.button22.TabIndex = 2;
+            this.button22.Text = "Сохранить отчет";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(3, 35);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(124, 23);
+            this.button21.TabIndex = 1;
+            this.button21.Text = "Открыть отчет";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(3, 6);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(124, 23);
+            this.button20.TabIndex = 0;
+            this.button20.Text = "Выбрать тип отчета";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // menuStrip1
             // 
@@ -665,39 +695,9 @@
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(3, 6);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(124, 23);
-            this.button20.TabIndex = 0;
-            this.button20.Text = "Выбрать тип отчета";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button21
-            // 
-            this.button21.Location = new System.Drawing.Point(3, 35);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(124, 23);
-            this.button21.TabIndex = 1;
-            this.button21.Text = "Открыть отчет";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // button22
-            // 
-            this.button22.Location = new System.Drawing.Point(3, 64);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(124, 23);
-            this.button22.TabIndex = 2;
-            this.button22.Text = "Сохранить отчет";
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
             // Form1
             // 
@@ -721,7 +721,6 @@
             this.tabPage0.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
@@ -793,7 +792,6 @@
         private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;

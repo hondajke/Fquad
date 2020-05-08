@@ -13,7 +13,13 @@ namespace solpr
     public partial class Form1 : Form
     {
         ParkDBEntities db;
-        ToolTip toolTip1 = new ToolTip();
+        ToolTip toolTip1 = new ToolTip()
+        {
+            AutoPopDelay = 5000,
+            InitialDelay = 500,
+            ReshowDelay = 100,
+            ShowAlways = true,
+        };
         bool inButton = false;
         List<DataGridViewCell> searchCells;
         int searchCellNum = 0;
@@ -926,8 +932,7 @@ namespace solpr
 
         private void button2_MouseHover(object sender, EventArgs e)
         {
-            var pos = button2.PointToClient(Cursor.Position);
-            toolTip1.Show("Ctrl + A", button2, pos);
+            toolTip1.Show("Ctrl + A", button2, 10000);
         }
 
         private void button2_MouseLeave(object sender, EventArgs e)
@@ -954,6 +959,61 @@ namespace solpr
         private void button22_Click(object sender, EventArgs e)
         {
             saveFileDialog1.ShowDialog();
+        }
+
+        private void button4_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + A", button4, 10000);
+        }
+
+        private void button1_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + A", button1, 10000);
+        }
+
+        private void button3_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + A", button3, 10000);
+        }
+
+        private void button11_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + D", button11, 10000);
+        }
+
+        private void button5_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + D", button5, 10000);
+        }
+
+        private void button10_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + D", button10, 10000);
+        }
+
+        private void button6_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + D", button6, 10000);
+        }
+
+        private void button16_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + E", button16, 10000);
+        }
+
+        private void button8_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + E", button8, 10000);
+        }
+
+        private void button12_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + E", button12, 10000);
+        }
+
+        private void button9_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + E", button9, 10000);
         }
     }
 

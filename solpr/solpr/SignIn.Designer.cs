@@ -46,6 +46,7 @@
             this.login.Size = new System.Drawing.Size(115, 20);
             this.login.TabIndex = 0;
             this.login.TextChanged += new System.EventHandler(this.login_TextChanged);
+            this.login.MouseHover += new System.EventHandler(this.login_MouseHover);
             // 
             // pass
             // 
@@ -55,6 +56,7 @@
             this.pass.PasswordChar = '*';
             this.pass.Size = new System.Drawing.Size(115, 20);
             this.pass.TabIndex = 1;
+            this.pass.MouseHover += new System.EventHandler(this.pass_MouseHover);
             // 
             // label1
             // 
