@@ -23,28 +23,30 @@ namespace solpr
             loadManufacturers();
             loadModels();
             loadTypes();
-            checkBox1.Enabled = true;
-            checkBox2.Enabled = true;
-            checkBox3.Enabled = true;
-            checkBox4.Enabled = true;
-            checkBox5.Enabled = true;
+            loadStatus();
             switch (Program.mf.dataGridNumber)
             {
                 case 1:
-                    comboBox1.Enabled = false;
+                    checkBox1.Enabled = false;
+                    checkBox3.Enabled = false;
+                    checkBox4.Enabled = false;
+                    checkBox5.Enabled = false;
                     break;
                 case 2:
                     checkBox1.Enabled = false;
+                    checkBox6.Enabled = false;
                     break;
                 case 3:
                     checkBox1.Enabled = false;
                     checkBox2.Enabled = false;
+                    checkBox6.Enabled = false;
                     break;
                 case 4:
                     checkBox2.Enabled = false;
                     checkBox3.Enabled = false;
                     checkBox4.Enabled = false;
                     checkBox5.Enabled = false;
+                    checkBox6.Enabled = false;
                     break;
             }
         }
@@ -98,26 +100,22 @@ namespace solpr
                             select new
                             {
                                 Name = mdl.Model,
-                                mdl.Id
                             };
             var pmdlQuery = from pmdl in db.Peripheries
                            orderby pmdl.Model
                            select new
                            {
                                Name = pmdl.Model,
-                               pmdl.Id
                            };
             switch(Program.mf.dataGridNumber)
             {
                 case 2:
-                    comboBox4.DataSource = pmdlQuery.ToList();
+                    comboBox4.DataSource = pmdlQuery.Distinct().ToList();
                     comboBox4.DisplayMember = "Name";
-                    comboBox4.ValueMember = "Id";
                     break;
                 case 3:
-                    comboBox4.DataSource = mdlQuery.ToList();
+                    comboBox4.DataSource = mdlQuery.Distinct().ToList();
                     comboBox4.DisplayMember = "Name";
-                    comboBox4.ValueMember = "Id";
                     break;
             }
         }
@@ -155,13 +153,57 @@ namespace solpr
             }
         }
 
+        private void loadStatus()
+        {
+            comboBox6.DataSource = Enum.GetValues(typeof(ComputerStatus))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            comboBox6.DisplayMember = "Description";
+            comboBox6.ValueMember = "value";
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
+            bool flag = false;
             switch (Program.mf.dataGridNumber)
             {
                 case 1:
-                    comboBox1.Enabled = false;
-                    this.Close();
+                    var result1 = from pc in db.Computers
+                                 join empl in db.Employees on pc.EmployeeId equals empl.Id
+                                 select new
+                                 {
+                                     ID = pc.Id,
+                                     Статус = pc.Status,
+                                     Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
+                                 };
+                    var computersFilter = result1;
+
+                    if (comboBox2.Enabled == true)
+                    {
+                        computersFilter = computersFilter.Where(x => x.Сотрудник == comboBox2.Text);
+                        flag = true;
+                    }
+                    if (comboBox6.Enabled == true)
+                    {
+                        computersFilter = computersFilter.Where(x => x.Статус.ToString() == comboBox6.SelectedValue.ToString());
+                        flag = true;
+                    }
+
+                    if (flag == true)
+                    {
+                        Program.mf.dataGridView1.DataSource = computersFilter.ToList();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Сначала выберите критерий фильтрации");
+                    }
                     break;
                 case 2:
                     var result2 = from periphery in db.Peripheries
@@ -177,39 +219,40 @@ namespace solpr
                                       Характеристики = specs.Name + " - " + specs.Value,
                                       Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                                   };
-                    if (comboBox3.Enabled == true && comboBox4.Enabled == true && comboBox5.Enabled == false && comboBox2.Enabled == false)
+                    var peripheryResult = result2;
+                    flag = false;
+
+                    if (comboBox2.Enabled == true)
                     {
-                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Производитель == comboBox3.Text && x.Модель == comboBox4.Text).ToList();
+                        peripheryResult = result2.Where(x => x.Сотрудник == comboBox2.Text);
+                        flag = true;
                     }
-                    if (comboBox3.Enabled == true && comboBox4.Enabled == false && comboBox5.Enabled == false && comboBox2.Enabled == false)
+                    if (comboBox3.Enabled == true)
                     {
-                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Производитель == comboBox3.Text).ToList();
+                        peripheryResult = peripheryResult.Where(x => x.Производитель == comboBox3.Text);
+                        flag = true;
                     }
-                    if (comboBox3.Enabled == false && comboBox4.Enabled == true && comboBox5.Enabled == false && comboBox2.Enabled == false)
+                    if (comboBox4.Enabled == true)
                     {
-                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Модель == comboBox4.Text).ToList();
+                        peripheryResult = peripheryResult.Where(x => x.Модель == comboBox4.Text);
+                        flag = true;
                     }
-                    if (comboBox4.Enabled == false && comboBox5.Enabled == true && comboBox3.Enabled == false && comboBox2.Enabled == false)
+                    if (comboBox5.Enabled == true)
                     {
-                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString()).ToList();
+                        peripheryResult = peripheryResult.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString());
+                        flag = true;
                     }
-                    if (comboBox4.Enabled == true && comboBox5.Enabled == true && comboBox3.Enabled == true && comboBox2.Enabled == false)
+
+                    if (flag == true)
                     {
-                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString() && x.Модель == comboBox4.Text && x.Производитель == comboBox3.Text).ToList();
+                        Program.mf.dataGridView2.DataSource = peripheryResult.ToList();
+                        this.Close();
                     }
-                    if (comboBox4.Enabled == true && comboBox5.Enabled == true && comboBox3.Enabled == false && comboBox2.Enabled == false)
+                    else
                     {
-                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString() && x.Модель == comboBox4.Text).ToList();
+                        MessageBox.Show("Сначала выберите критерий фильтрации");
                     }
-                    if (comboBox4.Enabled == false && comboBox5.Enabled == true && comboBox3.Enabled == true && comboBox2.Enabled == false)
-                    {
-                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString() && x.Производитель == comboBox3.Text).ToList();
-                    }
-                    if (comboBox4.Enabled == false && comboBox5.Enabled == false && comboBox3.Enabled == false && comboBox2.Enabled == true)
-                    {
-                        Program.mf.dataGridView3.DataSource = result2.Where(x => x.Сотрудник == comboBox2.Text).ToList();
-                    }
-                    this.Close();
+
                     break;
                 case 3:
                     var result3 = from comps in db.Components
@@ -222,35 +265,34 @@ namespace solpr
                                      Производитель = manufac.Name,
                                      //Характеристики = specs.Name + " - " + specs.Value
                                  };
-                    if (comboBox3.Enabled == true && comboBox4.Enabled == true && comboBox5.Enabled == false)
+                    var componentsFilter = result3;
+                   
+                    if (comboBox3.Enabled == true)
                     {
-                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Производитель == comboBox3.Text && x.Модель == comboBox4.Text).ToList();
+                        componentsFilter = componentsFilter.Where(x => x.Производитель == comboBox3.Text);
+                        flag = true;
                     }
-                    if (comboBox3.Enabled == true && comboBox4.Enabled == false && comboBox5.Enabled == false)
+                    if (comboBox4.Enabled == true)
                     {
-                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Производитель == comboBox3.Text).ToList();
+                        componentsFilter = componentsFilter.Where(x => x.Модель == comboBox4.Text);
+                        flag = true;
                     }
-                    if (comboBox3.Enabled == false && comboBox4.Enabled == true && comboBox5.Enabled == false)
+                    if (comboBox5.Enabled == true)
                     {
-                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Модель == comboBox4.Text).ToList();
+                        componentsFilter = componentsFilter.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString());
+                        flag = true;
                     }
-                    if (comboBox4.Enabled == false && comboBox5.Enabled == true && comboBox3.Enabled == false)
+
+                    if (flag == true)
                     {
-                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString()).ToList();
+                        Program.mf.dataGridView3.DataSource = componentsFilter.ToList();
+                        this.Close();
                     }
-                    if (comboBox4.Enabled == true && comboBox5.Enabled == true && comboBox3.Enabled == true)
+                    else
                     {
-                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString() && x.Модель == comboBox4.Text && x.Производитель == comboBox3.Text).ToList();
+                        MessageBox.Show("Сначала выберите критерий фильтрации");
                     }
-                    if (comboBox4.Enabled == true && comboBox5.Enabled == true && comboBox3.Enabled == false)
-                    {
-                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString() && x.Модель == comboBox4.Text).ToList();
-                    }
-                    if (comboBox4.Enabled == false && comboBox5.Enabled == true && comboBox3.Enabled == true)
-                    {
-                        Program.mf.dataGridView3.DataSource = result3.Where(x => x.Тип.ToString() == comboBox5.SelectedValue.ToString() && x.Производитель == comboBox3.Text).ToList();
-                    }
-                    this.Close();
+
                     break;
                 case 4:
                     var result4 = from employee in db.Employees
@@ -264,8 +306,16 @@ namespace solpr
                                      ID_отдела = employee.DepartmentId,
                                      Отдел = department.Name
                                  };
-                    Program.mf.dataGridView4.DataSource = result4.Where(x => x.Отдел == comboBox1.Text).ToList();
-                    this.Close();
+                    if (comboBox1.Enabled == true)
+                    {
+                        Program.mf.dataGridView4.DataSource = result4.Where(x => x.Отдел == comboBox1.Text).ToList();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Сначала выберите критерий фильтрации");
+                    }
+
                     break;
             }
         }
@@ -332,6 +382,18 @@ namespace solpr
             else
             {
                 comboBox5.Enabled = false;
+            }
+        }
+
+        private void checkBox6_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBox6.Checked == true)
+            {
+                comboBox6.Enabled = true;
+            }
+            else
+            {
+                comboBox6.Enabled = false;
             }
         }
     }
