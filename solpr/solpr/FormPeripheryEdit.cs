@@ -58,8 +58,6 @@ namespace solpr
                 Spe.Rows[Spe.Rows.Count - 1].Cells[0].Value = "";
                 Spe.Rows[Spe.Rows.Count - 1].Cells[1].Value = "";
             }
-            Console.WriteLine(j);
-            
             //Spe.Rows.Add();
             //Spe.DataSource = spec.ToList();
             //Spe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -106,10 +104,11 @@ namespace solpr
                 changedPeri.Model = Model.Text;
                 if (addedNewOne == true) changedPeri.ManufacturerId = tempManId;
                 else changedPeri.ManufacturerId = (int)manufac.SelectedValue;
-                //SpecId = (int)Spe.SelectedValue,
                 changedPeri.EmployeeId = (int)comboBox1.SelectedValue;
                 db.Entry(changedPeri).State = System.Data.Entity.EntityState.Modified;
                 int temp = changedPeri.Id;
+                System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@param", temp);
+                int numberOfRowDeleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.Specs WHERE PeripheryId=@param", param);
                 db.SaveChanges();
                 for (int i = 0; i < Spe.Rows.Count - 1; i++) 
                 {
@@ -122,7 +121,6 @@ namespace solpr
                     }else if (!checkSpecsExistence(Spe.Rows[i].Cells[0].Value.ToString(), Spe.Rows[i].Cells[1].Value.ToString(), changedPeri.Id))
                     {
                         Specs spec = new Specs();
-                        //spec.PeripheryId = example.Id;
                         spec.PeripheryId = changedPeri.Id;
                         spec.Name = Spe.Rows[i].Cells[0].Value.ToString();
                         spec.Value = Spe.Rows[i].Cells[1].Value.ToString();
