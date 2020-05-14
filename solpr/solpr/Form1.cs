@@ -25,6 +25,8 @@ namespace solpr
         List<DataGridViewCell> searchCells;
         int searchCellNum = 0;
 
+        private string reportFile = "";
+
         public int dataGridNumber = 0;
 
         public Form1()
@@ -950,16 +952,27 @@ namespace solpr
 
         private void button21_Click(object sender, EventArgs e)
         {
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "Pdf Files|*.pdf";
             DialogResult dial = openFileDialog1.ShowDialog();
             if (dial == DialogResult.OK)
             {
-
+                reportFile = openFileDialog1.FileName;
+                axAcroPDF1.src = openFileDialog1.FileName;
             }
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.ShowDialog();
+            if (reportFile != "")
+            {
+                saveFileDialog1.Filter = "Pdf Files|*.pdf";
+                DialogResult dial = saveFileDialog1.ShowDialog();
+                if (dial == DialogResult.OK)
+                {
+                    
+                }
+            }
         }
 
         private void button4_MouseHover(object sender, EventArgs e)

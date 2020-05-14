@@ -34,8 +34,17 @@ namespace solpr
                 page.AddCB_MM(height, new RepString(fp, row.Cells[0].Value + " " + row.Cells[1].Value + " " + row.Cells[2].Value));
                 height += 3;
             }
-            
-            RT.ViewPDF(report, "asd.pdf");
+            report.Save("asd.pdf");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
