@@ -958,7 +958,6 @@ namespace solpr
             if (dial == DialogResult.OK)
             {
                 reportFile = openFileDialog1.FileName;
-                axAcroPDF1.src = openFileDialog1.FileName;
             }
         }
 

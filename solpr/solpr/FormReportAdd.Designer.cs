@@ -28,13 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReportAdd));
             this.button1 = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -71,15 +68,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // axAcroPDF1
-            // 
-            this.axAcroPDF1.Enabled = true;
-            this.axAcroPDF1.Location = new System.Drawing.Point(346, 12);
-            this.axAcroPDF1.Name = "axAcroPDF1";
-            this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
-            this.axAcroPDF1.Size = new System.Drawing.Size(345, 347);
-            this.axAcroPDF1.TabIndex = 3;
-            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(174, 66);
@@ -93,13 +81,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 371);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.axAcroPDF1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.button1);
             this.Name = "FormReportAdd";
             this.Text = "FormReportAdd";
-            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,7 +96,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button2;
-        private AxAcroPDFLib.AxAcroPDF axAcroPDF1;
         private System.Windows.Forms.TextBox textBox1;
     }
 }
