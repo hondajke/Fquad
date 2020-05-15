@@ -48,6 +48,7 @@ namespace solpr
                 else
                 {
                     MessageBox.Show("Данные введены неправильно");
+                    pass.Text = "";
                     attemptLeft--;
                     if (attemptLeft == 0)
                     {
