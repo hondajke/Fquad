@@ -428,6 +428,13 @@ namespace solpr
 
         private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "Тип")
+            {
+                PeripheryType enumValue = (PeripheryType)e.Value;
+                GetTypes a = new GetTypes();
+                string enumstring = a.GetDescription(enumValue);
+                e.Value = enumstring;
+            }
             if (e.RowIndex == 0)
                 return;
             if (IsTheSameCellValue(e.ColumnIndex, e.RowIndex))
@@ -866,6 +873,10 @@ namespace solpr
             {
                 editHotkey();
             }
+            if (e.Control == true && e.KeyCode == Keys.M) 
+            {
+                returnAddOther();
+            }
         }
 
         private Form returnAddForm() 
@@ -886,6 +897,27 @@ namespace solpr
                 case 3:
                     FormEmployeeAdd dial3 = new FormEmployeeAdd();
                     return dial3;
+                default:
+                    return null;
+            }
+        }
+
+        private Form returnAddOther() 
+        {
+            switch (tabControl1.SelectedIndex) 
+            {
+                case 1:
+                    FormManufacturerAdd dial = new FormManufacturerAdd();
+                    dial.ShowDialog();
+                    return dial;
+                case 2:
+                    FormManufacturerAdd dial1 = new FormManufacturerAdd();
+                    dial1.ShowDialog();
+                    return dial1;
+                case 3:
+                    FormDepartmentAdd dial2 = new FormDepartmentAdd();
+                    dial2.ShowDialog();
+                    return dial2;
                 default:
                     return null;
             }
@@ -1027,6 +1059,21 @@ namespace solpr
         private void button9_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Ctrl + E", button9, 10000);
+        }
+
+        private void button19_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + M", button19, 10000);
+        }
+
+        private void button18_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + M", button18, 10000);
+        }
+
+        private void button7_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + M", button7, 10000);
         }
     }
 

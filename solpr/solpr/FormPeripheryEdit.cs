@@ -58,10 +58,6 @@ namespace solpr
                 Spe.Rows[Spe.Rows.Count - 1].Cells[0].Value = "";
                 Spe.Rows[Spe.Rows.Count - 1].Cells[1].Value = "";
             }
-            //Spe.Rows.Add();
-            //Spe.DataSource = spec.ToList();
-            //Spe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            //Spe.Rows.Insert(Spe.Rows.);
             var emplo = db.Employees
                 .Select(p => new
                 {
@@ -128,29 +124,6 @@ namespace solpr
                         db.SaveChanges();
                     }
                 }
-                /*for (int i = 0; i < length - 1; i = i + 2)
-                {
-                    if (checkSpecsExistence2(Values[i], changedPeri.Id))
-                    {
-                        var result = db.Specs.AsEnumerable()
-                            .Single(p => (p.PeripheryId == changedPeri.Id) && (p.Name == Values[i].ToString()));
-                        result.Value = Values[i + 1];
-                        db.SaveChanges();
-                    }
-                    else if (!checkSpecsExistence(Values[j], Values[j + 1], changedPeri.Id))
-                    {
-                        Specs spec = new Specs();
-                        //spec.PeripheryId = example.Id;
-                        for (int j = 0; j < Spe.Rows.Count - 1; j++)
-                        {
-                            spec.PeripheryId = changedPeri.Id;
-                            spec.Name = Spe.Rows[j].Cells[0].Value.ToString();
-                            spec.Value = Spe.Rows[j].Cells[1].Value.ToString();
-                            db.Specs.Add(spec);
-                            db.SaveChanges();
-                        }
-                    }
-                }*/
             }
             this.Close();
         }
@@ -158,11 +131,6 @@ namespace solpr
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-        private void SplitSpecs()
-        {
-            Values = Spe.Text.Split(new Char[] { '@', '.', '\n', '-', ',', ';', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            length = Values.Length;
         }
         private bool checkManufacturerExistence(string newMan)
         {

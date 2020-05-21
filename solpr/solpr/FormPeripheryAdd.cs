@@ -25,7 +25,6 @@ namespace solpr
             db = new ParkDBEntities();
             loadPeripheryTypes();
             loadManufacturers();
-            //loadSpecs();
             loadModels();
             loadEmployee();
         }
@@ -60,15 +59,6 @@ namespace solpr
             manufac.ValueMember = "Id";  
         }
 
-        private void loadSpecs() 
-        {
-            var spe = db.Specs.Select(p => new
-            {
-                Id = p.Id,
-                Name = p.Name + " - " + p.Value,
-            });
-            Spe.DataSource = spe.ToList();
-        }
 
         private void loadModels()
         {
@@ -76,15 +66,8 @@ namespace solpr
             Model.DisplayMember = "model";
             Model.ValueMember = "Id";
         }
-        private void SplitSpecs() 
-        {
-            Values = Spe.Text.Split(new Char[] { '@', '.', '\n', '-' , ',', ';',' '}, StringSplitOptions.RemoveEmptyEntries);
-            length = Values.Length;
-        }
         private void button1_Click(object sender, EventArgs e)
         {
-            //try
-            //{
             using (db = new ParkDBEntities())
             {
                 int tempManId = 0;
@@ -99,67 +82,31 @@ namespace solpr
                 db.Manufacturers.Attach(man);
                 db.Manufacturers.Add(man);
                 db.SaveChanges();
-                    //this.Refresh();
                 loadManufacturers();
                 tempManId = man.Id;
                 addedNewOne = true;
                 }
-
-                
-
                 example.Type = (PeripheryType)type.SelectedValue;
                 example.Model = Model.Text;
                 if (addedNewOne == true) example.ManufacturerId = tempManId;
                 else example.ManufacturerId = (int)manufac.SelectedValue;
-                //SpecId = (int)Spe.SelectedValue,
-
                 example.EmployeeId = (int)comboBox1.SelectedValue;
                 db.Peripheries.Attach(example);
                 db.Peripheries.Add(example);
                 int temp = example.Id;
                 db.SaveChanges();
-                /*SplitSpecs();
-                for (int i = 0; i < length - 1; i = i + 2)
-                {
-                    if (!checkSpecsExistence(Values[i], Values[i + 1], example.Id))
-                    {
-                        Specs spe = new Specs
-                        {
-                            Name = Values[i],
-                            Value = Values[i + 1],
-                            PeripheryId = example.Id,
-                        };
-                        db.Specs.Attach(spe);
-                        db.Specs.Add(spe);
-                        db.SaveChanges();
-
-                    }
-                }*/
-                //string specnames = "";
-                //string specvalues = "";
                 Specs spec = new Specs();
-                //spec.PeripheryId = example.Id;
                 for (int i = 0; i < Spe.Rows.Count - 1; i++)
                 {
-                    //specnames += Spe.Rows[i].Cells[0].Value + "|";
-                    //specvalues += Spe.Rows[i].Cells[1].Value + "|";
                     spec.PeripheryId = example.Id;
                     spec.Name = Spe.Rows[i].Cells[0].Value.ToString();
                     spec.Value = Spe.Rows[i].Cells[1].Value.ToString();
                     db.Specs.Add(spec);
                     db.SaveChanges();
                 }
-                //spec.Name = specnames;
-                //spec.Value = specvalues;
-                //db.Specs.Add(spec);
             }
                 this.Close();
             }
-            /*catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }*/
-        //}
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -170,18 +117,6 @@ namespace solpr
             foreach (Manufacturer man in db.Manufacturers.ToList())
             {
                 if (man.Name == newMan)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool checkSpecsExistence(string _name, string _value, int _PeripheryId)
-        {
-            foreach (Specs spe in db.Specs.ToList())
-            {
-                if (spe.Name == _name && spe.Value == _value && spe.PeripheryId == _PeripheryId)
                 {
                     return true;
                 }
