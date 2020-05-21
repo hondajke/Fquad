@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage0 = new System.Windows.Forms.TabPage();
             this.button16 = new System.Windows.Forms.Button();
@@ -307,14 +307,14 @@
             // dataGridView3
             // 
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView3.Location = new System.Drawing.Point(6, 6);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.Size = new System.Drawing.Size(500, 400);
@@ -344,7 +344,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(136, 54);
             this.label7.TabIndex = 6;
-            this.label7.Text = "*редактирует периферию выбранную в таблице слева";
+            this.label7.Text = "*редактирует сотрудника выбранного в таблице слева";
             // 
             // button9
             // 
@@ -501,7 +501,7 @@
             this.удалитьToolStripMenuItem3,
             this.редактироватьToolStripMenuItem3});
             this.пКToolStripMenuItem.Name = "пКToolStripMenuItem";
-            this.пКToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.пКToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.пКToolStripMenuItem.Text = "ПК";
             this.пКToolStripMenuItem.Click += new System.EventHandler(this.пКToolStripMenuItem_Click);
             // 
@@ -536,7 +536,7 @@
             this.удалитьToolStripMenuItem,
             this.редактироватьToolStripMenuItem});
             this.периферияToolStripMenuItem.Name = "периферияToolStripMenuItem";
-            this.периферияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.периферияToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.периферияToolStripMenuItem.Text = "Периферия";
             this.периферияToolStripMenuItem.Click += new System.EventHandler(this.периферияToolStripMenuItem_Click);
             // 
@@ -571,7 +571,7 @@
             this.удалитьToolStripMenuItem1,
             this.редактироватьToolStripMenuItem1});
             this.комплектующиеToolStripMenuItem.Name = "комплектующиеToolStripMenuItem";
-            this.комплектующиеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.комплектующиеToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.комплектующиеToolStripMenuItem.Text = "Комплектующие";
             this.комплектующиеToolStripMenuItem.Click += new System.EventHandler(this.комплектующиеToolStripMenuItem_Click);
             // 
@@ -607,7 +607,7 @@
             this.редактироватьToolStripMenuItem2,
             this.добавитьОтделToolStripMenuItem});
             this.сотрудникиToolStripMenuItem.Name = "сотрудникиToolStripMenuItem";
-            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.сотрудникиToolStripMenuItem.Text = "Сотрудники";
             this.сотрудникиToolStripMenuItem.Click += new System.EventHandler(this.сотрудникиToolStripMenuItem_Click);
             // 

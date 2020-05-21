@@ -92,6 +92,7 @@ namespace solpr
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
         public ICollection<Component> Components { get; set; }
+        public DateTime LastRepairDate { get; set; }
     }
 
     public class Periphery

@@ -132,9 +132,9 @@ namespace solpr
                 bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
                 if (converted == false)
                     return;
-                System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@param", id);
+               /* System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@param", id);
                 int numberOfRowDeleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.Specs WHERE PeripheryId=@param", param);
-                db.SaveChanges();
+                db.SaveChanges();*/
 
                 Periphery peri = db.Peripheries
                     .Where(p => p.Id == id)
@@ -476,22 +476,6 @@ namespace solpr
         private void button16_Click(object sender, EventArgs e)
         {
             editComputer();
-        }
-
-        public void FilterByDepartment()
-        {
-            var result = from employee in db.Employees
-                          join department in db.Departments on employee.DepartmentId equals department.Id
-                          select new
-                          {
-                              ID = employee.Id,
-                              Фамилия = employee.Surname,
-                              Имя = employee.Name,
-                              Отчество = employee.Patronymic_Name,
-                              ID_отдела = employee.DepartmentId,
-                              Отдел = department.Name
-                          };
-           // dataGridView4.DataSource = result.Where(x => x.Отдел == comboBox1.Text).ToList();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
