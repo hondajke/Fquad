@@ -2,8 +2,14 @@ bin
 vs
 obj
 
+reports
 EntityFramework.6.4.4
-Report.NET.0.9.8
+Common.Logging.3.4.1
+Common.Logging.Core.3.4.1
+Microsoft.CSharp.4.0.1
+Portable.BouncyCastle.1.8.5
+itext7.7.1.11
+
 
 
 *.oob

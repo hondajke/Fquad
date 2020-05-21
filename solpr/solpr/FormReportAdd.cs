@@ -7,13 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Root.Reports;
+using iText.IO.Font.Constants;
+using iText.IO.Util;
+using iText.Kernel.Font;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Kernel.Colors;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using System.IO;
+
 
 namespace solpr
 {
     public partial class FormReportAdd : Form
     {
-        Report report;
+        string path = "reports/asd.pdf";
+
+        iText.Kernel.Colors.Color headerBg = new DeviceRgb(235, 235, 235);
+        string fontpathV = "C:/Windows/Fonts/Verdana.ttf";
 
         public FormReportAdd()
         {
@@ -23,78 +36,67 @@ namespace solpr
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double height = 30;
-            report = new Report(new PdfFormatter());
-            FontDef fd = new FontDef(report, "Helvetica");
-            Page page = new Page(report);
-            FontProp fph = new FontPropMM(fd, 5);
-            FontProp fp = new FontPropMM(fd, 1.9);
-            page.AddCB_MM(14, new RepString(fp, "Report"));
-            page.AddCB_MM(20, new RepString(fp, "xdddd"));
+            FileInfo file = new FileInfo(path);
+            if (!file.Directory.Exists) file.Directory.Create();
+
+            PdfWriter wr = new PdfWriter(path);
+            PdfDocument pdf = new PdfDocument(wr);
+            Document doc = new Document(pdf, PageSize.A4);
+            doc.SetMargins(25, 25, 25, 25);
+            PdfFont font = PdfFontFactory.CreateFont(fontpathV, "Identity-H", true);
+
+            doc.Add(new Paragraph("Report").SetFont(font));
+            
             if (radioButton1.Checked)
             {
                 
                 if (checkedListBox1.CheckedIndices.Contains(0))
                 {
-                    page.AddCB_MM(height, new RepString(fp, checkedListBox1.Items[0].ToString()));
-                    height += 5;
-
-                    TableLayoutManager tlm = new TableLayoutManager(fp);
-                    TlmColumn col;
-                    col = new TlmColumnMM(tlm, "ID", 13);
-                    col = new TlmColumnMM(tlm, "Статус", 40);
-                    col = new TlmColumnMM(tlm, "Сотрудник", 60);/*
-                    foreach (DataGridViewRow row in Program.mf.dataGridView1.Rows)
-                    {
-                        
-                        page.AddCB_MM(height, new RepString(fp, row.Cells[0].Value + " " + row.Cells[1].Value + " " + row.Cells[2].Value));
-                        height += 3;
-                    }*/
-                    height += 6;
-                    tlm.Close();
+                    
                 }
                 if (checkedListBox1.CheckedIndices.Contains(1))
                 {
-                    page.AddCB_MM(height, new RepString(fp, checkedListBox1.Items[1].ToString()));
-                    height += 5;
+                    doc.Add(new Paragraph("Комплектующие").SetFont(font));
 
-                    TableLayoutManager tlm = new TableLayoutManager(fp);
-                    TlmColumn col;
-                    col = new TlmColumnMM(tlm, "ID", 13);
-                    col = new TlmColumnMM(tlm, "Тип", 40);
-                    col = new TlmColumnMM(tlm, "Модель", 60);
-                    col = new TlmColumnMM(tlm, "Производитель", 60);
+                    Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
+
+                    foreach (DataGridViewColumn column in Program.mf.dataGridView2.Columns)
+                    {
+                        Cell cell = new Cell().Add(new Paragraph(column.HeaderText).SetFont(font));
+                        cell.SetBackgroundColor(headerBg);
+                        table.AddHeaderCell(cell);
+                    }
 
                     foreach (DataGridViewRow row in Program.mf.dataGridView2.Rows)
                     {
-                        tlm.NewRow();
-                        tlm.Add(0, new RepString(fp, row.Cells[0].ToString()));
-                        tlm.Add(1, new RepString(fp, row.Cells[1].ToString()));
-                        tlm.Add(2, new RepString(fp, row.Cells[2].ToString()));
-                        tlm.Add(3, new RepString(fp, row.Cells[3].ToString()));
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            table.AddCell(cell.Value.ToString()).SetFont(font);
+                        }
                     }
-                    height += 6;
-                    tlm.Close();
+                    doc.Add(table);
                 }
                 if (checkedListBox1.CheckedIndices.Contains(2))
                 {
-                    page.AddCB_MM(height, new RepString(fp, checkedListBox1.Items[2].ToString()));
-                    height += 5;
+                    doc.Add(new Paragraph("Комплектующие").SetFont(font));
 
-                    TableLayoutManager tlm = new TableLayoutManager(fp);
-                    TlmColumn col;
-                    col = new TlmColumnMM(tlm, "ID", 13);
-                    col = new TlmColumnMM(tlm, "Тип", 40);
-                    col = new TlmColumnMM(tlm, "Модель", 60);
-                    col = new TlmColumnMM(tlm, "Производитель", 60);
+                    Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
+
+                    foreach (DataGridViewColumn column in Program.mf.dataGridView3.Columns)
+                    {
+                        Cell cell = new Cell().Add(new Paragraph(column.HeaderText).SetFont(font));
+                        cell.SetBackgroundColor(headerBg);
+                        table.AddHeaderCell(cell);
+                    }
 
                     foreach (DataGridViewRow row in Program.mf.dataGridView3.Rows)
                     {
-                        page.AddCB_MM(height, new RepString(fp, row.Cells[0].Value + " " + row.Cells[1].Value + " " + row.Cells[2].Value));
-                        height += 3;
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            table.AddCell(cell.Value.ToString()).SetFont(font);
+                        }
                     }
-                    height += 6;
-                    tlm.Close();
+                    doc.Add(table);
                 }
             }
 
@@ -113,8 +115,7 @@ namespace solpr
                     
                 }*/
             }
-
-            report.Save("asd.pdf");
+            doc.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
