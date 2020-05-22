@@ -416,14 +416,10 @@ namespace solpr
             if (e.RowIndex < 1 || e.ColumnIndex < 0)
                 return;
             if (IsTheSameCellValue(e.ColumnIndex, e.RowIndex))
-            {
                 e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
-            }
             else
-            {
                 e.AdvancedBorderStyle.Top = dataGridView2.AdvancedCellBorderStyle.Top;
             }
-        }
 
         private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -582,16 +578,17 @@ namespace solpr
             Application.Exit();
         }
 
-  /*      private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FilterByDepartment();
-        }*/
+        /*      private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+              {
+                  FilterByDepartment();
+              }*/
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                searchCells = new List<DataGridViewCell>();
-                searchCellNum = 0;
-            }
+        {
+            searchCells = new List<DataGridViewCell>();
+            searchCellNum = 0;
+            hideshowFilterButtons();
+        }
 
         private void пКToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -609,23 +606,27 @@ namespace solpr
         {
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage1"];
             peripheryTabShow();
+            hideshowFilterButtons();
         }
 
         private void комплектующиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage2"];
             componentsTabShow();
+            hideshowFilterButtons();
         }
 
         private void сотрудникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage3"];
             employeeTabShow();
+            hideshowFilterButtons();
         }
 
         private void отчетыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage4"];
+            hideshowFilterButtons();
         }
 
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -844,21 +845,34 @@ namespace solpr
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control == true && e.KeyCode == Keys.A)
-            {
-                Form add = returnAddForm();
-                add.ShowDialog();
-            }
+                returnAddForm();
             if (e.Control == true && e.KeyCode == Keys.D) 
-            {
                 deleteHotkey();
-            }
             if (e.Control == true && e.KeyCode == Keys.E) 
-            {
                 editHotkey();
-            }
             if (e.Control == true && e.KeyCode == Keys.M) 
-            {
                 returnAddOther();
+            if (e.Control == true && e.KeyCode == Keys.O && tabControl1.SelectedIndex == 4) 
+            {
+                openFileDialog1.FileName = "";
+                openFileDialog1.Filter = "Pdf Files|*.pdf";
+                DialogResult dial = openFileDialog1.ShowDialog();
+                if (dial == DialogResult.OK)
+                {
+                    reportFile = openFileDialog1.FileName;
+                }
+            }
+            if (e.Control == true && e.KeyCode == Keys.S && tabControl1.SelectedIndex == 4) 
+            {
+                if (reportFile != "")
+                {
+                    saveFileDialog1.Filter = "Pdf Files|*.pdf";
+                    DialogResult dial = saveFileDialog1.ShowDialog();
+                    if (dial == DialogResult.OK)
+                    {
+
+                    }
+                }
             }
         }
 
@@ -868,18 +882,24 @@ namespace solpr
             {
                 case 0:
                     FormComputerAdd dial = new FormComputerAdd();
-                    RefreshComputersGrid();
+                    dial.ShowDialog();
                     return dial;
                 case 1:
                     FormPeripheryAdd dial1 = new FormPeripheryAdd();
-                    RefreshPeripheryGrid();
+                    dial1.ShowDialog();
                     return dial1;
                 case 2:
                     FormComponentAdd dial2 = new FormComponentAdd();
+                    dial2.ShowDialog();
                     return dial2;
                 case 3:
                     FormEmployeeAdd dial3 = new FormEmployeeAdd();
+                    dial3.ShowDialog();
                     return dial3;
+                case 4:
+                    FormReportAdd dial4 = new FormReportAdd();
+                    dial4.ShowDialog();
+                    return dial4;
                 default:
                     return null;
             }
@@ -1057,6 +1077,43 @@ namespace solpr
         private void button7_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Ctrl + M", button7, 10000);
+        }
+
+        private void hideshowFilterButtons() 
+        {
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])
+            {
+                button17.Visible = false;
+                button15.Visible = false;
+                label6.Visible = false;
+                textBox2.Visible = false;
+                button13.Visible = false;
+                button14.Visible = false;
+            }
+            else 
+            {
+                button17.Visible = true;
+                button15.Visible = true;
+                label6.Visible = true;
+                textBox2.Visible = true;
+                button13.Visible = true;
+                button14.Visible = true;
+            }
+        }
+
+        private void button20_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + A", button20, 10000);
+        }
+
+        private void button21_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + O", button21, 10000);
+        }
+
+        private void button22_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + S", button22, 10000);
         }
     }
 
