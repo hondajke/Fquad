@@ -13,7 +13,7 @@ namespace solpr.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202005220447422_Third"; }
+            get { return "202005220948175_Third"; }
         }
         
         string IMigrationMetadata.Source

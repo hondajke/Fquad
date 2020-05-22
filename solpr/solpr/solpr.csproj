@@ -192,9 +192,9 @@
     <Compile Include="Migrations\202004230707469_Second.designer.cs">
       <DependentUpon>202004230707469_Second.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005220447422_Third.cs" />
-    <Compile Include="Migrations\202005220447422_Third.designer.cs">
-      <DependentUpon>202005220447422_Third.cs</DependentUpon>
+    <Compile Include="Migrations\202005220948175_Third.cs" />
+    <Compile Include="Migrations\202005220948175_Third.designer.cs">
+      <DependentUpon>202005220948175_Third.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="models.cs" />
@@ -251,8 +251,8 @@
     <EmbeddedResource Include="Migrations\202004230707469_Second.resx">
       <DependentUpon>202004230707469_Second.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005220447422_Third.resx">
-      <DependentUpon>202005220447422_Third.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005220948175_Third.resx">
+      <DependentUpon>202005220948175_Third.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

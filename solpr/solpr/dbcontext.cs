@@ -32,6 +32,7 @@ namespace solpr
         public virtual DbSet<Periphery> Peripheries { get; set; }
         public virtual DbSet<Computer> Computers { get; set; }
         public virtual DbSet<Specs> Specs { get; set; }
+        public virtual DbSet<Maintenance> Maintenance { get; set; }
 
 
     }

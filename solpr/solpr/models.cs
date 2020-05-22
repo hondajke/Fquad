@@ -92,7 +92,9 @@ namespace solpr
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
         public ICollection<Component> Components { get; set; }
-        public DateTime LastRepairDate { get; set; }
+        public DateTime? ScrapDate { get; set; }
+        [StringLength(200)]
+        public string Description { get; set; }
     }
 
     public class Periphery
@@ -125,6 +127,19 @@ namespace solpr
 
         public int? ComponentId { get; set; }
         public Component Component { get; set; }
+    }
+
+    public class Maintenance
+    {
+        [Key]
+        public int Id { get; set; }
+        public int ComputerId { get; set; }
+        [ForeignKey("ComputerId")]
+        public Computer Computer { get; set; }
+        public DateTime RepairStart { get; set; }
+        public DateTime? RepairFinish { get; set; }
+        [StringLength(200)]
+        public string Description { get; set; }
     }
 
     public class GetTypes
