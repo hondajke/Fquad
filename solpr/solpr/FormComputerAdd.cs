@@ -18,13 +18,23 @@ namespace solpr
         {
             InitializeComponent();
         }
-
+        //drow["Id"] = p.Id;
+        string processor = "";
+        string mboard = "";
+        string video = "";
+        string ram = "";
+        string hdd = "";
+        string ssd = "";
+        string sound = "";
+        string drive = "";
+        string other = "";
 
         private void FormComputerAdd_Load_1(object sender, EventArgs e)
         {
             db = new ParkDBEntities();
             loadCompStatus();
             loadEmployees();
+            loadComponents();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,5 +83,116 @@ namespace solpr
 
         }
 
+        public void loadComponents()
+        {
+            comboBox1.DataSource = Enum.GetValues(typeof(ComponentType))
+              .Cast<Enum>()
+              .Select(value => new
+              {
+                  (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                  value
+              })
+              .OrderBy(item => item.value)
+              .ToList();
+            comboBox1.DisplayMember = "Description";
+            comboBox1.ValueMember = "value";
+        }
+
+        public void refreshList()
+        {
+            DataTable dt = new DataTable();
+            //dt.Columns.Add("Id", typeof(int));
+            dt.Columns.Add("Процессор", typeof(string));
+            dt.Columns.Add("Материнская плата", typeof(string));
+            dt.Columns.Add("Видеокарта", typeof(string));
+            dt.Columns.Add("Оперативная память", typeof(string));
+            dt.Columns.Add("Жесткий диск", typeof(string));
+            dt.Columns.Add("Твердотельный накопитель", typeof(string));
+            dt.Columns.Add("Аудиокарта", typeof(string));
+            dt.Columns.Add("Привод", typeof(string));
+            dt.Columns.Add("Другое", typeof(string));
+
+            DataRow drow;
+            drow = dt.NewRow();
+            //drow["Id"] = p.Id;
+            drow["Процессор"] = processor;
+            drow["Материнская плата"] = mboard;
+            drow["Видеокарта"] = video;
+            drow["Оперативная память"] = ram;
+            drow["Жесткий диск"] = hdd;
+            drow["вердотельный накопитель"] = ssd;
+            drow["Аудиокарта"] = sound;
+            drow["Привод"] = drive;
+            drow["Другое"] = other;
+            dt.Rows.Add(drow);
+
+            dataGridView2.DataSource = dt;
+            dataGridView2.Refresh();
+
+        }
+
+        public void refreshList2(ComponentType comp)
+        {
+            switch (comp)
+            {
+                case ComponentType.processor:
+                    break;
+                case ComponentType.mboard:
+                    break;
+                case ComponentType.video:
+                    break;
+                case ComponentType.ram:
+                    break;
+                case ComponentType.hdd:
+                    break;
+                case ComponentType.ssd:
+                    break;
+                case ComponentType.sound:
+                    break;
+                case ComponentType.drive:
+                    break;
+                case ComponentType.other:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void refreshList3()
+        {
+            DataTable dt = new DataTable();
+            //dt.Columns.Add("Id", typeof(int));
+            dt.Columns.Add("Тип", typeof(ComponentType));
+            dt.Columns.Add("Модель", typeof(string));
+            dt.Columns.Add("Видеокарта", typeof(string));
+            dt.Columns.Add("Оперативная память", typeof(string));
+            dt.Columns.Add("Жесткий диск", typeof(string));
+            dt.Columns.Add("Твердотельный накопитель", typeof(string));
+            dt.Columns.Add("Аудиокарта", typeof(string));
+            dt.Columns.Add("Привод", typeof(string));
+            dt.Columns.Add("Другое", typeof(string));        
+        }
+
+     
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //refreshList2((ComponentType) comboBox1.SelectedValue);
+        }      
     }
 }
