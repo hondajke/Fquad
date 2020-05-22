@@ -1115,6 +1115,12 @@ namespace solpr
         {
             toolTip1.Show("Ctrl + S", button22, 10000);
         }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            MaintenanceLogForm maint = new MaintenanceLogForm();
+            maint.ShowDialog();
+        }
     }
 
 }

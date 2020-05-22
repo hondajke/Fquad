@@ -184,6 +184,12 @@
     <Compile Include="FormReportAdd.Designer.cs">
       <DependentUpon>FormReportAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="MaintenanceLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaintenanceLogForm.Designer.cs">
+      <DependentUpon>MaintenanceLogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202003260553405_First.cs" />
     <Compile Include="Migrations\202003260553405_First.designer.cs">
       <DependentUpon>202003260553405_First.cs</DependentUpon>
@@ -244,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportAdd.resx">
       <DependentUpon>FormReportAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaintenanceLogForm.resx">
+      <DependentUpon>MaintenanceLogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003260553405_First.resx">
       <DependentUpon>202003260553405_First.cs</DependentUpon>
