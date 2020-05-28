@@ -13,7 +13,6 @@ namespace solpr
     public partial class FormComputerAdd : Form
     {
         ParkDBEntities db;
-
         public FormComputerAdd()
         {
             InitializeComponent();
