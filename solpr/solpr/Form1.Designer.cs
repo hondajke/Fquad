@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage0 = new System.Windows.Forms.TabPage();
+            this.button23 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -90,7 +91,6 @@
             this.button17 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.button23 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -133,6 +133,16 @@
             this.tabPage0.Text = "ПК";
             this.tabPage0.UseVisualStyleBackColor = true;
             this.tabPage0.Enter += new System.EventHandler(this.tabPage0_Enter);
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(509, 146);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(139, 40);
+            this.button23.TabIndex = 4;
+            this.button23.Text = "Журнал техобслуживания";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // button16
             // 
@@ -242,10 +252,11 @@
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(6, 6);
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView2.Size = new System.Drawing.Size(500, 400);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView2_CellFormatting);
-            this.dataGridView2.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView2_CellPainting);
             // 
             // tabPage2
             // 
@@ -719,16 +730,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // button23
-            // 
-            this.button23.Location = new System.Drawing.Point(509, 146);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(139, 40);
-            this.button23.TabIndex = 4;
-            this.button23.Text = "Журнал техобслуживания";
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // Form1
             // 

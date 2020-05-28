@@ -87,10 +87,11 @@ namespace solpr
                              Тип = periphery.Type,
                              Модель = periphery.Model,
                              Производитель = manufac.Name,
-                             Характеристики = specs.Name + " - " + specs.Value,
+                             Характеристики = specs.Name + "−" + specs.Value,
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView2.DataSource = result.ToList();
+            dataGridView2.Columns[0].Visible = false;
         }
 
         public void RefreshComponentsGrid()
@@ -106,7 +107,6 @@ namespace solpr
                              Производитель = manufac.Name,
                              Характеристики = specs.Name + "−" + specs.Value
                          };
-            
             dataGridView3.DataSource = result.ToList();
         }
         public void RefreshComputersGrid()
@@ -124,28 +124,35 @@ namespace solpr
 
         private void deletePeriphery() 
         {
-            if (dataGridView2.SelectedRows.Count > 0)
+            try
             {
-                int index = dataGridView2.SelectedRows[0].Index;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
-                if (converted == false)
-                    return;
-               /* System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@param", id);
-                int numberOfRowDeleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.Specs WHERE PeripheryId=@param", param);
-                db.SaveChanges();*/
-
-                Periphery peri = db.Peripheries
-                    .Where(p => p.Id == id)
-                    .FirstOrDefault();
-
-                db.Peripheries.Remove(peri);
-                db.SaveChanges();
-                RefreshPeripheryGrid();
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView2.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+                    Periphery peri = db.Peripheries
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+                    Specs spec = db.Specs
+                            .Where(p => p.ComponentId == id)
+                            .FirstOrDefault();
+                    db.Entry(peri).State = System.Data.Entity.EntityState.Modified;
+                    db.Specs.Remove(spec);
+                    db.SaveChanges();
+                    db.Peripheries.Remove(peri);
+                    db.SaveChanges();
+                    RefreshPeripheryGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Сначала выберите");
+                }
             }
-            else 
-            {
-                MessageBox.Show("Сначала выберите");
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -258,16 +265,6 @@ namespace solpr
 
                 FormPeripheryEdit Edit = new FormPeripheryEdit(peri);
                 Edit.ShowDialog();
-
-                /*peri.Age = (int)Edit.numericUpDown1.Value;
-                peri.Name = Edit.textBox1.Text;
-                peri.Position = Edit.comboBox1.SelectedItem.ToString();
-                peri.Team = (Team)Edit.comboBox2.SelectedItem;
-
-                db.Entry(peri).State = EntityState.Modified;
-                db.SaveChanges();*/
-
-                //MessageBox.Show("Объект обновлен");
             }
             else 
             {
@@ -399,46 +396,6 @@ namespace solpr
         {
             deleteComputer();
         }
-
-        bool IsTheSameCellValue(int column, int row)
-        {
-            DataGridViewCell cell1 = dataGridView2[column, row];
-            DataGridViewCell cell2 = dataGridView2[column, row - 1];
-            if (cell1.Value == null || cell2.Value == null)
-            {
-                return false;
-            }
-            return cell1.Value.ToString() == cell2.Value.ToString();
-        }
-        private void dataGridView2_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None;
-            if (e.RowIndex < 1 || e.ColumnIndex < 0)
-                return;
-            if (IsTheSameCellValue(e.ColumnIndex, e.RowIndex))
-                e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
-            else
-                e.AdvancedBorderStyle.Top = dataGridView2.AdvancedCellBorderStyle.Top;
-            }
-
-        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (dataGridView2.Columns[e.ColumnIndex].Name == "Тип")
-            {
-                PeripheryType enumValue = (PeripheryType)e.Value;
-                GetTypes a = new GetTypes();
-                string enumstring = a.GetDescription(enumValue);
-                e.Value = enumstring;
-            }
-            if (e.RowIndex == 0)
-                return;
-            if (IsTheSameCellValue(e.ColumnIndex, e.RowIndex))
-            {
-                e.Value = "";
-                e.FormattingApplied = true;
-            }
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             FormDepartmentAdd dial = new FormDepartmentAdd();
@@ -808,7 +765,35 @@ namespace solpr
             FormManufacturerAdd dial = new FormManufacturerAdd();
             dial.ShowDialog();
         }
-        
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "Тип")
+            {
+                PeripheryType enumValue = (PeripheryType)e.Value;
+                GetTypes a = new GetTypes();
+                string enumstring = a.GetDescription(enumValue);
+                e.Value = enumstring;
+            }
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "Характеристики")
+            {
+                string[] specs = e.Value.ToString().Split('−');
+                int maxNumOfSpecs = specs[0].Count(x => x == '|');
+                if (specs[1].Count(x => x == '|') > maxNumOfSpecs)
+                {
+                    maxNumOfSpecs = specs[1].Count(x => x == '|');
+                }
+                string specstring = "";
+                string[] specNames = specs[0].Split('|');
+                string[] specValues = specs[1].Split('|');
+                for (int i = 0; i < maxNumOfSpecs; i++)
+                {
+                    specstring += specNames[i] + " − " + specValues[i] + "\n";
+                }
+                e.Value = specstring;
+            }
+        }
+
+
         private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dataGridView3.Columns[e.ColumnIndex].Name == "Тип")

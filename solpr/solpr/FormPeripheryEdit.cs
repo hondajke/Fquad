@@ -14,8 +14,6 @@ namespace solpr
     {
         ParkDBEntities db;
         Periphery changedPeri;
-        string[] Values;
-        int length = 0;
         int tempPerId = 0;
         public FormPeripheryEdit()
         {
@@ -42,21 +40,16 @@ namespace solpr
             manufac.DisplayMember = "Name";
             manufac.ValueMember = "Id";
             Model.Text = peri.Model;
-            var spec = db.Specs.Where(p => p.PeripheryId == peri.Id)
-                .Select(p => new
-                {
-                    Id = p.Id,
-                    Название = p.Name,
-                    Значение = p.Value,
-                });
-            int j = 0;
-            foreach (var s in spec) 
+            Specs spec = db.Specs.Where(x => x.PeripheryId == peri.Id).FirstOrDefault();
+            int specNum = countNumofSpecs(spec);
+            string[] SpecNames = spec.Name.Split('|');
+            string[] SpecValues = spec.Value.Split('|');
+
+            for (int i = 0; i < specNum; i++)
             {
                 Spe.Rows.Add();
-                Spe.Rows[Spe.Rows.Count - 2].Cells[0].Value = s.Название;
-                Spe.Rows[Spe.Rows.Count - 2].Cells[1].Value = s.Значение;
-                Spe.Rows[Spe.Rows.Count - 1].Cells[0].Value = "";
-                Spe.Rows[Spe.Rows.Count - 1].Cells[1].Value = "";
+                Spe.Rows[i].Cells[0].Value = SpecNames[i];
+                Spe.Rows[i].Cells[1].Value = SpecValues[i];
             }
             var emplo = db.Employees
                 .Select(p => new
@@ -94,8 +87,7 @@ namespace solpr
                     tempManId = man.Id;
                     addedNewOne = true;
                 }
-
-
+                Specs spec = db.Specs.Where(x => x.PeripheryId == tempPerId).FirstOrDefault();
                 changedPeri.Type = (PeripheryType)type.SelectedValue;
                 changedPeri.Model = Model.Text;
                 if (addedNewOne == true) changedPeri.ManufacturerId = tempManId;
@@ -103,31 +95,48 @@ namespace solpr
                 changedPeri.EmployeeId = (int)comboBox1.SelectedValue;
                 db.Entry(changedPeri).State = System.Data.Entity.EntityState.Modified;
                 int temp = changedPeri.Id;
-                System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@param", temp);
-                int numberOfRowDeleted = db.Database.ExecuteSqlCommand("DELETE FROM dbo.Specs WHERE PeripheryId=@param", param);
-                db.SaveChanges();
-                for (int i = 0; i < Spe.Rows.Count - 1; i++) 
+                string specnames = "";
+                string specvalues = "";
+                for (int i = 0; i < Spe.Rows.Count - 1; i++)
                 {
-                    if (checkSpecsExistence2(Spe.Rows[i].Cells[0].Value.ToString(), changedPeri.Id))
-                    {
-                        var result = db.Specs.AsEnumerable()
-                            .Single(p => (p.PeripheryId == changedPeri.Id) && (p.Name == Spe.Rows[i].Cells[0].Value.ToString()));
-                        result.Value = Spe.Rows[i].Cells[1].Value.ToString();
-                        db.SaveChanges();
-                    }else if (!checkSpecsExistence(Spe.Rows[i].Cells[0].Value.ToString(), Spe.Rows[i].Cells[1].Value.ToString(), changedPeri.Id))
-                    {
-                        Specs spec = new Specs();
-                        spec.PeripheryId = changedPeri.Id;
-                        spec.Name = Spe.Rows[i].Cells[0].Value.ToString();
-                        spec.Value = Spe.Rows[i].Cells[1].Value.ToString();
-                        db.Specs.Add(spec);
-                        db.SaveChanges();
-                    }
+                    specnames += Spe.Rows[i].Cells[0].Value + "|";
+                    specvalues += Spe.Rows[i].Cells[1].Value + "|";
                 }
+                spec.Name = specnames;
+                spec.Value = specvalues;
+                db.SaveChanges();
             }
             this.Close();
         }
 
+        private int countNumofSpecs(Specs spec)
+        {
+            int names = 0;
+            int values = 0;
+            foreach (char c in spec.Name)
+            {
+                if (c == '|')
+                {
+                    names++;
+                }
+            }
+            foreach (char c in spec.Value)
+            {
+                if (c == '|')
+                {
+                    values++;
+                }
+            }
+            if (names >= values)
+            {
+                return names;
+            }
+            else
+            {
+                return values;
+            }
+
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -137,29 +146,6 @@ namespace solpr
             foreach (Manufacturer man in db.Manufacturers.ToList())
             {
                 if (man.Name == newMan)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool checkSpecsExistence(string _name, string _value, int _PeripheryId)
-        {
-            foreach (Specs spe in db.Specs.ToList())
-            {
-                if (spe.Name == _name && spe.Value == _value && spe.PeripheryId == _PeripheryId)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        private bool checkSpecsExistence2(string _name, int _PeripheryId)
-        {
-            foreach (Specs spe in db.Specs.ToList())
-            {
-                if (spe.Name == _name && spe.PeripheryId == _PeripheryId)
                 {
                     return true;
                 }

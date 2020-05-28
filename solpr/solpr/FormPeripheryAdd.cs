@@ -79,12 +79,12 @@ namespace solpr
                     {
                         Name = manufac.Text
                     };
-                db.Manufacturers.Attach(man);
-                db.Manufacturers.Add(man);
-                db.SaveChanges();
-                loadManufacturers();
-                tempManId = man.Id;
-                addedNewOne = true;
+                    db.Manufacturers.Attach(man);
+                    db.Manufacturers.Add(man);
+                    db.SaveChanges();
+                    loadManufacturers();
+                    tempManId = man.Id;
+                    addedNewOne = true;
                 }
                 example.Type = (PeripheryType)type.SelectedValue;
                 example.Model = Model.Text;
@@ -96,17 +96,21 @@ namespace solpr
                 int temp = example.Id;
                 db.SaveChanges();
                 Specs spec = new Specs();
+                string specnames = "";
+                string specvalues = "";
                 for (int i = 0; i < Spe.Rows.Count - 1; i++)
                 {
-                    spec.PeripheryId = example.Id;
-                    spec.Name = Spe.Rows[i].Cells[0].Value.ToString();
-                    spec.Value = Spe.Rows[i].Cells[1].Value.ToString();
-                    db.Specs.Add(spec);
-                    db.SaveChanges();
+                    specnames += Spe.Rows[i].Cells[0].Value.ToString() + "|";
+                    specvalues += Spe.Rows[i].Cells[1].Value.ToString() + "|";
                 }
-            }
+                spec.PeripheryId = example.Id;
+                spec.Name = specnames;
+                spec.Value = specvalues;
+                db.Specs.Add(spec);
+                db.SaveChanges();
                 this.Close();
             }
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
