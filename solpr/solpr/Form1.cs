@@ -549,14 +549,9 @@ namespace solpr
 
         private void пКToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           /*tabControl1.SelectedTab = tabControl1.TabPages["tabPage0"];
-            dataGridView1.DataSource = db.Computers.ToList();
-            List<string> colnames = new List<string>();
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
-            {
-                colnames.Add(col.Name);
-            }
-            comboBox1.DataSource = colnames;*/
+            tabControl1.SelectedTab = tabControl1.TabPages["tabPage0"];
+            computerTabShow();
+            hideshowFilterButtons();
         }
 
         private void периферияToolStripMenuItem_Click(object sender, EventArgs e)

@@ -45,7 +45,7 @@
             // comboBox7
             // 
             this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(376, 424);
+            this.comboBox7.Location = new System.Drawing.Point(389, 424);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(143, 21);
             this.comboBox7.TabIndex = 31;
@@ -53,12 +53,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(295, 427);
+            this.label7.Location = new System.Drawing.Point(307, 427);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 29;
             this.label7.Text = "Сотрудник";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // button2
             // 
@@ -109,12 +108,12 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(731, 221);
             this.dataGridView1.TabIndex = 34;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(120, 424);
+            this.comboBox1.Location = new System.Drawing.Point(138, 424);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(143, 21);
             this.comboBox1.TabIndex = 35;
@@ -123,7 +122,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 427);
+            this.label1.Location = new System.Drawing.Point(25, 427);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 13);
             this.label1.TabIndex = 36;
@@ -139,7 +138,6 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(731, 124);
             this.dataGridView2.TabIndex = 37;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // FormComputerAdd
             // 

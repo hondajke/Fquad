@@ -18,16 +18,6 @@ namespace solpr
         {
             InitializeComponent();
         }
-        //drow["Id"] = p.Id;
-        string processor = "";
-        string mboard = "";
-        string video = "";
-        string ram = "";
-        string hdd = "";
-        string ssd = "";
-        string sound = "";
-        string drive = "";
-        string other = "";
 
         private void FormComputerAdd_Load_1(object sender, EventArgs e)
         {
@@ -35,18 +25,6 @@ namespace solpr
             loadCompStatus();
             loadEmployees();
             loadComponents();
-            var result = from comps in db.Components
-                         join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
-                         join specs in db.Specs on comps.Id equals specs.ComponentId
-                         select new
-                         {
-                             ID = comps.Id,
-                             Тип = comps.Type,
-                             Модель = comps.Model,
-                             Производитель = manufac.Name,
-                             Характеристики = specs.Name + "−" + specs.Value
-                         };
-            //dataGridView1.DataSource = result; 
             refreshList();
         }
 
@@ -113,61 +91,10 @@ namespace solpr
 
         public void refreshList()
         {
-            DataTable dt = new DataTable();
-            //dt.Columns.Add("Id", typeof(int));
-            dt.Columns.Add("Процессор", typeof(string));
-            dt.Columns.Add("Материнская плата", typeof(string));
-            dt.Columns.Add("Видеокарта", typeof(string));
-            dt.Columns.Add("Оперативная память", typeof(string));
-            dt.Columns.Add("Жесткий диск", typeof(string));
-            dt.Columns.Add("Твердотельный накопитель", typeof(string));
-            dt.Columns.Add("Аудиокарта", typeof(string));
-            dt.Columns.Add("Привод", typeof(string));
-            dt.Columns.Add("Другое", typeof(string));
-
-            DataRow drow;
-            drow = dt.NewRow();
-            //drow["Id"] = p.Id;
-            drow["Процессор"] = processor;
-            drow["Материнская плата"] = mboard;
-            drow["Видеокарта"] = video;
-            drow["Оперативная память"] = ram;
-            drow["Жесткий диск"] = hdd;
-            drow["Твердотельный накопитель"] = ssd;
-            drow["Аудиокарта"] = sound;
-            drow["Привод"] = drive;
-            drow["Другое"] = other;
-            dt.Rows.Add(drow);
-
-            dataGridView2.DataSource = dt;
-            dataGridView2.Refresh();
-
-        }
-
-        public void refreshList2(ComponentType comp)
-        {
-            switch (comp)
+            dataGridView2.DataSource = dataGridView1.DataSource;
+            foreach (DataGridViewRow row in dataGridView2.Rows)
             {
-                case ComponentType.processor:
-                    break;
-                case ComponentType.mboard:
-                    break;
-                case ComponentType.video:
-                    break;
-                case ComponentType.ram:
-                    break;
-                case ComponentType.hdd:
-                    break;
-                case ComponentType.ssd:
-                    break;
-                case ComponentType.sound:
-                    break;
-                case ComponentType.drive:
-                    break;
-                case ComponentType.other:
-                    break;
-                default:
-                    break;
+                //row.re
             }
         }
 
@@ -186,28 +113,34 @@ namespace solpr
             dt.Columns.Add("Другое", typeof(string));        
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-           
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //var filter = result;
-            //filter = filter.Where(x => x.Тип.ToString() == comboBox1.SelectedValue.ToString());
-            //dataGridView1.DataSource = filter.ToList();
-        }    
-        
-       
+            var result = from comps in db.Components
+                         join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
+                         join specs in db.Specs on comps.Id equals specs.ComponentId
+                         select new
+                         {
+                             ID = comps.Id,
+                             Тип = comps.Type,
+                             Модель = comps.Model,
+                             Производитель = manufac.Name,
+                             Характеристики = specs.Name + "−" + specs.Value
+                         };
+            var componentsFilter = result.AsEnumerable();
+            componentsFilter = componentsFilter.Where(x => x.Тип.ToString() == comboBox1.SelectedValue.ToString());
+            dataGridView1.DataSource = componentsFilter.ToList();
+            dataGridView1.Refresh();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                dataGridView2.Rows.Add(dataGridView1.SelectedRows[0]);
+                dataGridView1.Rows.Remove(dataGridView1.SelectedRows[0]);
+                dataGridView1.Refresh();
+                dataGridView2.Refresh();
+            }
+        }
     }
 }
