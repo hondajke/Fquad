@@ -91,6 +91,7 @@
             this.button17 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.button24 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -120,6 +121,7 @@
             // 
             // tabPage0
             // 
+            this.tabPage0.Controls.Add(this.button24);
             this.tabPage0.Controls.Add(this.button23);
             this.tabPage0.Controls.Add(this.button16);
             this.tabPage0.Controls.Add(this.button11);
@@ -731,6 +733,16 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(509, 192);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(139, 40);
+            this.button24.TabIndex = 5;
+            this.button24.Text = "Отправить ПК в ремонт";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -830,6 +842,7 @@
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Button button24;
     }
 }
 

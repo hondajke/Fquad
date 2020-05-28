@@ -51,8 +51,8 @@ namespace solpr
                              ID = maint.Id,
                              PC_ID = pc.Id,
                              Причина = maint.Description,
-                             Дата_начала_ремонта = maint.RepairStart.Day.ToString() + maint.RepairStart.Month.ToString() + maint.RepairStart.Year.ToString(),
-                             Дата_окончания_ремонта = maint.RepairFinish.Value.Day.ToString() + maint.RepairFinish.Value.Month.ToString() + maint.RepairFinish.Value.Year.ToString()
+                             Дата_начала_ремонта = maint.RepairStart,
+                             Дата_окончания_ремонта = maint.RepairFinish
                          };
             dataGridView1.DataSource = result.ToList();
         }

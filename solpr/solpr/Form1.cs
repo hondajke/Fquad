@@ -1106,6 +1106,39 @@ namespace solpr
             MaintenanceLogForm maint = new MaintenanceLogForm();
             maint.ShowDialog();
         }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            intoRepair();
+        }
+
+        private void intoRepair()
+        {
+            try
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    int index = dataGridView1.SelectedRows[0].Index;
+                    int id = 0;
+                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                    if (converted == false)
+                        return;
+                    Computer pc = db.Computers
+                        .Where(p => p.Id == id)
+                        .FirstOrDefault();
+                    MaintenanceAddForm maint = new MaintenanceAddForm(pc);
+                    maint.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Сначала выберите");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 
 }

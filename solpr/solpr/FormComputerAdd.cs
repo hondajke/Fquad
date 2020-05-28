@@ -13,7 +13,6 @@ namespace solpr
     public partial class FormComputerAdd : Form
     {
         ParkDBEntities db;
-
         public FormComputerAdd()
         {
             InitializeComponent();
@@ -35,18 +34,6 @@ namespace solpr
             loadCompStatus();
             loadEmployees();
             loadComponents();
-            var result = from comps in db.Components
-                         join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
-                         join specs in db.Specs on comps.Id equals specs.ComponentId
-                         select new
-                         {
-                             ID = comps.Id,
-                             Тип = comps.Type,
-                             Модель = comps.Model,
-                             Производитель = manufac.Name,
-                             Характеристики = specs.Name + "−" + specs.Value
-                         };
-            //dataGridView1.DataSource = result; 
             refreshList();
         }
 
@@ -203,11 +190,22 @@ namespace solpr
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //var filter = result;
-            //filter = filter.Where(x => x.Тип.ToString() == comboBox1.SelectedValue.ToString());
-            //dataGridView1.DataSource = filter.ToList();
-        }    
+            var result = from comps in db.Components
+                         join manufac in db.Manufacturers on comps.ManufacturerId equals manufac.Id
+                         join specs in db.Specs on comps.Id equals specs.ComponentId
+                         select new
+                         {
+                             ID = comps.Id,
+                             Тип = comps.Type,
+                             Модель = comps.Model,
+                             Производитель = manufac.Name,
+                             Характеристики = specs.Name + "−" + specs.Value
+                         };
+            var componentsFilter = result.AsEnumerable();
+            componentsFilter = componentsFilter.Where(x => x.Тип.ToString() == comboBox1.SelectedValue.ToString());
+            dataGridView1.DataSource = componentsFilter.ToList();
+            dataGridView1.Refresh();
+        }
         
-       
     }
 }
