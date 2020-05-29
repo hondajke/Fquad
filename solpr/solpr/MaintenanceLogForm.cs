@@ -16,14 +16,17 @@ namespace solpr
     {
         ParkDBEntities db;
         int searchCellNum = 0;
+        bool dtpickerFl_1 = false;
+        bool dtpickerFl_2 = false;
+
         List<DataGridViewCell> searchCells;
-        string[] months = new string[] { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
 
         public MaintenanceLogForm()
         {
             InitializeComponent();
             db = new ParkDBEntities();
-            comboBox1.Items.AddRange(months);
+            dtpickerFl_1 = false;
+            dtpickerFl_2 = false;
 
             RefreshMainLogGrid();
 
@@ -51,9 +54,10 @@ namespace solpr
                              ID = maint.Id,
                              PC_ID = pc.Id,
                              Причина = maint.Description,
-                             Дата_начала_ремонта = maint.RepairStart,
-                             Дата_окончания_ремонта = maint.RepairFinish
+                             Дата_начала_ремонта = maint.RepairStart.Day.ToString()+ "." + maint.RepairStart.Month.ToString() + "." + maint.RepairStart.Year.ToString(),
+                             Дата_окончания_ремонта = maint.RepairFinish.Value.Day.ToString() + "." + maint.RepairFinish.Value.Month.ToString() + "." + maint.RepairFinish.Value.Year.ToString()
                          };
+
             dataGridView1.DataSource = result.ToList();
         }
 
@@ -113,7 +117,17 @@ namespace solpr
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            dtpickerFl_1 = true;
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            dtpickerFl_2 = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
             var result = from maint in db.Maintenance
                          join pc in db.Computers on maint.ComputerId equals pc.Id
@@ -122,10 +136,19 @@ namespace solpr
                              ID = maint.Id,
                              PC_ID = pc.Id,
                              Причина = maint.Description,
-                             Дата_начала_ремонта = maint.RepairStart.Day.ToString() + maint.RepairStart.Month.ToString() + maint.RepairStart.Year.ToString(),
-                             Дата_окончания_ремонта = maint.RepairFinish.Value.Day.ToString() + maint.RepairFinish.Value.Month.ToString() + maint.RepairFinish.Value.Year.ToString()
+                             Дата_начала_ремонта = maint.RepairStart,
+                             Дата_окончания_ремонта = maint.RepairFinish
                          };
-           
+
+            if (dateTimePicker1.Value.Date < dateTimePicker2.Value.Date)
+            {
+                var filteredNotes = result.Where(x => x.Дата_начала_ремонта <= dateTimePicker1.Value && x.Дата_окончания_ремонта >= dateTimePicker2.Value);
+
+            }
+            else
+            {
+                MessageBox.Show("Начало отрезка не должно быть больше конца");
+            }
         }
     }
 }
