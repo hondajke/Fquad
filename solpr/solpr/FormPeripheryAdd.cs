@@ -13,8 +13,6 @@ namespace solpr
     public partial class FormPeripheryAdd : Form
     {
         ParkDBEntities db;
-        string[] Values;
-        int length = 0;
         public FormPeripheryAdd()
         {
             InitializeComponent();

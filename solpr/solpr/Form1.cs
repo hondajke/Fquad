@@ -20,7 +20,6 @@ namespace solpr
             ReshowDelay = 100,
             ShowAlways = true,
         };
-        bool inButton = false;
         List<DataGridViewCell> searchCells;
         int searchCellNum = 0;
 
@@ -92,6 +91,7 @@ namespace solpr
                          };
             dataGridView2.DataSource = result.ToList();
             dataGridView2.Columns[0].Visible = false;
+            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
         public void RefreshComponentsGrid()
@@ -108,6 +108,7 @@ namespace solpr
                              Характеристики = specs.Name + "−" + specs.Value
                          };
             dataGridView3.DataSource = result.ToList();
+            dataGridView3.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
         public void RefreshComputersGrid()
         {
@@ -126,22 +127,21 @@ namespace solpr
         {
             try
             {
-                if (dataGridView2.SelectedRows.Count > 0)
+                if (dataGridView2.SelectedCells.Count > 0)
                 {
-                    int index = dataGridView2.SelectedRows[0].Index;
+                    //int index = dataGridView2.SelectedRows[0].Index;
                     int id = 0;
-                    bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                    int rowId = Convert.ToInt32(dataGridView2.SelectedCells[0].RowIndex.ToString());
+                    bool converted = Int32.TryParse(dataGridView2[0,rowId].Value.ToString(), out id);
                     if (converted == false)
                         return;
                     Periphery peri = db.Peripheries
                         .Where(p => p.Id == id)
                         .FirstOrDefault();
                     Specs spec = db.Specs
-                            .Where(p => p.ComponentId == id)
+                            .Where(p => p.PeripheryId == id)
                             .FirstOrDefault();
-                    db.Entry(peri).State = System.Data.Entity.EntityState.Modified;
                     db.Specs.Remove(spec);
-                    db.SaveChanges();
                     db.Peripheries.Remove(peri);
                     db.SaveChanges();
                     RefreshPeripheryGrid();
@@ -160,11 +160,12 @@ namespace solpr
         {
             try
             {
-                if (dataGridView3.SelectedRows.Count > 0)
+                if (dataGridView3.SelectedCells.Count > 0)
                 {
-                    int index = dataGridView3.SelectedRows[0].Index;
+                    //int index = dataGridView3.SelectedRows[0].Index;
                     int id = 0;
-                    bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
+                    int rowId = Convert.ToInt32(dataGridView3.SelectedCells[0].RowIndex.ToString());
+                    bool converted = Int32.TryParse(dataGridView3[0, rowId].Value.ToString(), out id);
                     if (converted == false)
                         return;
                     Component comp = db.Components
@@ -193,11 +194,12 @@ namespace solpr
         {
             try
             {
-                if (dataGridView4.SelectedRows.Count > 0)
+                if (dataGridView4.SelectedCells.Count > 0)
                 {
-                    int index = dataGridView4.SelectedRows[0].Index;
+                    //int index = dataGridView4.SelectedRows[0].Index;
                     int id = 0;
-                    bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
+                    int rowId = Convert.ToInt32(dataGridView4.SelectedCells[0].RowIndex.ToString());
+                    bool converted = Int32.TryParse(dataGridView4[0, rowId].Value.ToString(), out id);
                     if (converted == false)
                         return;
                     Employee emplo = db.Employees
@@ -223,11 +225,12 @@ namespace solpr
         {
             try
             {
-                if (dataGridView1.SelectedRows.Count > 0)
+                if (dataGridView1.SelectedCells.Count > 0)
                 {
-                    int index = dataGridView1.SelectedRows[0].Index;
+                    //int index = dataGridView1.SelectedRows[0].Index;
                     int id = 0;
-                    bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                    int rowId = Convert.ToInt32(dataGridView1.SelectedCells[0].RowIndex.ToString());
+                    bool converted = Int32.TryParse(dataGridView1[0, rowId].Value.ToString(), out id);
                     if (converted == false)
                         return;
                     Computer pc = db.Computers
@@ -251,11 +254,11 @@ namespace solpr
 
         private void editPeriphery() 
         {
-            if (dataGridView2.SelectedRows.Count > 0)
+            if (dataGridView2.SelectedCells.Count > 0)
             {
-                int index = dataGridView2.SelectedRows[0].Index;
                 int id = 0;
-                bool converted = Int32.TryParse(dataGridView2[0, index].Value.ToString(), out id);
+                int rowId = Convert.ToInt32(dataGridView2.SelectedCells[0].RowIndex.ToString());
+                bool converted = Int32.TryParse(dataGridView2[0, rowId].Value.ToString(), out id);
                 if (converted == false)
                     return;
 
@@ -274,11 +277,12 @@ namespace solpr
 
         private void editComponent() 
         {
-            if (dataGridView3.SelectedRows.Count > 0)
+            if (dataGridView3.SelectedCells.Count > 0)
             {
-                int index = dataGridView3.SelectedRows[0].Index;
+                //int index = dataGridView3.SelectedRows[0].Index;
                 int id = 0;
-                bool converted = Int32.TryParse(dataGridView3[0, index].Value.ToString(), out id);
+                int rowId = Convert.ToInt32(dataGridView3.SelectedCells[0].RowIndex.ToString());
+                bool converted = Int32.TryParse(dataGridView3[0, rowId].Value.ToString(), out id);
                 if (converted == false)
                     return;
 
@@ -289,11 +293,12 @@ namespace solpr
 
         private void editEmployee() 
         {
-            if (dataGridView4.SelectedRows.Count > 0)
+            if (dataGridView4.SelectedCells.Count > 0)
             {
-                int index = dataGridView4.SelectedRows[0].Index;
+                //int index = dataGridView4.SelectedRows[0].Index;
                 int id = 0;
-                bool converted = Int32.TryParse(dataGridView4[0, index].Value.ToString(), out id);
+                int rowId = Convert.ToInt32(dataGridView4.SelectedCells[0].RowIndex.ToString());
+                bool converted = Int32.TryParse(dataGridView4[0, rowId].Value.ToString(), out id);
                 if (converted == false)
                     return;
 
@@ -312,11 +317,12 @@ namespace solpr
 
         private void editComputer()
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedCells.Count > 0)
             {
-                int index = dataGridView1.SelectedRows[0].Index;
+               //int index = dataGridView1.SelectedRows[0].Index;
                 int id = 0;
-                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                int rowId = Convert.ToInt32(dataGridView1.SelectedCells[0].RowIndex.ToString());
+                bool converted = Int32.TryParse(dataGridView1[0, rowId].Value.ToString(), out id);
                 if (converted == false)
                     return;
 
@@ -854,6 +860,20 @@ namespace solpr
                     }
                 }
             }
+            if (e.Control == true && e.KeyCode == Keys.J && tabControl1.SelectedIndex == 0) 
+            {
+                MaintenanceLogForm maint = new MaintenanceLogForm();
+                maint.ShowDialog();
+            }
+            if (e.Control == true && e.KeyCode == Keys.F) 
+            {
+                Filter fil = new Filter();
+                fil.ShowDialog();
+            }
+            if (e.Control == true && e.KeyCode == Keys.F && e.Alt == true) 
+            {
+                RefreshActiveGrid();
+            }
         }
 
         private Form returnAddForm() 
@@ -1133,6 +1153,21 @@ namespace solpr
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void button23_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + J", button23, 10000);
+        }
+
+        private void button15_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + F", button15, 10000);
+        }
+
+        private void button17_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("Ctrl + Alt + F", button17, 10000);
         }
     }
 

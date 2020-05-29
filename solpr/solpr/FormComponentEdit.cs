@@ -24,7 +24,7 @@ namespace solpr
             db = new ParkDBEntities();
             loadCompTypes();
             loadManufacturers();
-            int index = Program.mf.dataGridView3.SelectedRows[0].Index;
+            int index = Convert.ToInt32(Program.mf.dataGridView3.SelectedCells[0].RowIndex.ToString());
             int id = 0;
             bool converted = Int32.TryParse(Program.mf.dataGridView3[0, index].Value.ToString(), out id);
             if (converted == false)
