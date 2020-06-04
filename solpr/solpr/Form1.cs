@@ -994,6 +994,8 @@ namespace solpr
             inButton = false;*/
         }
 
+        //Reports
+
         private void button20_Click(object sender, EventArgs e)
         {
             FormReportAdd dial = new FormReportAdd();
@@ -1008,6 +1010,7 @@ namespace solpr
             if (dial == DialogResult.OK)
             {
                 reportFile = openFileDialog1.FileName;
+                webBrowser1.Navigate(reportFile);
             }
         }
 

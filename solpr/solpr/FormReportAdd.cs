@@ -23,6 +23,9 @@ namespace solpr
 {
     public partial class FormReportAdd : Form
     {
+        ParkDBEntities db;
+
+
         string path = "reports/asd.pdf";
 
         iText.Kernel.Colors.Color headerBg = new DeviceRgb(235, 235, 235);
@@ -36,6 +39,8 @@ namespace solpr
 
         private void button1_Click(object sender, EventArgs e)
         {
+            db = new ParkDBEntities();
+
             FileInfo file = new FileInfo(path);
             if (!file.Directory.Exists) file.Directory.Create();
 
@@ -45,20 +50,42 @@ namespace solpr
             doc.SetMargins(25, 25, 25, 25);
             PdfFont font = PdfFontFactory.CreateFont(fontpathV, "Identity-H", true);
 
-            doc.Add(new Paragraph("Report").SetFont(font));
+            Paragraph header = new Paragraph(string.Format("Отчет от {0}", DateTime.Today.ToString("dd-MM-yyyy"))).SetFont(font);
+            header.SetTextAlignment(TextAlignment.CENTER);
+
+            doc.Add(header);
             
             if (radioButton1.Checked)
             {
                 
                 if (checkedListBox1.CheckedIndices.Contains(0))
                 {
-                    
+                    doc.Add(new Paragraph("ПК").SetFont(font));
+
+                    Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
+
+                    foreach (DataGridViewColumn column in Program.mf.dataGridView1.Columns)
+                    {
+                        Cell cell = new Cell().Add(new Paragraph(column.HeaderText).SetFont(font));
+                        cell.SetBackgroundColor(headerBg);
+                        table.AddHeaderCell(cell);
+                    }
+
+                    foreach (DataGridViewRow row in Program.mf.dataGridView1.Rows)
+                    {
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            table.AddCell(cell.Value.ToString()).SetFont(font);
+                        }
+                    }
+                    doc.Add(table);
                 }
                 if (checkedListBox1.CheckedIndices.Contains(1))
                 {
-                    doc.Add(new Paragraph("Комплектующие").SetFont(font));
+                    doc.Add(new Paragraph("Периферия").SetFont(font));
 
-                    Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
+                    Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 4, 4 }));
+                    
 
                     foreach (DataGridViewColumn column in Program.mf.dataGridView2.Columns)
                     {
@@ -101,19 +128,42 @@ namespace solpr
             }
 
             if (radioButton2.Checked)
-            {/*
+            {
                 if (checkedListBox2.CheckedIndices.Contains(0))
                 {
+                    doc.Add(new Paragraph("Работающие ПК").SetFont(font));
                     
+                    DataGridView dg = new DataGridView();
+                    dg.DataSource = db.Computers.ToList();
+
+                    Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
+
+                    foreach (DataGridViewColumn column in dg.Columns)
+                    {
+                        Cell cell = new Cell().Add(new Paragraph(column.HeaderText).SetFont(font));
+                        cell.SetBackgroundColor(headerBg);
+                        table.AddHeaderCell(cell);
+                    }
+
+                    foreach (DataGridViewRow row in dg.Rows)
+                    {
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            table.AddCell(cell.Value.ToString()).SetFont(font);
+                        }
+                    }
+                    doc.Add(table);
                 }
                 if (checkedListBox2.CheckedIndices.Contains(1))
                 {
-                    
+                    doc.Add(new Paragraph("ПК в ремонте").SetFont(font));
+
                 }
                 if (checkedListBox2.CheckedIndices.Contains(2))
                 {
-                    
-                }*/
+                    doc.Add(new Paragraph("Списанные ПК").SetFont(font));
+
+                }
             }
             doc.Close();
         }
