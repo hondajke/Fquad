@@ -1156,7 +1156,7 @@ namespace solpr
                     Computer pc = db.Computers
                         .Where(p => p.Id == id)
                         .FirstOrDefault();
-                    MaintenanceAddForm maint = new MaintenanceAddForm(pc);
+                    AddMaintenanceNote maint = new AddMaintenanceNote(pc);
                     maint.ShowDialog();
                 }
                 else

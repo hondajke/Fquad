@@ -10,24 +10,24 @@ using System.Windows.Forms;
 
 namespace solpr
 {
-    public partial class MaintenanceAddForm : Form
+    public partial class AddMaintenanceNote : Form
     {
         ParkDBEntities db;
         private Computer pc;
 
-        public MaintenanceAddForm()
+        public AddMaintenanceNote()
         {
             InitializeComponent();
         }
 
-        public MaintenanceAddForm(Computer pc)
+        public AddMaintenanceNote(Computer pc)
         {
             InitializeComponent();
             this.pc = pc;
             db = new ParkDBEntities();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             Maintenance maint = new Maintenance();
             maint.ComputerId = pc.Id;
@@ -38,7 +38,7 @@ namespace solpr
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
