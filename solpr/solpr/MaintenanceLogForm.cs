@@ -150,5 +150,6 @@ namespace solpr
                 MessageBox.Show("Начало отрезка не должно быть больше конца");
             }
         }
+
     }
 }
