@@ -93,6 +93,9 @@
             this.button17 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.фильтрToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.очиститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -484,7 +487,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
-            this.оПрограммеToolStripMenuItem});
+            this.оПрограммеToolStripMenuItem,
+            this.фильтрToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(797, 24);
@@ -749,6 +753,31 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // фильтрToolStripMenuItem
+            // 
+            this.фильтрToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.открытьToolStripMenuItem,
+            this.очиститьToolStripMenuItem});
+            this.фильтрToolStripMenuItem.Name = "фильтрToolStripMenuItem";
+            this.фильтрToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.фильтрToolStripMenuItem.Text = "Фильтр";
+            // 
+            // открытьToolStripMenuItem
+            // 
+            this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
+            this.открытьToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + F";
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.открытьToolStripMenuItem.Text = "Открыть";
+            this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
+            // 
+            // очиститьToolStripMenuItem
+            // 
+            this.очиститьToolStripMenuItem.Name = "очиститьToolStripMenuItem";
+            this.очиститьToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + Alt + F";
+            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.очиститьToolStripMenuItem.Text = "Очистить";
+            this.очиститьToolStripMenuItem.Click += new System.EventHandler(this.очиститьToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -849,6 +878,9 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.ToolStripMenuItem фильтрToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem открытьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
     }
 }
 

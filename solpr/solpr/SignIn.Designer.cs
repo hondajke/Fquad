@@ -40,6 +40,7 @@
             // 
             // login
             // 
+            this.login.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.login.Location = new System.Drawing.Point(137, 98);
             this.login.Multiline = true;
             this.login.Name = "login";
@@ -50,6 +51,7 @@
             // 
             // pass
             // 
+            this.pass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pass.Location = new System.Drawing.Point(137, 151);
             this.pass.MaxLength = 100;
             this.pass.Name = "pass";
@@ -60,6 +62,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(60, 100);
@@ -70,6 +73,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(60, 151);
@@ -80,6 +84,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(69, 34);
@@ -90,6 +95,7 @@
             // 
             // checkIn
             // 
+            this.checkIn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkIn.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.checkIn.Location = new System.Drawing.Point(197, 222);
             this.checkIn.Name = "checkIn";
@@ -101,6 +107,7 @@
             // 
             // exit
             // 
+            this.exit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.exit.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.exit.Location = new System.Drawing.Point(63, 222);
             this.exit.Name = "exit";
@@ -131,6 +138,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pass);
             this.Controls.Add(this.login);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SignIn";
             this.Text = "Вход";
             this.ResumeLayout(false);

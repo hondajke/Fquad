@@ -59,6 +59,13 @@ namespace solpr
             RefreshComputersGrid();
         }
 
+        private void applyDataGridViewStyles(DataGridView date) 
+        {
+            date.Columns[0].Visible = false;
+            date.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            date.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
         public void RefreshEmployeeGrid()
         {
             var result = from employee in db.Employees
@@ -66,13 +73,14 @@ namespace solpr
                          select new
                          {
                              ID = employee.Id,
-                             Фамилия = employee.Surname,
-                             Имя = employee.Name,
-                             Отчество = employee.Patronymic_Name,
+                             ФИО = employee.Surname + " " + employee.Name + " " + employee.Patronymic_Name,
+                             /*Имя = employee.Name,
+                             Отчество = employee.Patronymic_Name,*/
                              ID_отдела = employee.DepartmentId,
                              Отдел = department.Name
                          };
             dataGridView4.DataSource = result.ToList();
+            applyDataGridViewStyles(dataGridView4);
         }
         public void RefreshPeripheryGrid()
         {
@@ -90,8 +98,7 @@ namespace solpr
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView2.DataSource = result.ToList();
-            dataGridView2.Columns[0].Visible = false;
-            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            applyDataGridViewStyles(dataGridView2);
         }
 
         public void RefreshComponentsGrid()
@@ -108,7 +115,7 @@ namespace solpr
                              Характеристики = specs.Name + "−" + specs.Value
                          };
             dataGridView3.DataSource = result.ToList();
-            dataGridView3.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            applyDataGridViewStyles(dataGridView3);
         }
         public void RefreshComputersGrid()
         {
@@ -121,6 +128,7 @@ namespace solpr
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView1.DataSource = result.ToList();
+            //applyDataGridViewStyles(dataGridView1);
         }
 
         private void deletePeriphery() 
@@ -558,6 +566,7 @@ namespace solpr
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage0"];
             computerTabShow();
             hideshowFilterButtons();
+            пКToolStripMenuItem.Owner.Hide();
         }
 
         private void периферияToolStripMenuItem_Click(object sender, EventArgs e)
@@ -565,6 +574,7 @@ namespace solpr
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage1"];
             peripheryTabShow();
             hideshowFilterButtons();
+            периферияToolStripMenuItem.Owner.Hide();
         }
 
         private void комплектующиеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -572,6 +582,7 @@ namespace solpr
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage2"];
             componentsTabShow();
             hideshowFilterButtons();
+            комплектующиеToolStripMenuItem.Owner.Hide();
         }
 
         private void сотрудникиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -579,12 +590,14 @@ namespace solpr
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage3"];
             employeeTabShow();
             hideshowFilterButtons();
+            сотрудникиToolStripMenuItem.Owner.Hide();
         }
 
         private void отчетыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabControl1.TabPages["tabPage4"];
             hideshowFilterButtons();
+            отчетыToolStripMenuItem.Owner.Hide();
         }
 
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -788,7 +801,8 @@ namespace solpr
                 string[] specValues = specs[1].Split('|');
                 for (int i = 0; i < maxNumOfSpecs; i++)
                 {
-                    specstring += specNames[i] + " − " + specValues[i] + "\n";
+                    if (i == maxNumOfSpecs - 1)  specstring += specNames[i] + " − " + specValues[i]; 
+                    else specstring += specNames[i] + " − " + specValues[i] + "\n";
                 }
                 e.Value = specstring;
             }
@@ -816,7 +830,8 @@ namespace solpr
                 string[] specValues = specs[1].Split('|');
                 for (int i = 0; i < maxNumOfSpecs; i++)
                 {
-                    specstring += specNames[i] + " - " + specValues[i] + "\n";
+                    if (i == maxNumOfSpecs - 1) specstring += specNames[i] + " − " + specValues[i];
+                    else specstring += specNames[i] + " − " + specValues[i] + "\n";
                 }
                 e.Value = specstring;
             }
@@ -1168,6 +1183,17 @@ namespace solpr
         private void button17_MouseHover(object sender, EventArgs e)
         {
             toolTip1.Show("Ctrl + Alt + F", button17, 10000);
+        }
+
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filter fil = new Filter();
+            fil.ShowDialog();
+        }
+
+        private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshActiveGrid();
         }
     }
 
