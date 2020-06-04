@@ -142,8 +142,8 @@ namespace solpr
 
             if (dateTimePicker1.Value.Date < dateTimePicker2.Value.Date)
             {
-                var filteredNotes = result.Where(x => x.Дата_начала_ремонта <= dateTimePicker1.Value && x.Дата_окончания_ремонта >= dateTimePicker2.Value);
-
+                var filteredNotes = result.Where(x => x.Дата_начала_ремонта >= dateTimePicker1.Value && x.Дата_окончания_ремонта <= dateTimePicker2.Value);
+                dataGridView1.DataSource = filteredNotes.ToList();
             }
             else
             {
