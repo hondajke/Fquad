@@ -783,28 +783,11 @@ namespace solpr
         {
             if (dataGridView2.Columns[e.ColumnIndex].Name == "Тип")
             {
-                PeripheryType enumValue = (PeripheryType)e.Value;
-                GetTypes a = new GetTypes();
-                string enumstring = a.GetDescription(enumValue);
-                e.Value = enumstring;
+                cellFormattingType(sender, e);
             }
             if (dataGridView2.Columns[e.ColumnIndex].Name == "Характеристики")
             {
-                string[] specs = e.Value.ToString().Split('−');
-                int maxNumOfSpecs = specs[0].Count(x => x == '|');
-                if (specs[1].Count(x => x == '|') > maxNumOfSpecs)
-                {
-                    maxNumOfSpecs = specs[1].Count(x => x == '|');
-                }
-                string specstring = "";
-                string[] specNames = specs[0].Split('|');
-                string[] specValues = specs[1].Split('|');
-                for (int i = 0; i < maxNumOfSpecs; i++)
-                {
-                    if (i == maxNumOfSpecs - 1)  specstring += specNames[i] + " − " + specValues[i]; 
-                    else specstring += specNames[i] + " − " + specValues[i] + "\n";
-                }
-                e.Value = specstring;
+                cellFormattingSpecs(sender, e);
             }
         }
 
@@ -813,27 +796,11 @@ namespace solpr
         {
             if (dataGridView3.Columns[e.ColumnIndex].Name == "Тип")
             {
-                ComponentType enumValue = (ComponentType)e.Value;
-                GetTypes a = new GetTypes();
-                string enumstring = a.GetDescription(enumValue);
-                e.Value = enumstring;
+                cellFormattingType(sender, e);
             }
             if (dataGridView3.Columns[e.ColumnIndex].Name == "Характеристики")
             {
-                string[] specs = e.Value.ToString().Split('−');
-                int maxNumOfSpecs = specs[0].Count(x => x == '|');
-                if (specs[1].Count(x => x == '|') > maxNumOfSpecs) {
-                    maxNumOfSpecs = specs[1].Count(x => x == '|');
-                }
-                string specstring = "";
-                string[] specNames = specs[0].Split('|');
-                string[] specValues = specs[1].Split('|');
-                for (int i = 0; i < maxNumOfSpecs; i++)
-                {
-                    if (i == maxNumOfSpecs - 1) specstring += specNames[i] + " − " + specValues[i];
-                    else specstring += specNames[i] + " − " + specValues[i] + "\n";
-                }
-                e.Value = specstring;
+                cellFormattingSpecs(sender, e);
             }
         }
         
@@ -1197,6 +1164,35 @@ namespace solpr
         private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RefreshActiveGrid();
+        }
+
+        //Cell format
+
+        public void cellFormattingSpecs(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string[] specs = e.Value.ToString().Split('−');
+            int maxNumOfSpecs = specs[0].Count(x => x == '|');
+            if (specs[1].Count(x => x == '|') > maxNumOfSpecs)
+            {
+                maxNumOfSpecs = specs[1].Count(x => x == '|');
+            }
+            string specstring = "";
+            string[] specNames = specs[0].Split('|');
+            string[] specValues = specs[1].Split('|');
+            for (int i = 0; i < maxNumOfSpecs; i++)
+            {
+                if (i == maxNumOfSpecs - 1) specstring += specNames[i] + " − " + specValues[i];
+                else specstring += specNames[i] + " − " + specValues[i] + "\n";
+            }
+            e.Value = specstring;
+        }
+
+        public void cellFormattingType(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            ComponentType enumValue = (ComponentType)e.Value;
+            GetTypes a = new GetTypes();
+            string enumstring = a.GetDescription(enumValue);
+            e.Value = enumstring;
         }
     }
 

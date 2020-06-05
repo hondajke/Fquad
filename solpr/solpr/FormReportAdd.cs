@@ -120,6 +120,7 @@ namespace solpr
                     {
                         foreach (DataGridViewCell cell in row.Cells)
                         {
+                            //if (cell.ColumnIndex == )
                             table.AddCell(cell.Value.ToString()).SetFont(font);
                         }
                     }
@@ -131,38 +132,15 @@ namespace solpr
             {
                 if (checkedListBox2.CheckedIndices.Contains(0))
                 {
-                    doc.Add(new Paragraph("Работающие ПК").SetFont(font));
-                    
-                    DataGridView dg = new DataGridView();
-                    dg.DataSource = db.Computers.ToList();
-
-                    Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
-
-                    foreach (DataGridViewColumn column in dg.Columns)
-                    {
-                        Cell cell = new Cell().Add(new Paragraph(column.HeaderText).SetFont(font));
-                        cell.SetBackgroundColor(headerBg);
-                        table.AddHeaderCell(cell);
-                    }
-
-                    foreach (DataGridViewRow row in dg.Rows)
-                    {
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            table.AddCell(cell.Value.ToString()).SetFont(font);
-                        }
-                    }
-                    doc.Add(table);
+                    addPCwithStatus(doc, font, 1);
                 }
                 if (checkedListBox2.CheckedIndices.Contains(1))
                 {
-                    doc.Add(new Paragraph("ПК в ремонте").SetFont(font));
-
+                    addPCwithStatus(doc, font, 2);
                 }
                 if (checkedListBox2.CheckedIndices.Contains(2))
                 {
-                    doc.Add(new Paragraph("Списанные ПК").SetFont(font));
-
+                    addPCwithStatus(doc, font, 3);
                 }
             }
             doc.Close();
@@ -191,6 +169,62 @@ namespace solpr
         {
             checkedListBox2.Enabled = radioButton2.Checked;
             checkedListBox2.Visible = radioButton2.Checked;
+        }
+
+        private void addPCwithStatus (Document doc, PdfFont font, int status)
+        {
+            var result = from pc in db.Computers
+                         join empl in db.Employees on pc.EmployeeId equals empl.Id
+                         select pc;
+
+            switch (status)
+            {
+                case 1:
+                    doc.Add(new Paragraph("Работающие ПК").SetFont(font));
+                    result = result.Where(x => x.Status == ComputerStatus.ok);
+                    break;
+                case 2:
+                    doc.Add(new Paragraph("ПК в ремонте").SetFont(font));
+                    result = result.Where(x => x.Status == ComputerStatus.under_repair);
+                    break;
+                case 3:
+                    doc.Add(new Paragraph("Списанные ПК").SetFont(font));
+                    result = result.Where(x => x.Status == ComputerStatus.scrapped);
+                    break;
+
+                default:
+                    break;
+            }
+            
+            Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
+
+
+            Cell cell = new Cell();
+            cell.SetBackgroundColor(headerBg);
+            cell.Add(new Paragraph("ID").SetFont(font));
+            table.AddHeaderCell(cell);
+            cell = new Cell();
+            cell.SetBackgroundColor(headerBg);
+            cell.Add(new Paragraph("Сотрудник").SetFont(font));
+            table.AddHeaderCell(cell);
+            cell = new Cell();
+            cell.SetBackgroundColor(headerBg);
+            cell.Add(new Paragraph("Комплектующие").SetFont(font));
+            table.AddHeaderCell(cell);
+
+
+            foreach (Computer pc in result)
+            {
+                table.AddCell(pc.Id.ToString()).SetFont(font);
+                table.AddCell(pc.Employee.ToString()).SetFont(font);
+                string comps = "";
+                foreach (Component comp in pc.Components)
+                {
+                    comps += comp.Manufacturer + " " + comp.Model + "\n";
+                }
+
+            }
+            doc.Add(table);
         }
     }
     
