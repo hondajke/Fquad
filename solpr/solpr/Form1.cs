@@ -128,7 +128,6 @@ namespace solpr
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView1.DataSource = result.ToList();
-            //applyDataGridViewStyles(dataGridView1);
         }
 
         private void deletePeriphery() 
@@ -137,7 +136,6 @@ namespace solpr
             {
                 if (dataGridView2.SelectedCells.Count > 0)
                 {
-                    //int index = dataGridView2.SelectedRows[0].Index;
                     int id = 0;
                     int rowId = Convert.ToInt32(dataGridView2.SelectedCells[0].RowIndex.ToString());
                     bool converted = Int32.TryParse(dataGridView2[0,rowId].Value.ToString(), out id);
@@ -170,7 +168,6 @@ namespace solpr
             {
                 if (dataGridView3.SelectedCells.Count > 0)
                 {
-                    //int index = dataGridView3.SelectedRows[0].Index;
                     int id = 0;
                     int rowId = Convert.ToInt32(dataGridView3.SelectedCells[0].RowIndex.ToString());
                     bool converted = Int32.TryParse(dataGridView3[0, rowId].Value.ToString(), out id);
@@ -204,7 +201,6 @@ namespace solpr
             {
                 if (dataGridView4.SelectedCells.Count > 0)
                 {
-                    //int index = dataGridView4.SelectedRows[0].Index;
                     int id = 0;
                     int rowId = Convert.ToInt32(dataGridView4.SelectedCells[0].RowIndex.ToString());
                     bool converted = Int32.TryParse(dataGridView4[0, rowId].Value.ToString(), out id);
@@ -235,7 +231,6 @@ namespace solpr
             {
                 if (dataGridView1.SelectedCells.Count > 0)
                 {
-                    //int index = dataGridView1.SelectedRows[0].Index;
                     int id = 0;
                     int rowId = Convert.ToInt32(dataGridView1.SelectedCells[0].RowIndex.ToString());
                     bool converted = Int32.TryParse(dataGridView1[0, rowId].Value.ToString(), out id);
@@ -287,7 +282,6 @@ namespace solpr
         {
             if (dataGridView3.SelectedCells.Count > 0)
             {
-                //int index = dataGridView3.SelectedRows[0].Index;
                 int id = 0;
                 int rowId = Convert.ToInt32(dataGridView3.SelectedCells[0].RowIndex.ToString());
                 bool converted = Int32.TryParse(dataGridView3[0, rowId].Value.ToString(), out id);
@@ -303,16 +297,11 @@ namespace solpr
         {
             if (dataGridView4.SelectedCells.Count > 0)
             {
-                //int index = dataGridView4.SelectedRows[0].Index;
                 int id = 0;
                 int rowId = Convert.ToInt32(dataGridView4.SelectedCells[0].RowIndex.ToString());
                 bool converted = Int32.TryParse(dataGridView4[0, rowId].Value.ToString(), out id);
                 if (converted == false)
                     return;
-
-                /* Employee emplo = db.Employees
-                         .Where(p => p.Id == id)
-                         .FirstOrDefault();*/
 
                 FormEmployeeEdit Edit = new FormEmployeeEdit();
                 Edit.ShowDialog();
@@ -327,7 +316,6 @@ namespace solpr
         {
             if (dataGridView1.SelectedCells.Count > 0)
             {
-               //int index = dataGridView1.SelectedRows[0].Index;
                 int id = 0;
                 int rowId = Convert.ToInt32(dataGridView1.SelectedCells[0].RowIndex.ToString());
                 bool converted = Int32.TryParse(dataGridView1[0, rowId].Value.ToString(), out id);
@@ -548,11 +536,6 @@ namespace solpr
         {
             Application.Exit();
         }
-
-        /*      private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-              {
-                  FilterByDepartment();
-              }*/
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
