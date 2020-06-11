@@ -58,19 +58,9 @@ namespace solpr
         }
         private void loadEmployees()
         {
-            var empQuery = from emp in db.Employees
-                           join dep in db.Departments on emp.DepartmentId equals dep.Id
-                           orderby emp.Name
-
-                           select new
-                           {
-                               sad = dep.Name + " " + emp.Surname + " " + emp.Name,
-                               gov = emp.Id
-                           };
-            comboBox7.DataSource = empQuery.ToList();
-            comboBox7.DisplayMember = "sad";
-            comboBox7.ValueMember = "gov";
-
+            comboBox7.DataSource = db.Employees.ToList();
+            comboBox7.DisplayMember = "Surname";
+            comboBox7.ValueMember = "Id";
         }
 
         public void loadComponents()

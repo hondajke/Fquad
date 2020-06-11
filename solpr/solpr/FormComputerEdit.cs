@@ -25,8 +25,8 @@ namespace solpr
             loadCompStatus();
             loadEmployees();
             loadComponents();
-            refreshList();
             int index = Program.mf.dataGridView1.SelectedRows[0].Index;
+            refreshList();
             int id = 0;
             bool converted = Int32.TryParse(Program.mf.dataGridView1[0, index].Value.ToString(), out id);
             if (converted == false)
@@ -46,6 +46,11 @@ namespace solpr
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             using (db = new ParkDBEntities())
             {
@@ -70,11 +75,6 @@ namespace solpr
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void loadCompStatus()
         {
             comboBox8.DataSource = Enum.GetValues(typeof(ComputerStatus))
@@ -91,18 +91,9 @@ namespace solpr
         }
         private void loadEmployees()
         {
-            var empQuery = from emp in db.Employees
-                           join dep in db.Departments on emp.DepartmentId equals dep.Id
-                           orderby emp.Name
-
-                           select new
-                           {
-                               sad = dep.Name + " " + emp.Surname + " " + emp.Name,
-                               gov = emp.Id
-                           };
-            comboBox7.DataSource = empQuery.ToList();
-            comboBox7.DisplayMember = "sad";
-            comboBox7.ValueMember = "gov";
+            comboBox7.DataSource = db.Employees.ToList();
+            comboBox7.DisplayMember = "Surname";
+            comboBox7.ValueMember = "Id";
 
         }
         public void loadComponents()

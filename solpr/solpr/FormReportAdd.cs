@@ -26,7 +26,7 @@ namespace solpr
         ParkDBEntities db;
 
 
-        string path = "reports/asd.pdf";
+        string path = "reports/temp.pdf";
 
         iText.Kernel.Colors.Color headerBg = new DeviceRgb(235, 235, 235);
         string fontpathV = "C:/Windows/Fonts/Verdana.ttf";
@@ -34,15 +34,28 @@ namespace solpr
         public FormReportAdd()
         {
             InitializeComponent();
+            dateTimePicker1.Value = DateTime.Now.AddMonths(-1);
         }
 
-
-        private void button1_Click(object sender, EventArgs e)
+        private void createPdf(bool temp)
         {
             db = new ParkDBEntities();
+            
+            if (temp)
+            {
+                FileInfo file = new FileInfo(path);
+                if (!file.Directory.Exists) file.Directory.Create();
+            }
+            else
+            {
+                saveFileDialog1.InitialDirectory = @"\reports";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    FileInfo file = new FileInfo(saveFileDialog1.FileName);
 
-            FileInfo file = new FileInfo(path);
-            if (!file.Directory.Exists) file.Directory.Create();
+                }
+            }
+            
 
             PdfWriter wr = new PdfWriter(path);
             PdfDocument pdf = new PdfDocument(wr);
@@ -54,10 +67,10 @@ namespace solpr
             header.SetTextAlignment(TextAlignment.CENTER);
 
             doc.Add(header);
-            
+
             if (radioButton1.Checked)
             {
-                
+
                 if (checkedListBox1.CheckedIndices.Contains(0))
                 {
                     doc.Add(new Paragraph("ПК").SetFont(font));
@@ -85,7 +98,7 @@ namespace solpr
                     doc.Add(new Paragraph("Периферия").SetFont(font));
 
                     Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 4, 4 }));
-                    
+
 
                     foreach (DataGridViewColumn column in Program.mf.dataGridView2.Columns)
                     {
@@ -144,11 +157,17 @@ namespace solpr
                 }
             }
             doc.Close();
+            webBrowser1.Navigate(path);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            createPdf(false);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            createPdf(true);
         }
         
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
@@ -173,29 +192,41 @@ namespace solpr
 
         private void addPCwithStatus (Document doc, PdfFont font, int status)
         {
-            var result = from pc in db.Computers
-                         join empl in db.Employees on pc.EmployeeId equals empl.Id
-                         select pc;
+            var result = db.Computers.ToList();
+                
 
             switch (status)
             {
                 case 1:
-                    doc.Add(new Paragraph("Работающие ПК").SetFont(font));
-                    result = result.Where(x => x.Status == ComputerStatus.ok);
+                    doc.Add(new Paragraph("Отремонтированные ПК").SetFont(font));
+                    result = result.Where(x => x.Status == ComputerStatus.ok).ToList();
+                    if (checkBox1.Checked)
+                    {
+                        
+                        
+                    }
+                    if (checkBox2.Checked)
+                    {
+
+                    }
                     break;
                 case 2:
                     doc.Add(new Paragraph("ПК в ремонте").SetFont(font));
-                    result = result.Where(x => x.Status == ComputerStatus.under_repair);
+                    result = result.Where(x => x.Status == ComputerStatus.under_repair).ToList();
+
                     break;
                 case 3:
                     doc.Add(new Paragraph("Списанные ПК").SetFont(font));
-                    result = result.Where(x => x.Status == ComputerStatus.scrapped);
+                    result = result.Where(x => x.Status == ComputerStatus.scrapped).ToList();
                     break;
 
                 default:
                     break;
             }
-            
+
+            Employee empl;
+            List<Component> comp;
+
             Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
 
 
@@ -206,25 +237,51 @@ namespace solpr
             cell = new Cell();
             cell.SetBackgroundColor(headerBg);
             cell.Add(new Paragraph("Сотрудник").SetFont(font));
-            table.AddHeaderCell(cell);
+            table.AddHeaderCell(cell);/*
             cell = new Cell();
             cell.SetBackgroundColor(headerBg);
             cell.Add(new Paragraph("Комплектующие").SetFont(font));
-            table.AddHeaderCell(cell);
+            table.AddHeaderCell(cell);*/
 
 
             foreach (Computer pc in result)
             {
                 table.AddCell(pc.Id.ToString()).SetFont(font);
-                table.AddCell(pc.Employee.ToString()).SetFont(font);
-                string comps = "";
-                foreach (Component comp in pc.Components)
+                empl = db.Employees.Where(x => x.Id == pc.EmployeeId).FirstOrDefault();
+                table.AddCell(empl.Surname.ToString() + " " + empl.Name.ToString() + " " + empl.Patronymic_Name.ToString()).SetFont(font);
+                /*string comps = "";
+                
+                foreach (Component cc in pc.Components)
                 {
-                    comps += comp.Manufacturer + " " + comp.Model + "\n";
-                }
+                    comps += comps.Manufacturer + " " + comps.Model + "\n";
+                }*/
 
             }
             doc.Add(table);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                dateTimePicker1.Enabled = true;
+            }
+            else
+            {
+                dateTimePicker1.Enabled = false;
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                dateTimePicker2.Enabled = true;
+            }
+            else
+            {
+                dateTimePicker2.Enabled = false;
+            }
         }
     }
     
