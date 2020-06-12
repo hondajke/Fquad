@@ -22,6 +22,7 @@ namespace solpr
         };
         List<DataGridViewCell> searchCells;
         int searchCellNum = 0;
+        int gridHeader = 0;
 
         private string reportFile = "";
 
@@ -61,11 +62,44 @@ namespace solpr
 
         private void applyDataGridViewStyles(DataGridView date) 
         {
-            date.Columns[0].Visible = false;
+            //date.Columns[0].Visible = false;
             date.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             date.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
+        private void groupBoxView(DataGridView grid) 
+        {
+            groupBox1.Controls.Clear();
+            int count = grid.Columns.Count;
+            CheckBox[] checks = new CheckBox[count];
+            for (int i = 0; i < count; i++) 
+            {
+                gridHeader = i;
+                checks[i] = new CheckBox();
+                checks[i].Location = new Point(4, 19 + i * checks[i].Size.Height);
+                checks[i].Text = grid.Columns[i].HeaderText;
+                checks[i].Checked = true;
+                checks[i].CheckedChanged += CheckBox_CheckedChanged;
+                groupBox1.Controls.Add(checks[i]);
+            }
+        }
+
+        private void CheckBox_CheckedChanged(Object sender, EventArgs e)
+        {
+            CheckBox check = (CheckBox)sender;
+            DataGridView dgv = activeGrid();
+            foreach (DataGridViewColumn clm in dgv.Columns)
+            {
+                if (check.Checked == false && clm.HeaderText == check.Text)
+                {
+                    dgv.Columns[clm.Index].Visible = false;
+                }
+                else
+                {
+                    dgv.Columns[clm.Index].Visible = true;
+                }
+            }
+        }
         public void RefreshEmployeeGrid()
         {
             var result = from employee in db.Employees
@@ -81,6 +115,7 @@ namespace solpr
                          };
             dataGridView4.DataSource = result.ToList();
             applyDataGridViewStyles(dataGridView4);
+            groupBoxView(dataGridView4);
         }
         public void RefreshPeripheryGrid()
         {
@@ -99,6 +134,7 @@ namespace solpr
                          };
             dataGridView2.DataSource = result.ToList();
             applyDataGridViewStyles(dataGridView2);
+            groupBoxView(dataGridView2);
         }
 
         public void RefreshComponentsGrid()
@@ -116,6 +152,7 @@ namespace solpr
                          };
             dataGridView3.DataSource = result.ToList();
             applyDataGridViewStyles(dataGridView3);
+            groupBoxView(dataGridView3);
         }
         public void RefreshComputersGrid()
         {
@@ -128,6 +165,7 @@ namespace solpr
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView1.DataSource = result.ToList();
+            groupBoxView(dataGridView1);
         }
 
         private void deletePeriphery() 
@@ -1057,6 +1095,7 @@ namespace solpr
                 textBox2.Visible = false;
                 button13.Visible = false;
                 button14.Visible = false;
+                groupBox1.Visible = false;
             }
             else 
             {
@@ -1066,6 +1105,7 @@ namespace solpr
                 textBox2.Visible = true;
                 button13.Visible = true;
                 button14.Visible = true;
+                groupBox1.Visible = true;
             }
         }
 
@@ -1176,6 +1216,11 @@ namespace solpr
             GetTypes a = new GetTypes();
             string enumstring = a.GetDescription(enumValue);
             e.Value = enumstring;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 
