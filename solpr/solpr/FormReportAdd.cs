@@ -75,7 +75,7 @@ namespace solpr
                 {
                     doc.Add(new Paragraph("ПК").SetFont(font));
 
-                    Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
+                    Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4 }));
 
                     foreach (DataGridViewColumn column in Program.mf.dataGridView1.Columns)
                     {
@@ -157,7 +157,7 @@ namespace solpr
                 }
             }
             doc.Close();
-            webBrowser1.Navigate(path);
+            webBrowser1.Navigate(AppDomain.CurrentDomain.BaseDirectory + path);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -192,17 +192,29 @@ namespace solpr
 
         private void addPCwithStatus (Document doc, PdfFont font, int status)
         {
-            var result = db.Computers.ToList();
-                
-
+            
+            var pcs = from pc in db.Computers
+                      join main in db.Maintenance on pc.Id equals main.ComputerId
+                      join emplo in db.Employees on pc.EmployeeId equals emplo.Id
+                      select new
+                      {
+                          MaintenanceId = main.Id,
+                          ComputerId = pc.Id,
+                          pc.EmployeeId,
+                          pc.Status,
+                          main.RepairStart,
+                          main.RepairFinish,
+                          main.Description
+                      };
             switch (status)
             {
                 case 1:
                     doc.Add(new Paragraph("Отремонтированные ПК").SetFont(font));
-                    result = result.Where(x => x.Status == ComputerStatus.ok).ToList();
+                    pcs = pcs.Where(x => x.Status == ComputerStatus.ok);
+
+
                     if (checkBox1.Checked)
                     {
-                        
                         
                     }
                     if (checkBox2.Checked)
@@ -212,43 +224,79 @@ namespace solpr
                     break;
                 case 2:
                     doc.Add(new Paragraph("ПК в ремонте").SetFont(font));
-                    result = result.Where(x => x.Status == ComputerStatus.under_repair).ToList();
+                    pcs = pcs.Where(x => x.Status == ComputerStatus.under_repair);
+                    if (checkBox1.Checked)
+                    {
 
+
+                    }
+                    if (checkBox2.Checked)
+                    {
+
+                    }
                     break;
                 case 3:
                     doc.Add(new Paragraph("Списанные ПК").SetFont(font));
-                    result = result.Where(x => x.Status == ComputerStatus.scrapped).ToList();
-                    break;
-
-                default:
+                    pcs = pcs.Where(x => x.Status == ComputerStatus.scrapped);
                     break;
             }
 
             Employee empl;
-            List<Component> comp;
+            //List<Component> comp;
 
-            Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 4, 6 }));
+            Table table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3 }));
 
 
             Cell cell = new Cell();
             cell.SetBackgroundColor(headerBg);
-            cell.Add(new Paragraph("ID").SetFont(font));
+            cell.Add(new Paragraph("ID ремонта").SetFont(font));
+            table.AddHeaderCell(cell);
+            cell = new Cell();
+            cell.SetBackgroundColor(headerBg);
+            cell.Add(new Paragraph("ID компьютера").SetFont(font));
             table.AddHeaderCell(cell);
             cell = new Cell();
             cell.SetBackgroundColor(headerBg);
             cell.Add(new Paragraph("Сотрудник").SetFont(font));
-            table.AddHeaderCell(cell);/*
-            cell = new Cell();
+            table.AddHeaderCell(cell);
+            /*cell = new Cell();
             cell.SetBackgroundColor(headerBg);
             cell.Add(new Paragraph("Комплектующие").SetFont(font));
             table.AddHeaderCell(cell);*/
-
-
-            foreach (Computer pc in result)
+            if (status == 1 || status == 2) {
+                cell = new Cell();
+                cell.SetBackgroundColor(headerBg);
+                cell.Add(new Paragraph("Начало ремонта").SetFont(font));
+                table.AddHeaderCell(cell);
+            }
+            if (status == 1)
             {
-                table.AddCell(pc.Id.ToString()).SetFont(font);
+                cell = new Cell();
+                cell.SetBackgroundColor(headerBg);
+                cell.Add(new Paragraph("Конец ремонта").SetFont(font));
+                table.AddHeaderCell(cell);
+            }
+            cell = new Cell();
+            cell.SetBackgroundColor(headerBg);
+            cell.Add(new Paragraph("Описание").SetFont(font));
+            table.AddHeaderCell(cell);
+
+
+            foreach (var pc in pcs)
+            {
+                table.AddCell(pc.MaintenanceId.ToString()).SetFont(font);
+                table.AddCell(pc.ComputerId.ToString()).SetFont(font);
                 empl = db.Employees.Where(x => x.Id == pc.EmployeeId).FirstOrDefault();
                 table.AddCell(empl.Surname.ToString() + " " + empl.Name.ToString() + " " + empl.Patronymic_Name.ToString()).SetFont(font);
+                if (status == 1 || status == 2)
+                {
+                    table.AddCell(pc.RepairStart.ToString()).SetFont(font);
+                }
+                if (status == 1)
+                {
+                    table.AddCell(pc.RepairFinish.ToString()).SetFont(font);
+                }
+                table.AddCell(pc.Description.ToString()).SetFont(font);
                 /*string comps = "";
                 
                 foreach (Component cc in pc.Components)
