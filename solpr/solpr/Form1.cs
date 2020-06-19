@@ -82,6 +82,11 @@ namespace solpr
                 checks[i].CheckedChanged += CheckBox_CheckedChanged;
                 groupBox1.Controls.Add(checks[i]);
             }
+            Button btn = new Button();
+            btn.Text = "Скрыть";
+            btn.Location = new Point(4, 19 + count * btn.Size.Height);
+            btn.Click += viewButton_Click;
+            groupBox1.Controls.Add(btn);
         }
 
         private void CheckBox_CheckedChanged(Object sender, EventArgs e)
@@ -98,6 +103,37 @@ namespace solpr
                 {
                     dgv.Columns[clm.Index].Visible = true;
                 }
+            }
+        }
+
+        private void viewButton_Click(Object sender, EventArgs e) 
+        {
+            Button btn = (Button)sender;
+            if (btn.Text == "Скрыть")
+            {
+                for (int i = 0; i < groupBox1.Controls.Count; i++)
+                {
+                    if (groupBox1.Controls[i] is CheckBox)
+                    {
+                        ((CheckBox)groupBox1.Controls[i]).Visible = false;
+                    }
+                }
+                btn.Location = new Point(4, 19);
+                btn.Text = "Показать";
+                groupBox1.Controls.Add(btn);
+            }
+            else 
+            {
+                for (int i = 0; i < groupBox1.Controls.Count; i++)
+                {
+                    if (groupBox1.Controls[i] is CheckBox)
+                    {
+                        ((CheckBox)groupBox1.Controls[i]).Visible = true;
+                    }
+                }
+                btn.Location = new Point(4, 19 + (groupBox1.Controls.Count - 1) * btn.Size.Height);
+                btn.Text = "Скрыть";
+                groupBox1.Controls.Add(btn);
             }
         }
         public void RefreshEmployeeGrid()
@@ -130,6 +166,7 @@ namespace solpr
                              Модель = periphery.Model,
                              Производитель = manufac.Name,
                              Характеристики = specs.Name + "−" + specs.Value,
+                             IDСотрудника = empl.Id,
                              Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
                          };
             dataGridView2.DataSource = result.ToList();
