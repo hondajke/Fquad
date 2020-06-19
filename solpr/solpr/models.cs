@@ -19,6 +19,7 @@ namespace solpr
         [Description("Оперативная память")] ram,
         [Description("Жесткий диск")] hdd,
         [Description("Твердотельный накопитель")] ssd,
+        [Description("Блок питания")] psu,
         [Description("Аудиокарта")] sound,
         [Description("Привод")] drive,
         [Description("Другое")] other
