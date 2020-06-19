@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace solpr
 {
     public partial class FormComputerAdd : Form
     {
         ParkDBEntities db;
+        DataTable dataTable = new DataTable();
+        bool check = true;
+        private List<int> selectedComp = new List<int>();
         public FormComputerAdd()
         {
             InitializeComponent();
@@ -23,8 +27,7 @@ namespace solpr
             db = new ParkDBEntities();
             loadCompStatus();
             loadEmployees();
-            loadComponents();
-            refreshList();
+            loadComponents(); 
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,6 +35,12 @@ namespace solpr
             Computer pc = new Computer();
             pc.Status = (ComputerStatus)comboBox8.SelectedValue;
             pc.EmployeeId = (int)comboBox7.SelectedValue;
+            //for (int i = 0; i < dataGridView2.Rows.Count - 1; i++) {
+            //    int W = Convert.ToInt32(dataGridView2.Rows[i].Cells[0].Value);
+            //    Component component = db.Components.Where(x => x.Id == W).FirstOrDefault();
+            //    pc.Components.Add(component);
+            //}
+           
             db.Computers.Add(pc);
             db.SaveChanges();
             Close();
@@ -81,26 +90,32 @@ namespace solpr
         public void refreshList()
         {
             dataGridView2.DataSource = dataGridView1.DataSource;
-            foreach (DataGridViewRow row in dataGridView2.Rows)
+            //foreach (DataGridViewColumn column in dataGridView1.Columns)
+            //{
+            //    dataTable.Columns.Add(column.Name, column.GetType());
+            //}
+            //DataRow newrow = dataTable.NewRow();
+            if (check)
             {
-                //row.re
+                dataTable.Columns.Add("ID", typeof(int));
+                dataTable.Columns.Add("Тип", typeof(string));
+                dataTable.Columns.Add("Модель", typeof(string));
+                dataTable.Columns.Add("Производитель", typeof(string));
+                dataTable.Columns.Add("Характеристики", typeof(string));
+                check = false;
             }
+
+       
+            dataTable.Rows.Add(dataGridView1.Rows[selectedComp[selectedComp.Count-1]].Cells[0].Value);
+
+                for (int i = 1; i < dataGridView1.Rows[selectedComp[selectedComp.Count - 1]].Cells.Count; i++)
+                {
+                    dataTable.Rows[selectedComp.Count-1][i] = dataGridView1.Rows[selectedComp[selectedComp.Count - 1]].Cells[i].Value;
+                }
+
+            dataGridView2.DataSource = dataTable;
         }
 
-        public void refreshList3()
-        {
-            DataTable dt = new DataTable();
-            //dt.Columns.Add("Id", typeof(int));
-            dt.Columns.Add("Тип", typeof(ComponentType));
-            dt.Columns.Add("Модель", typeof(string));
-            dt.Columns.Add("Видеокарта", typeof(string));
-            dt.Columns.Add("Оперативная память", typeof(string));
-            dt.Columns.Add("Жесткий диск", typeof(string));
-            dt.Columns.Add("Твердотельный накопитель", typeof(string));
-            dt.Columns.Add("Аудиокарта", typeof(string));
-            dt.Columns.Add("Привод", typeof(string));
-            dt.Columns.Add("Другое", typeof(string));        
-        }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -125,8 +140,27 @@ namespace solpr
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                dataGridView2.Rows.Add(dataGridView1.SelectedRows[0]);
-                dataGridView1.Rows.Remove(dataGridView1.SelectedRows[0]);
+                //dataGridView2.Rows.Add(dataGridView1.SelectedRows[0]);
+                //dataGridView1.Rows.Remove(dataGridView1.SelectedRows[0]);
+                //for (int i = 0; i < dataGridView2.Rows.Count; i++)
+                //{
+                //    dataGridView2.Rows[i].Visible = false;
+                //}
+                //if (iscolumn)
+                //{
+                //    foreach (DataGridViewColumn column in dataGridView1.Columns)
+                //    {
+                //        dataGridView2.Columns.Add(column);
+                //    }
+                //    //for (int j = 0; j < dataGridView1.Rows.Count; j++)
+                //    //{
+                //    //    dataGridView2.Rows.Add(dataGridView1.Rows[j].Clone() as DataGridViewRow);
+                //    //}
+                //    iscolumn = false;
+                //}
+
+                selectedComp.Add(dataGridView1.CurrentCell.RowIndex);
+                refreshList();
                 dataGridView1.Refresh();
                 dataGridView2.Refresh();
             }

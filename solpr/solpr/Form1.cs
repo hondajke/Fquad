@@ -195,13 +195,24 @@ namespace solpr
         {
             var result = from pc in db.Computers
                          join empl in db.Employees on pc.EmployeeId equals empl.Id
+                         join comps in db.Components on pc.Id equals comps.Id
                          select new
                          {
                              ID = pc.Id,
                              Статус = pc.Status,
-                             Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name
+                             Сотрудник = empl.Surname + " " + empl.Name + " " + empl.Patronymic_Name,
+                             Процессор = comps.Model,
+                             Материнская_плата = comps.Model,
+                             //Видеокарта 
+                             //Оперативная память
+                             //Жесткий диск
+                             //Твердотельный накопитель
+                             //Аудиокарта
+                             //Привод
+                             //Другое
                          };
             dataGridView1.DataSource = result.ToList();
+            applyDataGridViewStyles(dataGridView1);
             groupBoxView(dataGridView1);
         }
 
